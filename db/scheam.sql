@@ -1,5 +1,6 @@
 DROP IF EXISTS jobs;
 DROP IF EXISTS applications;
+DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE jobs (
   job_id TEXT PRIMARY KEY UNIQUE,
@@ -19,5 +20,11 @@ CREATE TABLE jobs (
 CREATE TABLE applications (
   job_id TEXT references jobs,
   user_id TEXT references users,
-  primary key ( job_id, user_id)
-);
+  primary key ( job_id, id)
+
+
+
+CREATE TABLE users (
+  id SERIAL UNIQUE PRIMARY KEY,
+  email VARCHAR(255),
+  password_digest TEXT

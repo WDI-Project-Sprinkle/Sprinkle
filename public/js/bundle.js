@@ -1,0 +1,1 @@
+console.error("SyntaxError: /Users/elton912/GA/dev/Sprinkle/public/js/components/nav.js: Expected corresponding JSX closing tag for <li> (18:8) while parsing file: /Users/elton912/GA/dev/Sprinkle/public/js/components/nav.js");
