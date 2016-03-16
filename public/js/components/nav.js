@@ -9,7 +9,11 @@ const Nav = React.createClass({
         <ul>
           <li>
             <Logout/>
+          <li>
             <Login/>
+          </li>
+          <li>
+            <Signup/>
           </li>
         </ul>
       </div>
