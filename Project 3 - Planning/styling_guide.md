@@ -1,5 +1,13 @@
 ## SPRINKLE STYLE GUIDE
 
+#### Git Guide
+  * Daily merge and Heroku deployment at 7pm
+  * Work on separate branch based on folder/file
+  * Branch Naming convention - initial / folderName / fileName
+    * jldbpg
+  * Never push individual work to Master without group approval
+
+
 #### ES6 Functions & concatenations
   * use airbnb style guide
   * arrow function
