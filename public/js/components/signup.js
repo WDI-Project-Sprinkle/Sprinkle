@@ -17,10 +17,7 @@ const Signup = React.createClass({
       <form onSubmit={this.handleSubmit}>
         <label><input ref="email" placeholder="email"/></label>
         <label><input ref="pass" placeholder="password" /></label><br />
-        <button type="submit">login</button>
-        {this.state.error && (
-          <p>Bad login information</p>
-        )}
+        <button type="submit">signup</button>
       </form>
     )
   }
