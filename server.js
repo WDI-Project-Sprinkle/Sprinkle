@@ -11,6 +11,7 @@ const jsonwebtoken = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const app = express();
+const userRoutes = require(path.join(__dirname, '/routes/users'));
 
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
