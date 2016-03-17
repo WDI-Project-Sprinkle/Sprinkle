@@ -2,7 +2,7 @@
 const React = require( 'react' )
 const ReactDOM = require( 'react-dom' )
 
-const Dashboard = React.createClass({
+const Profile = React.createClass({
   render : function(){
     const token = auth.getToken()
 
@@ -10,16 +10,15 @@ const Dashboard = React.createClass({
       <div>
         <h1>User Info</h1>
         <p>You did it</p>
-        <p>{token}</p>
       </div>
     )
   }
 })
 
-module.exports = Dashboard;
+module.exports = Profile;
 
 
 //inside pgp.js
-//inside script.js const Dashboard = require('./components/vb-users.js')
+//inside script.js const Profile = require('./components/profile.js')
 //inside nav.js <li><Link to="/:id">Dashboard</Link> (authenticated)</li>
 //in routes we need a <Route Path="/:id" component={Dashboard} onEnter{requireAuth} />
