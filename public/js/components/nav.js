@@ -1,6 +1,6 @@
-const React = require('react');
-const Logout = require('./logout.js');
-const Login = require('./login.js');
+const React = require( 'react' );
+const Logout = require( './logout.js' );
+const Login = require( './login.js' );
 
 const Nav = React.createClass({
   render : function() {
@@ -9,6 +9,7 @@ const Nav = React.createClass({
         <ul>
           <li>
             <Logout/>
+          </li>
           <li>
             <Login/>
           </li>
