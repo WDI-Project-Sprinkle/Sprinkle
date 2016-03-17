@@ -79,7 +79,6 @@ const App = React.createClass({
           <div className="row"id="navbar">
             <div className="nav-wrapper">
               <Nav loggedIn={ this.state.loggedIn } login={ this.login } logout={ this.logout } signup={ this.signup }/>
-              {this.state.signupBox ? notSignedIn : signedInView}
               {/* API nav bar here */}
               {/*<Nav />*/}
             </div>
@@ -98,6 +97,7 @@ const App = React.createClass({
           <div className="row" id="display">
             <div className="nav-wrapper">
               <br/>
+              {this.state.signupBox ? notSignedIn : signedInView}
               {/* Initial Search Result Display */}
               <Display />
             </div>
