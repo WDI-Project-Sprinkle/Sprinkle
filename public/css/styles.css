@@ -2,5 +2,36 @@
   width: 80%;
   height: 80%;
   margin: 0 auto;
+  border: 1px solid black;
+  margin-top: 20px;
+}
+
+#navbar {
+  background: black;
+  color: red;
+}
+
+#navbar li {
+  display: inline;
+  float: right;
+  list-style-type: none;
+}
+
+#search {
+  padding-right: 45px;
+}
+
+#searchbar {
+  border: 1px;
+  background-color: blue;
+}
+
+#display {
+  border: 1px;
+  background-color: red;
+}
+
+#listings {
+  border: 1px;
   background-color: green;
 }
