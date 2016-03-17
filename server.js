@@ -22,6 +22,8 @@ app.get('/', (req,res) => {
   res.sendFile(path.join(__dirname,'index.html'))
 })
 
+app.use('/users', userRoutes);
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log('Ayyyeeeeeee Sexyyy Lady! ', port);
