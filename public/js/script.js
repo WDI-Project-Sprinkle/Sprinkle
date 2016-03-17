@@ -11,13 +11,13 @@ const Link            = ReactRouter.Link;
 const browserHistory  = ReactRouter.browserHistory;
 
 const auth            = require( './auth.js' )
-const Login           = require( './components/login.js' )
+const Login           = require( './components/nav_components/login.js' )
 const Signup          = require( './components/signup.js' )
-const Logout          = require( './components/logout.js' )
+const Logout          = require( './components/nav_components/logout.js' )
 const Display         = require( './components/display.js' )
 const Search          = require( './components/search.js' )
 const Listings        = require( './components/listings.js' )
-const Nav             = require('./components/nav.js');
+const Nav             = require('./components/nav_components/nav.js');
 
 
 
@@ -25,7 +25,8 @@ const App = React.createClass({
   getInitialState : function() {
     return {
       loggedIn : false,
-      signupBox : false
+      signupBox : false,
+      profile : false
     }
   },
 
@@ -45,7 +46,8 @@ const App = React.createClass({
     .done( (data) => {
       console.log('am i posting?')
       this.state.loggedIn=true;
-      this.setState( { loggedIn : this.state.loggedIn } )
+      this.state.signupBox=false;
+      this.setState( { loggedIn : this.state.loggedIn, signupBox : this.state.signupBox } )
     })
   },
 
@@ -65,6 +67,11 @@ const App = React.createClass({
     this.setState( { signupBox : this.state.signupBox, loggedIn : this.state.loggedIn } )
   },
 
+  profile : function() {
+    this.state.profile=true
+    this.setState( { profile : this.state.profile })
+  },
+
   render : function() {
     let signedInView =
       <div>
@@ -78,7 +85,7 @@ const App = React.createClass({
       <div className="container">
           <div className="row"id="navbar">
             <div className="nav-wrapper">
-              <Nav loggedIn={ this.state.loggedIn } login={ this.login } logout={ this.logout } signup={ this.signup }/>
+              <Nav loggedIn={ this.state.loggedIn } login={ this.login } logout={ this.logout } signup={ this.signup } profile={ this.profile }/>
               {/* API nav bar here */}
               {/*<Nav />*/}
             </div>
