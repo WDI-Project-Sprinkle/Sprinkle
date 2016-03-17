@@ -23,13 +23,19 @@ const Nav = React.createClass({
     this.props.signup();
   },
 
+  handleProfile : function( event ) {
+    event.preventDefault();
+    this.props.profile();
+  },
+
   render : function() {
     return (
       <nav id="navbar">
         <h3>SPRINKLE</h3>
         <ul>
           {this.props.loggedIn ? (
-          <li><a onClick={ this.handleLogout }>Logout</a></li>
+          <li><a onClick={ this.handleLogout }>Logout</a>
+          <a onClick={ this.handleProfile }>Profile</a></li>
           ) : (
           <li>
             <form onSubmit={ this.handleLogin } >

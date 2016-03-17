@@ -25,7 +25,8 @@ const App = React.createClass({
   getInitialState : function() {
     return {
       loggedIn : false,
-      signupBox : false
+      signupBox : false,
+      profile : false
     }
   },
 
@@ -65,6 +66,11 @@ const App = React.createClass({
     this.setState( { signupBox : this.state.signupBox, loggedIn : this.state.loggedIn } )
   },
 
+  profile : function() {
+    this.state.profile=true
+    this.setState( { profile : this.state.profile })
+  },
+
   render : function() {
     let signedInView =
       <div>
@@ -78,7 +84,7 @@ const App = React.createClass({
       <div className="container">
           <div className="row"id="navbar">
             <div className="nav-wrapper">
-              <Nav loggedIn={ this.state.loggedIn } login={ this.login } logout={ this.logout } signup={ this.signup }/>
+              <Nav loggedIn={ this.state.loggedIn } login={ this.login } logout={ this.logout } signup={ this.signup } profile={ this.profile }/>
               {/* API nav bar here */}
               {/*<Nav />*/}
             </div>
