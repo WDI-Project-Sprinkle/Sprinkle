@@ -49,6 +49,7 @@ function loginUser(req, res, next) {
       console.log(data)
       if (bcrypt.compareSync(password, data.password_digest)) {
         res.rows = data
+        console.log('wow you amazing Elton');
         next()
       } else {
         res.status(401).json({data:"Fool this no workie"})
