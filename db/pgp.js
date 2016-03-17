@@ -79,6 +79,7 @@ function createHash( email, password, name, callback ) {
 
 function addJob( req, res, next ){
   // JL: variables will have to change according to our API request
+
   const company = req.body.company;
   const job_title = req.body.job_title;
   const job_desc = req.body.job_desc;
@@ -91,11 +92,11 @@ function addJob( req, res, next ){
   const indeed_url = req.body.indeed_url;
   const career_url = req.body.career_url;
 
-  db.any("INSERT INTO jobs (company, job_title, job_desc, city, state, salaries, first_added, indeed_id, career_id, indeed_url, career_url) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)", [ company, job_title, job_desc, city, state, salaries, first_added, indeed_id, career_id, indeed_url, career_url ] )
-  .then( data ) => {
+  db.none( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, indeed_id, career_id, indeed_url, career_url ) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11 )', [ company, job_title, job_desc, city, state, salaries, first_added, indeed_id, career_id, indeed_url, career_url ] )
+  .then( ( data ) => {
     res.rows = data;
     next();
-  }
+  })
   .catch( ( error ) => {
     console.log( error )
   })
