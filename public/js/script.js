@@ -18,6 +18,7 @@ const Display         = require( './components/display.js' )
 const Search          = require( './components/search.js' )
 const Listings        = require( './components/listings.js' )
 const Nav             = require('./components/nav_components/nav.js');
+const AdvSearch       = require('./components/advSearch.js');
 
 
 
@@ -26,6 +27,7 @@ const App = React.createClass({
     return {
       loggedIn : false,
       signupBox : false,
+      advSearch : false,
       profile : false,
       jobs : []
     }
@@ -37,7 +39,8 @@ const App = React.createClass({
 
     var data = {
       q: newSearch.q,
-      l: cityState
+      l: cityState,
+      jt: newSearch.jt
     }
 
     $.get('/search',
@@ -47,8 +50,8 @@ const App = React.createClass({
     .done( (data) => {
       console.log('this is the data ',data[0])
       this.state.jobs = data;
-      this.setState({ jobs : this.state.jobs })
-      console.log('job state', this.state.jobs);
+      this.state.signupBox = false;
+      this.setState({ jobs : this.state.jobs, signupBox : this.state.signupBox });
 
 
     })
@@ -74,8 +77,9 @@ const App = React.createClass({
   },
 
   signup : function() {
-    this.state.signupBox=true
-    this.setState( { signupBox : this.state.signupBox } )
+    this.state.jobs = [];
+    this.state.signupBox=true;
+    this.setState( { signupBox : this.state.signupBox, jobs : this.state.jobs } )
   },
 
   signedIn : function() {
@@ -89,6 +93,16 @@ const App = React.createClass({
     this.setState( { profile : this.state.profile })
   },
 
+  handleAdvance : function() {
+    this.state.advSearch=true
+    this.setState( { advSearch : this.state.advSearch } )
+  },
+
+  handleBasic : function() {
+    this.state.advSearch=false
+    this.setState( { advSearch : this.state.advSearch } )
+  },
+
   render : function() {
     let signedInView =
       <div>
@@ -98,9 +112,20 @@ const App = React.createClass({
         <Signup signedIn={ this.signedIn}/>
       </div>
 
+    let regularSearch =
+    <div>
+      <Search addSearch={ this.addSearch }/>
+      <a onClick={this.handleAdvance}> advance search </a>
+    </div>
+    let advSearch =
+      <div>
+        <AdvSearch addSearch={ this.addSearch }/>
+        <a onClick={this.handleBasic}> basic search </a>
+      </div>
+
       var showStuff = [];
       this.state.jobs.forEach((el) => {
-        showStuff.push(<li>Job Title: {el.jobtitle} <br/> Company Name: {el.company}</li>);
+        showStuff.push(<li>Job Title: {el.jobtitle} <br/> Company Name: {el.company} <a href={el.url} target="_blank">indeed</a></li>);
       })
 
     return (
@@ -118,7 +143,7 @@ const App = React.createClass({
             <div className="nav-wrapper">
               <br/>
               {/* API search bar here */}
-              <Search addSearch={ this.addSearch }/>
+              {this.state.advSearch ? advSearch : regularSearch}
             </div>
           </div>
 
@@ -130,7 +155,6 @@ const App = React.createClass({
               <ul>
                 { showStuff }
               </ul>
-
               {this.state.signupBox ? notSignedIn : signedInView}
               {/* Initial Search Result Display */}
               <Display />
