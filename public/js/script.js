@@ -26,18 +26,35 @@ const App = React.createClass({
     return {
       loggedIn : false,
       signupBox : false,
-      profile : false
+      profile : false,
+      jobs : []
     }
   },
 
   addSearch : function ( newSearch ){
-    const updateData = ( data ) => {
-    console.log( data )
+    var cityState = newSearch.city + '+' + newSearch.state
+
+
+    var data = {
+      q: newSearch.q,
+      l: cityState
     }
+
+    $.get('/search',
+    {
+      data: data
+    })
+    .done( (data) => {
+      console.log('this is the data ',data[0])
+      this.state.jobs = data;
+      this.setState({ jobs : this.state.jobs })
+      console.log('job state', this.state.jobs);
+
+
+    })
   },
 
   login : function( username, password ) {
-
     let data = {
       email: username,
       password: password
@@ -81,6 +98,11 @@ const App = React.createClass({
         <Signup signedIn={ this.signedIn}/>
       </div>
 
+      var showStuff = [];
+      this.state.jobs.forEach((el) => {
+        showStuff.push(<li>Job Title: {el.jobtitle} <br/> Company Name: {el.company}</li>);
+      })
+
     return (
       <div className="container">
           <div className="row"id="navbar">
@@ -104,6 +126,11 @@ const App = React.createClass({
           <div className="row" id="display">
             <div className="nav-wrapper">
               <br/>
+
+              <ul>
+                { showStuff }
+              </ul>
+
               {this.state.signupBox ? notSignedIn : signedInView}
               {/* Initial Search Result Display */}
               <Display />
