@@ -1,5 +1,5 @@
-DROP IF EXISTS jobs;
-DROP IF EXISTS applications;
+DROP TABLE IF EXISTS jobs CASCADE;
+DROP TABLE IF EXISTS applications CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE jobs (
@@ -8,7 +8,7 @@ CREATE TABLE jobs (
   city TEXT,
   state TEXT,
   salaries INTEGER,
-  first_added DATE,
+  first_added timestamp,
   company TEXT,
   job_desc TEXT,
   indeed_id TEXT,
@@ -17,14 +17,14 @@ CREATE TABLE jobs (
   url_2 TEXT
 );
 
-CREATE TABLE applications (
-  job_id TEXT references jobs,
-  user_id TEXT references users,
-  primary key ( job_id, id)
-
-
-
 CREATE TABLE users (
-  id SERIAL UNIQUE PRIMARY KEY,
+  user_id SERIAL UNIQUE PRIMARY KEY,
   email VARCHAR(255),
   password_digest TEXT
+);
+
+CREATE TABLE applications (
+  job_id TEXT references jobs,
+  user_id INTEGER references users,
+  primary key ( job_id, user_id)
+);

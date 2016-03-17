@@ -19,24 +19,14 @@ const Nav             = require('./components/nav.js');
 const App = React.createClass({
   getInitialState : function() {
     return {
-      loggedIn : true
+      loggedIn : false
     }
   },
-
-  logout : function() {
-    this.state.loggedIn=false
-    this.setState( { loggedIn : this.state.loggedIn } )
-  },
-
-  logout : function() {
-    this.state.loggedIn=false
-    this.setState( { loggedIn : this.state.loggedIn } )
-  }, 
 
   render : function() {
     return (
       <div>
-        <Nav loggedIn={ this.state.loggedIn } logout={ this.logout }/>
+        <Nav/>
         <h1>hey dude</h1>
       </div>
     )
