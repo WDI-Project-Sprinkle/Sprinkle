@@ -12,27 +12,37 @@ const Nav = React.createClass({
 
   handleLogin : function( event ) {
     event.preventDefault();
-    let username = this.refs.username.value();
-    let password = this.refs.password.value();
+    const username = this.refs.username.value;
+    const password = this.refs.password.value;
     this.props.login( username, password );
     console.log('You backs!');
   },
 
+  handleSignup : function( event ) {
+    event.preventDefault();
+    this.props.signup();
+  },
+
   render : function() {
     return (
-      <div>
+      <nav id="navbar">
+        <h3>SPRINKLE</h3>
         <ul>
           {this.props.loggedIn ? (
           <li><a onClick={ this.handleLogout }>Logout</a></li>
           ) : (
-          <form onSubmit={ this.handleLogin } >
-            <input type="text" placeholder="username" refs="username"/>
-            <input type="password" placeholder="password" refs="password"/>
-            <button type="submit">login</button>
-          </form>
+          <li>
+            <form onSubmit={ this.handleLogin } >
+              <input type="text" placeholder="username" ref="username"/>
+              <input type="password" placeholder="password" ref="password"/>
+              <button type="submit">login</button>
+              <br/>
+              <a onClick={ this.handleSignup } >signup</a>
+            </form>
+          </li>
           )}
         </ul>
-      </div>
+      </nav>
     )
   }
 })
