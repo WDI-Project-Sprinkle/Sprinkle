@@ -5,8 +5,8 @@ const Search = React.createClass({
   handleSubmit : function( event ){
     event.preventDefault()
     console.log( "search funciton clicked" )
-    const search = {
-      searchInput: this.refs.searchInput.value,
+    let search = {
+      q: this.refs.searchInput.value,
       city: this.refs.city.value,
       state: this.refs.state.value
     }
