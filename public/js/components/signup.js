@@ -1,10 +1,10 @@
 const React = require('react');
-const auth = require('../auth.js');
+
 const Signup = React.createClass({
   handleSubmit : function(event) {
     event.preventDefault()
 
-    const name = this.refs.email.name
+    const name = this.refs.name.value
     const email = this.refs.email.value
     const pass = this.refs.pass.value
 

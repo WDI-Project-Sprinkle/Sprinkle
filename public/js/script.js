@@ -11,13 +11,13 @@ const Link            = ReactRouter.Link;
 const browserHistory  = ReactRouter.browserHistory;
 
 const auth            = require( './auth.js' )
-const Login           = require( './components/login.js' )
+const Login           = require( './components/nav_components/login.js' )
 const Signup          = require( './components/signup.js' )
-const Logout          = require( './components/logout.js' )
+const Logout          = require( './components/nav_components/logout.js' )
 const Display         = require( './components/display.js' )
 const Search          = require( './components/search.js' )
 const Listings        = require( './components/listings.js' )
-const Nav             = require('./components/nav.js');
+const Nav             = require('./components/nav_components/nav.js');
 
 
 
@@ -46,7 +46,8 @@ const App = React.createClass({
     .done( (data) => {
       console.log('am i posting?')
       this.state.loggedIn=true;
-      this.setState( { loggedIn : this.state.loggedIn } )
+      this.state.signupBox=false;
+      this.setState( { loggedIn : this.state.loggedIn, signupBox : this.state.signupBox } )
     })
   },
 
