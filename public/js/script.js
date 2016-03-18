@@ -175,10 +175,6 @@ const App = React.createClass({
             <div className="nav-wrapper">
               <br/>
 
-              <ul>
-                { showIndeedJobs }
-                { showCareerJobs }
-              </ul>
               {this.state.signupBox ? notSignedIn : signedInView}
               {/* Initial Search Result Display */}
               <Display />
@@ -188,9 +184,13 @@ const App = React.createClass({
 
           <div className="row" id="listings">
             <div className="nav-wrapper">
-              <br/>
-              {/* Initial Search Result Display */}
-              <Listings />
+              <ul>
+                <br/>
+                {/* Initial Search Result Display */}
+                { showIndeedJobs }
+                { showCareerJobs }
+                <Listings />
+              </ul>
             </div>
           </div>
       </div>
