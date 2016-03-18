@@ -12,8 +12,14 @@ const Profile = React.createClass({
 
   componentDidMount:function() {
    // this is where you'll get the data from the 'db'
-   $.get('/jobs').done( data=>{
-
+   $.ajax({
+     url : '/jobs',
+     type : 'get',
+     beforeSend : function( xhr ) {
+       xhr.setRequestHeader("Authorization", 'Bearer ' + auth.getToken() )
+     }
+   }).done( data=>{
+     console.log( 'running profile did mount')
       data.forEach( el=> {
         this.state.jobs[ el.job_id ] = el;
       });

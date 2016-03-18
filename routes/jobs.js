@@ -13,7 +13,8 @@ jobs.use(function(error, request, response, next) {
 });
 
 jobs.route('/')
-  .get( db.getJobs, ( req, res ) => {
+  .get( expressJWT( { secret : secret } ), db.getJobs, ( req, res ) => {
+    console.log(req, req.agent)
     res.json( res.rows )
   })
 
