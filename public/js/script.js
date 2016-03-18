@@ -18,6 +18,7 @@ const Display         = require( './components/display.js' )
 const Search          = require( './components/search.js' )
 const Listings        = require( './components/listings.js' )
 const Nav             = require('./components/nav.js');
+const Profile         = require( './components/profiles.js' )
 
 
 
@@ -71,6 +72,10 @@ const App = React.createClass({
     this.setState( { profile : this.state.profile })
   },
 
+
+
+
+
   render : function() {
     let signedInView =
       <div>
@@ -102,6 +107,7 @@ const App = React.createClass({
 
           <div className="row" id="display">
             <div className="nav-wrapper">
+              <Profile toggleJob={ this.state.jobs }/>
               <br/>
               {this.state.signupBox ? notSignedIn : signedInView}
               {/* Initial Search Result Display */}
@@ -134,6 +140,7 @@ const App = React.createClass({
         <Route path="search" component={ Search } />
         <Route path="listings" component={ Listings } />
         <Route path="display" component={ Display } />
+        <Route path="profile" component={ Profile } />
       </Route>
     </Router>
   )

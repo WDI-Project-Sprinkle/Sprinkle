@@ -11,7 +11,8 @@ const jsonwebtoken = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const app = express();
-const userRoutes = require(path.join(__dirname, '/routes/users'));
+const userRoutes = require( path.join(__dirname, '/routes/users' ) );
+const jobRoutes = require( path.join( __dirname, '/routes/jobs' ) )
 
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -23,6 +24,7 @@ app.get('/', (req,res) => {
 })
 
 app.use('/users', userRoutes);
+app.use( '/jobs', jobRoutes );
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

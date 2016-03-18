@@ -35,3 +35,19 @@
   border: 1px;
   background-color: green;
 }
+
+#current-jobs-div {
+  border: 1px;
+  background-color: yellow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#applied-jobs-div {
+  border: 1px;
+  background-color: blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

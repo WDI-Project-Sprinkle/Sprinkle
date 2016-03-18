@@ -60,6 +60,35 @@ function loginUser(req, res, next) {
       console.error('error finding users')
     })
 }
+// **** added functions getJobs and toggleJobs
+function getJobs( req, res, next ) {
+  db.any( "SELECT * from jobs;")
+    .then( function (data) {
+      res.rows = data;
+      next();
+    })
+    .catch( function ( error ) {
+      console.log( 'Error', error )
+    });
+}
 
+function toggleJobs( req, res, next ) {
+  db.none( `
+    UPDATE jobs
+    SET completed = NOT completed
+    WHERE job_id = ($1);`,
+        [ req.params.jobid ]
+    )
+    .then( ()=> {
+      console.log('Toggled Job Successfully');
+      next();
+    })
+    .catch( ( error )=>{
+      console.log('Error toggling job')
+    })
+}
+
+module.exports.toggleJobs = toggleJobs;
+module.exports.getJobs = getJobs;
 module.exports.createUser = createUser;
 module.exports.loginUser = loginUser;
