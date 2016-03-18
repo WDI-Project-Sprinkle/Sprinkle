@@ -11,15 +11,19 @@ const jsonwebtoken = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const app = express();
-const userRoutes = require( path.join(__dirname, '/routes/users' ) );
 const jobRoutes = require( path.join( __dirname, '/routes/jobs' ) )
+const userRoutes = require(path.join(__dirname, '/routes/users'));
+const searchRoutes = require(path.join(__dirname, '/routes/search'));
 
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get('/', (req,res) => {
+app.use('/users', userRoutes);
+app.use('/search', searchRoutes);
+
+app.get('*', (req,res) => {
   res.sendFile(path.join(__dirname,'index.html'))
 })
 

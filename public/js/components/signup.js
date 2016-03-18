@@ -1,5 +1,5 @@
 const React = require('react');
-const auth = require('../auth.js');
+
 const Signup = React.createClass({
   handleSubmit : function(event) {
     event.preventDefault()
