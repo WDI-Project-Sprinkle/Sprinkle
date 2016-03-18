@@ -1,3 +1,7 @@
 .env
-node_modlues
+
+node_modules
+
 *bundle.js
+
+.DS_Store

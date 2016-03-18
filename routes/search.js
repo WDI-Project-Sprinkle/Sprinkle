@@ -3,13 +3,21 @@ const search      = express.Router();
 // const bodyParser  = require('body-parser');
 const db          = require('../db/pgp.js');
 const request = require('request');
+const parseString = require('xml2js').parseString;
 
-const url = 'http://api.indeed.com/ads/apisearch?'
-const apikey = '2780049725342565';
+const urlIndeed = 'http://api.indeed.com/ads/apisearch?'
+const urlCareer = 'http://api.careerbuilder.com/v1/jobsearch?'
+const apikeyIndeed = '2780049725342565';
+const apikeyCareer = 'WDHL7WC6DQGVW4PVN3D3';
 
-search.route('/')
-.get(getJobs, ( req, res ) => {
-  res.send(res.data)
+search.route('/indeed')
+.get(getJobsIndeed, ( req, res ) => {
+  res.send(res.dataIndeed)
+})
+
+search.route('/career')
+.get(getJobsCareer, ( req, res ) => {
+  res.json(res.dataCareer)
 })
 
 // @author Jason Seminara 2016-03-18
@@ -17,23 +25,31 @@ search.route('/')
 // @returns a copy of the original
 Object.prototype.pluckFirstArrayItem = function(first_argument) {
   return Object.keys(this).reduce((copy,key)=>{
+    // console.log('This is the key: ', this[key])
     copy[key]=this[key][0]
     return copy;
   }
   ,{})
 };
 
-
-function getJobs(req, res, next) {
-  request(url + 'publisher=' + apikey + '&q=' + req.query.data.q + '&l=' + req.query.data.l + '&co=us&jt=' + req.query.data.jt + '&format=json&limit=20&v=2', function(err, response, body) {
+function getJobsIndeed(req, res, next) {
+  request(urlIndeed + 'publisher=' + apikeyIndeed + '&q=' + req.query.data.q + '&l=' + req.query.data.l + '&co=us&jt=' + req.query.data.jt + '&format=json&limit=20&v=2', function(err, response, body) {
     var data = JSON.parse(body);
-    res.data = data.results;
+    res.dataIndeed = data.results;
     console.log('yo mama has a fat', body, 'res.data', res.data);
     next()
   });
 }
 
-
-
+var data = ''
+function getJobsCareer(req, res, next) {
+  request(urlCareer + 'DeveloperKey=' + apikeyCareer + '&JobTitle=' + req.query.data.q + '&Location=' + req.query.data.city + ',' + req.query.data.state, function(err, response, body) {
+    parseString(body, function (err, result) {
+      data = result.ResponseJobSearch.Results[0].JobSearchResult.map(job => job.pluckFirstArrayItem())
+    });
+    res.dataCareer = data;
+    next()
+  });
+}
 
 module.exports = search;

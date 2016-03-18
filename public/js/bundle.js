@@ -1240,7 +1240,7 @@ module.exports = performanceNow;
  *
  * @providesModule shallowEqual
  * @typechecks
- * 
+ *
  */
 
 'use strict';
@@ -14207,7 +14207,7 @@ function createRouteFromReactElement(element) {
  * nested.
  *
  *   import { Route, createRoutesFromReactChildren } from 'react-router'
- *   
+ *
  *   const routes = createRoutesFromReactChildren(
  *     <Route component={App}>
  *       <Route path="home" component={Dashboard}/>
@@ -33936,7 +33936,8 @@ var AdvSearch = React.createClass({
       jt: this.refs.jt.value
     };
     console.log('search result: ', search);
-    this.props.addSearch(search);
+    this.props.addSearchIndeed(search);
+    this.props.addSearchCareer(search);
     this.refs.searchForm.reset();
   },
 
@@ -34440,7 +34441,8 @@ var Search = React.createClass({
       state: this.refs.state.value
     };
     console.log('search result: ', search);
-    this.props.addSearch(search);
+    this.props.addSearchIndeed(search);
+    this.props.addSearchCareer(search);
     this.refs.searchForm.reset();
   },
 
@@ -34554,49 +34556,70 @@ var AdvSearch = require('./components/advSearch.js');
 var App = React.createClass({
   displayName: 'App',
 
+
   getInitialState: function getInitialState() {
     return {
       loggedIn: false,
       signupBox: false,
       advSearch: false,
       profile: false,
-      jobs: []
+      indeedJobs: [],
+      careerJobs: []
     };
   },
 
-  addSearch: function addSearch(newSearch) {
+  addSearchIndeed: function addSearchIndeed(newSearch) {
     var _this = this;
 
     var cityState = newSearch.city + '+' + newSearch.state;
 
     var data = {
       q: newSearch.q,
+      city: newSearch.city,
+      state: newSearch.state,
       l: cityState,
       jt: newSearch.jt
     };
 
-    $.get('/search', {
+    $.get('/search/indeed', {
       data: data
     }).done(function (data) {
-      console.log('this is the data ', data[0]);
-      _this.state.jobs = data;
+      _this.state.indeedJobs = data;
       _this.state.signupBox = false;
-      _this.setState({ jobs: _this.state.jobs, signupBox: _this.state.signupBox });
+      _this.setState({ jobs: _this.state.indeedJobs, signupBox: _this.state.signupBox });
+    });
+  },
+
+  addSearchCareer: function addSearchCareer(newSearch) {
+    var _this2 = this;
+
+    var data = {
+      q: newSearch.q,
+      city: newSearch.city,
+      state: newSearch.state,
+      jt: newSearch.jt
+    };
+
+    $.get('/search/career', {
+      data: data
+    }).done(function (data) {
+      _this2.state.careerJobs = data;
+      _this2.state.signupBox = false;
+      _this2.setState({ jobs: _this2.state.careerJobs, signupBox: _this2.state.signupBox });
     });
   },
 
   login: function login(username, password) {
-    var _this2 = this;
+    var _this3 = this;
 
     var data = {
       email: username,
       password: password
     };
     $.post('users/login', data).done(function (data) {
-      console.log('am i posting?');
-      _this2.state.loggedIn = true;
-      _this2.state.signupBox = false;
-      _this2.setState({ loggedIn: _this2.state.loggedIn, signupBox: _this2.state.signupBox });
+      _this3.state.loggedIn = true;
+      _this3.state.signupBox = false;
+      _this3.setState({ loggedIn: _this3.state.loggedIn, signupBox: _this3.state.signupBox });
     });
   },
 
@@ -34643,7 +34666,7 @@ var App = React.createClass({
     var regularSearch = React.createElement(
       'div',
       null,
-      React.createElement(Search, { addSearch: this.addSearch }),
+      React.createElement(Search, { addSearchIndeed: this.addSearchIndeed, addSearchCareer: this.addSearchCareer }),
       React.createElement(
         'a',
         { onClick: this.handleAdvance },
@@ -34653,7 +34676,7 @@ var App = React.createClass({
     var advSearch = React.createElement(
       'div',
       null,
-      React.createElement(AdvSearch, { addSearch: this.addSearch }),
+      React.createElement(AdvSearch, { addSearchIndeed: this.addSearchIndeed, addSearchCareer: this.addSearchCareer }),
       React.createElement(
         'a',
         { onClick: this.handleBasic },
@@ -34661,9 +34684,9 @@ var App = React.createClass({
       )
     );
 
-    var showStuff = [];
-    this.state.jobs.forEach(function (el) {
-      showStuff.push(React.createElement(
+    var showIndeedJobs = [];
+    this.state.indeedJobs.forEach(function (el) {
+      showIndeedJobs.push(React.createElement(
         'li',
         null,
         'Job Title: ',
@@ -34677,6 +34700,26 @@ var App = React.createClass({
           'a',
           { href: el.url, target: '_blank' },
           'indeed'
+        )
+      ));
+    });
+
+    var showCareerJobs = [];
+    this.state.careerJobs.forEach(function (el) {
+      showCareerJobs.push(React.createElement(
+        'li',
+        null,
+        'Job Title: ',
+        el.JobTitle,
+        ' ',
+        React.createElement('br', null),
+        ' Company Name: ',
+        el.Company,
+        ' ',
+        React.createElement(
+          'a',
+          { href: el.JobDetailsURL, target: '_blank' },
+          'careerbuilder'
         )
       ));
     });
@@ -34714,7 +34757,8 @@ var App = React.createClass({
           React.createElement(
             'ul',
             null,
-            showStuff
+            showIndeedJobs,
+            showCareerJobs
           ),
           this.state.signupBox ? notSignedIn : signedInView,
           React.createElement(Display, null)
