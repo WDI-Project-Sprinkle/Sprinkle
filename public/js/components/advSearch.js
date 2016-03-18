@@ -12,7 +12,8 @@ const AdvSearch = React.createClass({
       jt: this.refs.jt.value
     }
     console.log( 'search result: ', search )
-    this.props.addSearch( search )
+    this.props.addSearchIndeed( search )
+    this.props.addSearchCareer( search )
     this.refs.searchForm.reset()
   },
 
