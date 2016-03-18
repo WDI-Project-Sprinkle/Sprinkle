@@ -43,7 +43,7 @@ function getJobsIndeed(req, res, next) {
 
 var data = ''
 function getJobsCareer(req, res, next) {
-  request(urlCareer + 'DeveloperKey=' + apikeyCareer + '&JobTitle=' + req.query.data.q + '&l=' + req.query.data.city + ',' + req.query.data.state, function(err, response, body) {
+  request(urlCareer + 'DeveloperKey=' + apikeyCareer + '&JobTitle=' + req.query.data.q + '&Location=' + req.query.data.city + ',' + req.query.data.state, function(err, response, body) {
     parseString(body, function (err, result) {
       data = result.ResponseJobSearch.Results[0].JobSearchResult.map(job => job.pluckFirstArrayItem())
     });
@@ -51,8 +51,5 @@ function getJobsCareer(req, res, next) {
     next()
   });
 }
-
-
-
 
 module.exports = search;
