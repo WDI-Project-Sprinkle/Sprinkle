@@ -1,3 +1,5 @@
+pry = require('pryjs')
+
 'use strict'
 
 require('dotenv').config();

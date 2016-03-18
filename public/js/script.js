@@ -29,11 +29,12 @@ const App = React.createClass({
       signupBox : false,
       advSearch : false,
       profile : false,
-      jobs : []
+      indeedJobs : [],
+      careerJobs : []
     }
   },
 
-  addSearch : function ( newSearch ){
+  addSearchIndeed : function ( newSearch ){
     var cityState = newSearch.city + '+' + newSearch.state
 
 
@@ -45,15 +46,42 @@ const App = React.createClass({
       jt: newSearch.jt
     }
 
-    $.get('/search',
+    $.get('/search/indeed',
     {
       data: data
     })
     .done( (data) => {
       console.log('this is the data ',data[0])
-      this.state.jobs = data;
+      console.log('this.state.indeedJobs', this.state.indeedJobs)
+      this.state.indeedJobs = data;
       this.state.signupBox = false;
-      this.setState({ jobs : this.state.jobs, signupBox : this.state.signupBox });
+      this.setState({ jobs : this.state.indeedJobs, signupBox : this.state.signupBox });
+
+
+    })
+  },
+
+  addSearchCareer : function ( newSearch ){
+    var cityState = newSearch.city + '+' + newSearch.state
+
+
+    var data = {
+      q: newSearch.q,
+      city: newSearch.city,
+      state: newSearch.state,
+      l: cityState,
+      jt: newSearch.jt
+    }
+
+    $.get('/search/career',
+    {
+      data: data
+    })
+    .done( (data) => {
+      console.log('this is the data ',data[0])
+      this.state.careerJobs = data;
+      this.state.signupBox = false;
+      this.setState({ jobs : this.state.careerJobs, signupBox : this.state.signupBox });
 
 
     })
@@ -116,18 +144,23 @@ const App = React.createClass({
 
     let regularSearch =
     <div>
-      <Search addSearch={ this.addSearch }/>
+      <Search addSearchIndeed={ this.addSearchIndeed } addSearchCareer={ this.addSearchCareer }/>
       <a onClick={this.handleAdvance}> advance search </a>
     </div>
     let advSearch =
       <div>
-        <AdvSearch addSearch={ this.addSearch }/>
+        <AdvSearch addSearchIndeed={ this.addSearchIndeed } addSearchCareer={ this.addSearchCareer }/>
         <a onClick={this.handleBasic}> basic search </a>
       </div>
 
-      var showStuff = [];
-      this.state.jobs.forEach((el) => {
-        showStuff.push(<li>Job Title: {el.jobtitle} <br/> Company Name: {el.company} <a href={el.url} target="_blank">indeed</a></li>);
+      var showIndeedJobs = [];
+      this.state.indeedJobs.forEach((el) => {
+        showIndeedJobs.push(<li>Job Title: {el.jobtitle} <br/> Company Name: {el.company} <a href={el.url} target="_blank">indeed</a></li>);
+      })
+
+      var showCareerJobs = [];
+      this.state.careerJobs.forEach((el) => {
+        showCareerJobs.push(<li>Job Title: {el.JobTitle} <br/> Company Name: {el.Company} <a href={el.CompanyDetailsURL} target="_blank">careerbuilder</a></li>);
       })
 
     return (
@@ -155,7 +188,8 @@ const App = React.createClass({
               <br/>
 
               <ul>
-                { showStuff }
+                { showIndeedJobs }
+                { showCareerJobs }
               </ul>
               {this.state.signupBox ? notSignedIn : signedInView}
               {/* Initial Search Result Display */}
