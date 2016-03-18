@@ -15,23 +15,23 @@ CREATE TABLE jobs (
   first_added TIMESTAMP,
   indeed BOOLEAN,
   indeed_job_id VARCHAR(100),
+  indeed_url VARCHAR(255),
   career BOOLEAN,
   career_job_id VARCHAR(100),
-  indeed_url VARCHAR(255)
+  career_url VARCHAR(255)
+);
+
+CREATE TABLE users (
+  user_id SERIAL UNIQUE PRIMARY KEY,
+  email VARCHAR(255),
+  password_digest TEXT,
+  name VARCHAR(255)
 );
 
 CREATE TABLE apps (
   user_id INTEGER REFERENCES users,
   job_id INTEGER REFERENCES jobs,
+  PRIMARY KEY (user_id, job_id),
   saved_date TIMESTAMP,
-  applied BOOLEAN,
-  user_id REFERENCES users
-
-);
-
-CREATE TABLE users (
-   user_id SERIAL UNIQUE PRIMARY KEY,
-   email VARCHAR(255),
-   password_digest TEXT,
-   name VARCHAR(255),
+  applied BOOLEAN
 );
