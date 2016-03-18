@@ -39,6 +39,8 @@ const App = React.createClass({
 
     var data = {
       q: newSearch.q,
+      city: newSearch.city,
+      state: newSearch.state,
       l: cityState,
       jt: newSearch.jt
     }
