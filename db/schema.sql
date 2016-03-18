@@ -21,9 +21,8 @@ CREATE TABLE jobs (
 );
 
 CREATE TABLE apps (
-  profile_id SERIAL UNIQUE PRIMARY KEY,
-  indeed_id INTEGER REFERENCES indeed_jobs,
-  career_id INTEGER REFERENCES career_jobs,
+  user_id INTEGER REFERENCES users,
+  job_id INTEGER REFERENCES jobs,
   saved_date TIMESTAMP,
   applied BOOLEAN,
   user_id REFERENCES users
