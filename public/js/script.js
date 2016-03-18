@@ -94,9 +94,10 @@ const App = React.createClass({
   },
 
   signup : function() {
-    this.state.jobs = [];
+    this.state.indeedJobs = [];
+    this.state.careerJobs = [];
     this.state.signupBox=true;
-    this.setState( { signupBox : this.state.signupBox, jobs : this.state.jobs } )
+    this.setState( { signupBox : this.state.signupBox, indeedJobs : this.state.indeedJobs,  careerJobs : this.state.careerJobs })
   },
 
   signedIn : function() {
