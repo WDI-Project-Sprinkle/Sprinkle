@@ -62,7 +62,7 @@ function loginUser(req, res, next) {
 }
 // **** added functions getJobs and toggleJobs
 function getJobs( req, res, next ) {
-  db.any( "SELECT * from jobs WHERE user_id = $1;", [req.agent.user_id])
+  db.any( "SELECT * from jobs ;", [req.agent.user_id])
     .then( function (data) {
       res.rows = data;
       next();
