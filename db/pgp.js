@@ -2,13 +2,19 @@ const bcrypt = require('bcrypt');
 const salt   = bcrypt.genSaltSync(10);
 const pgp    = require('pg-promise')({});
 
-const cn = {
+if(process.env.ENVIRONMENT === 'production') {
+  var cn = process.env.DATABASE_URL
+} else {
+  var cn =
+  {
     host: 'localhost', // server name or IP address;
     port: 5432,
     database: process.env.DB,
     user: process.env.DB_USER,
     password: process.env.DB_PASS
-};
+  };
+}
+
 
 const db = pgp(cn);
 

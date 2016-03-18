@@ -94,9 +94,10 @@ const App = React.createClass({
   },
 
   signup : function() {
-    this.state.jobs = [];
+    this.state.indeedJobs = [];
+    this.state.careerJobs = [];
     this.state.signupBox=true;
-    this.setState( { signupBox : this.state.signupBox, jobs : this.state.jobs } )
+    this.setState( { signupBox : this.state.signupBox, indeedJobs : this.state.indeedJobs,  careerJobs : this.state.careerJobs })
   },
 
   signedIn : function() {
@@ -142,12 +143,12 @@ const App = React.createClass({
 
       var showIndeedJobs = [];
       this.state.indeedJobs.forEach((el) => {
-        showIndeedJobs.push(<li>Job Title: {el.jobtitle} <br/> Company Name: {el.company} <a href={el.url} target="_blank">indeed</a></li>);
+        showIndeedJobs.push(<li>Job Title: {el.jobtitle} <br/> Company Name: {el.company} <br/> <a href={el.url} target="_blank">indeed</a></li>);
       })
 
       var showCareerJobs = [];
       this.state.careerJobs.forEach((el) => {
-        showCareerJobs.push(<li>Job Title: {el.JobTitle} <br/> Company Name: {el.Company} <a href={el.JobDetailsURL} target="_blank">careerbuilder</a></li>);
+        showCareerJobs.push(<li>Job Title: {el.JobTitle} <br/> Company Name: {el.Company} <br/> <a href={el.JobDetailsURL} target="_blank">careerbuilder</a></li>);
       })
 
     return (
