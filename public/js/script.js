@@ -147,7 +147,7 @@ const App = React.createClass({
 
       var showCareerJobs = [];
       this.state.careerJobs.forEach((el) => {
-        showCareerJobs.push(<li>Job Title: {el.JobTitle} <br/> Company Name: {el.Company} <a href={el.CompanyDetailsURL} target="_blank">careerbuilder</a></li>);
+        showCareerJobs.push(<li>Job Title: {el.JobTitle} <br/> Company Name: {el.Company} <a href={el.JobDetailsURL} target="_blank">careerbuilder</a></li>);
       })
 
     return (
