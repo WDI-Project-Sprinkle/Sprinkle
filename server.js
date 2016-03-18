@@ -22,13 +22,12 @@ app.use(bodyParser.json());
 
 app.use('/users', userRoutes);
 app.use('/search', searchRoutes);
+app.use( '/jobs', jobRoutes );
 
 app.get('*', (req,res) => {
   res.sendFile(path.join(__dirname,'index.html'))
 })
 
-app.use('/users', userRoutes);
-app.use( '/jobs', jobRoutes );
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

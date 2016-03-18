@@ -150,7 +150,7 @@ const App = React.createClass({
 
           <div className="row" id="display">
             <div className="nav-wrapper">
-              <Profile toggleJob={ this.state.jobs }/>
+              <Profile />
               <br/>
 
               <ul>
@@ -187,7 +187,7 @@ const App = React.createClass({
         <Route path="search" component={ Search } />
         <Route path="listings" component={ Listings } />
         <Route path="display" component={ Display } />
-        <Route path="profile" component={ Profile } />
+        <Route path="jobs" component={ Profile } />
       </Route>
     </Router>
   )
