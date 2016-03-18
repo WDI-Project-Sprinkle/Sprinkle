@@ -20,9 +20,8 @@ const Listings        = require( './components/listings.js' )
 const Nav             = require('./components/nav_components/nav.js');
 const AdvSearch       = require('./components/advSearch.js');
 
-
-
 const App = React.createClass({
+
   getInitialState : function() {
     return {
       loggedIn : false,
@@ -37,7 +36,6 @@ const App = React.createClass({
   addSearchIndeed : function ( newSearch ){
     var cityState = newSearch.city + '+' + newSearch.state
 
-
     var data = {
       q: newSearch.q,
       city: newSearch.city,
@@ -51,25 +49,18 @@ const App = React.createClass({
       data: data
     })
     .done( (data) => {
-      console.log('this is the data ',data[0])
-      console.log('this.state.indeedJobs', this.state.indeedJobs)
       this.state.indeedJobs = data;
       this.state.signupBox = false;
       this.setState({ jobs : this.state.indeedJobs, signupBox : this.state.signupBox });
-
-
     })
   },
 
   addSearchCareer : function ( newSearch ){
-    var cityState = newSearch.city + '+' + newSearch.state
-
 
     var data = {
       q: newSearch.q,
       city: newSearch.city,
       state: newSearch.state,
-      l: cityState,
       jt: newSearch.jt
     }
 
@@ -78,12 +69,9 @@ const App = React.createClass({
       data: data
     })
     .done( (data) => {
-      console.log('this is the data ',data[0])
       this.state.careerJobs = data;
       this.state.signupBox = false;
       this.setState({ jobs : this.state.careerJobs, signupBox : this.state.signupBox });
-
-
     })
   },
 
@@ -94,7 +82,6 @@ const App = React.createClass({
     }
     $.post('users/login', data)
     .done( (data) => {
-      console.log('am i posting?')
       this.state.loggedIn=true;
       this.state.signupBox=false;
       this.setState( { loggedIn : this.state.loggedIn, signupBox : this.state.signupBox } )
