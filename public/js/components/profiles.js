@@ -1,21 +1,24 @@
 'use strict'
 const React = require( 'react' )
 const ReactDOM = require( 'react-dom' )
+const SavedJobs       = require('../components/savedjobs.js');
+const AppliedJobs     = require('../components/appliedjobs.js');
 
-const Profile = React.createClass({
+
+const Profiles = React.createClass({
+  // const token = auth.getToken()
   render : function(){
-    const token = auth.getToken()
 
     return (
       <div>
-        <h1>User Info</h1>
-        <p>You did it</p>
+        <SavedJobs />
+        <AppliedJobs />
       </div>
     )
   }
 })
 
-module.exports = Profile;
+module.exports = Profiles;
 
 
 //inside pgp.js

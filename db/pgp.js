@@ -126,6 +126,16 @@ function addCareerJobs( req, res, next ){
   })
 }
 
+function showSavedJobs( req, res, next ){
+  db.any( 'SELECT * FROM jobs' )
+  .then( ( data )=>{
+    res.rows = data;
+    next();
+  })
+  .catch( ( error )=>{
+    console.log( error )
+  })
+}
 
 //JL deleteSavedJobs function
 function deleteSavedJobs( req, res, next ){
@@ -140,7 +150,7 @@ function deleteSavedJobs( req, res, next ){
 }
 
 
-
+module.exports.showSavedJobs = showSavedJobs;
 module.exports.deleteSavedJobs = deleteSavedJobs;
 module.exports.addCareerJobs = addCareerJobs;
 module.exports.addIneedJobs = addIneedJobs;

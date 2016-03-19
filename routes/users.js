@@ -26,6 +26,11 @@ users.post('/login', db.loginUser, ( req, res ) => {
   res.json( { agent: res.rows, token: token } );
 })
 
+users.route('/jobs')
+  .get(db.showSavedJobs, (req, res)=>{
+    res.send(res.rows)
+  })
+
 // uses.route('/:id')
 //   .get( db.showUser, ( req, res ) => {
 //     res.send(res.rows)

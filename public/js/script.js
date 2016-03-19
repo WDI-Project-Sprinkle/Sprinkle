@@ -19,6 +19,11 @@ const Search          = require( './components/search.js' )
 const Listings        = require( './components/listings.js' )
 const Nav             = require('./components/nav_components/nav.js');
 const AdvSearch       = require('./components/advSearch.js');
+const Profiles        = require('./components/profiles.js');
+const SavedJobs       = require('./components/savedjobs.js');
+const AppliedJobs     = require('./components/appliedjobs.js');
+
+const utility         = require('./helpers/utility.js');
 
 const App = React.createClass({
 
@@ -29,8 +34,16 @@ const App = React.createClass({
       advSearch : false,
       profile : false,
       indeedJobs : [],
-      careerJobs : []
+      careerJobs : [],
+      savedJobs : []
     }
+  },
+
+  componentDidMount : function(){
+    $.get('/users/jobs')
+    .done(data => this.setState({
+      savedJobs : data.indexByKey('job_id')
+    }))
   },
 
   addSearchIndeed : function ( newSearch ){
@@ -111,6 +124,13 @@ const App = React.createClass({
     this.setState( { profile : this.state.profile })
   },
 
+  savedJobs : function() {
+    $.get('/users/jobs')
+    .done(data => this.setState({
+      savedJobs : data.indexByKey('job_id')
+    }))
+  },
+
   handleAdvance : function() {
     this.state.advSearch=true
     this.setState( { advSearch : this.state.advSearch } )
@@ -181,6 +201,7 @@ const App = React.createClass({
               {this.state.signupBox ? notSignedIn : signedInView}
               {/* Initial Search Result Display */}
               <Display />
+              <Profiles savedJobs={this.state.savedJobs}/>
             </div>
           </div>
 
