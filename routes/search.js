@@ -25,7 +25,6 @@ search.route('/career')
 // @returns a copy of the original
 Object.prototype.pluckFirstArrayItem = function(first_argument) {
   return Object.keys(this).reduce((copy,key)=>{
-    // console.log('This is the key: ', this[key])
     copy[key]=this[key][0]
     return copy;
   }
@@ -33,17 +32,16 @@ Object.prototype.pluckFirstArrayItem = function(first_argument) {
 };
 
 function getJobsIndeed(req, res, next) {
-  request(urlIndeed + 'publisher=' + apikeyIndeed + '&q=' + req.query.data.q + '&l=' + req.query.data.l + '&co=us&jt=' + req.query.data.jt + '&format=json&limit=20&v=2', function(err, response, body) {
+  request(urlIndeed + 'publisher=' + apikeyIndeed + '&q=' + req.query.data.q + '&l=' + req.query.data.l + '&co=us&jt=' + req.query.data.jt + '&radius=' + req.query.data.radius + '&format=json&limit=20&v=2', function(err, response, body) {
     var data = JSON.parse(body);
     res.dataIndeed = data.results;
-    console.log('yo mama has a fat', body, 'res.data', res.data);
     next()
   });
 }
 
 var data = ''
 function getJobsCareer(req, res, next) {
-  request(urlCareer + 'DeveloperKey=' + apikeyCareer + '&JobTitle=' + req.query.data.q + '&Location=' + req.query.data.city + ',' + req.query.data.state, function(err, response, body) {
+  request(urlCareer + 'DeveloperKey=' + apikeyCareer + '&JobTitle=' + req.query.data.q + '&Location=' + req.query.data.city + ',' + req.query.data.state + '&Radius=' + req.query.data.radius + '&EmploymentType=' +req.query.data.jt, function(err, response, body) {
     parseString(body, function (err, result) {
       data = result.ResponseJobSearch.Results[0].JobSearchResult.map(job => job.pluckFirstArrayItem())
     });

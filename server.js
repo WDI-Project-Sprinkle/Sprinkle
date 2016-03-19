@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use('/users', userRoutes);
 app.use('/search', searchRoutes);
 
-app.get('*', (req,res) => {
+app.get('/*', (req,res) => {
   res.sendFile(path.join(__dirname,'index.html'))
 })
 
