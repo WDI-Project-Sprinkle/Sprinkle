@@ -22,7 +22,7 @@ const Search = React.createClass({
       <form ref="searchForm" onSubmit={ this.handleSubmit }>
         <section className="col s12">
           <div className="input-field">
-            <section id="search-display" className="col s7">
+            <section id="search-display">
             <input id="searchInput" type="text" placeholder="job title" ref="searchInput" required />
             <input id="city" type="text" placeholder="city" ref="city"  />
             <input id="state" type="text" placeholder="state" ref="state"  />

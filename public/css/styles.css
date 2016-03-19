@@ -1,34 +1,50 @@
-#container {
-  width: 80%;
-  height: 80%;
-  margin: 0 auto;
-  border: 1px solid black;
-  margin-top: 20px;
-}
 
 #navbar {
   background: black;
   color: red;
 }
 
+#signinform {
+  text-align: right;
+}
+
+#username {
+  width: 110px;
+  height: 25px;
+}
+
+#password {
+  width: 110px;
+  height: 25px;
+}
+
+#loginbutton {
+  width: 110px;
+  height: 25px;
+}
+
 #navbar li {
   display: inline;
   float: right;
   list-style-type: none;
+  width: auto;
 }
 
 #search {
   padding-right: 45px;
+  width: auto;
 }
 
 #searchbar {
   border: 1px;
   background-color: blue;
+  width: auto;
 }
 
 #display {
   border: 1px;
   background-color: red;
+  width: auto;
 }
 
 #listings {

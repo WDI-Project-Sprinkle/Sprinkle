@@ -26,7 +26,6 @@ const Nav = React.createClass({
   render : function() {
     return (
       <nav id="navbar">
-        <h3>SPRINKLE</h3>
           {this.props.loggedIn ? (
           <ul>
             <Logout logout={ this.logout }/>
