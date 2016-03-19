@@ -81,7 +81,7 @@ function createHash( email, password, name, callback ) {
 
 
 // JL add Indeed Jobs to database
-function addJobs( req, res, next ){
+function addIneedJobs( req, res, next ){
   const company = req.body.company;
   const job_title = req.body.jobtitle;
   const job_desc = req.body.snippet;
@@ -89,14 +89,11 @@ function addJobs( req, res, next ){
   const state = req.body.state;
   const salaries = req.body.salaries;
   const first_added = req.body.date;
-  const indeed = req.body.indeed;
   const indeed_job_id = req.body.jobkey;
   const indeed_url = req.body.url;
-  const career = req.body.indeed;
-  const career_job_id = req.body.jobkey;
-  const career_url = req.body.url;
 
-  db.none( 'INSERT INTO indeed_jobs ( company, job_title, job_desc, city, state, salaries, first_added, indeed_id, indeed_url, ) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9 ) RETURNING *', [ company, job_title, job_desc, city, state, salaries, first_added, indeed_id, indeed_url ] )
+
+  db.none( 'INSERT INTO indeed_jobs ( company, job_title, job_desc, city, state, salaries, first_added, indeed_id, indeed_url, indeed) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING *', [ company, job_title, job_desc, city, state, salaries, first_added, indeed_id, indeed_url ] )
   .then( ( data ) => {
     res.rows = data;
     next();
@@ -107,15 +104,45 @@ function addJobs( req, res, next ){
 }
 
 
+// JL add Career Jobs to database
+function addCareerJobs( req, res, next ){
+  const company = req.body.Company;
+  const job_title = req.body.JobTitle;
+  const job_desc = req.body.ONetFriendlyTitle;
+  const city = req.body.City;
+  const state = req.body.state;
+  const salaries = req.body.Pay;
+  const first_added = req.body.PostedDate;
+  const career_job_id = req.body.DID;
+  const career_url = req.body.CompanyDetilsURL;
+
+  db.none( 'INSERT INTO indeed_jobs ( company, job_title, job_desc, city, state, salaries, first_added, indeed_id, indeed_url, career) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING *', [ company, job_title, job_desc, city, state, salaries, first_added, career_id, career_url ] )
+  .then( ( data ) => {
+    res.rows = data;
+    next();
+  })
+  .catch( ( error ) => {
+    console.log( error )
+  })
+}
+
+
+//JL deleteSavedJobs function
+function deleteSavedJobs( req, res, next ){
+  db.one( 'DELETE FROM apps WHERE user_id = ($1) AND job_id = ($2)' )
+  .then( ( data )=>{
+    res.rows = data;
+    next();
+  })
+  .catch( ( error )=>{
+    console.log( error )
+  })
+}
 
 
 
-// JL: save listings
-
-// function savedJobs( req, res, next ){
-//   db.one( 'INSERT INTO ' )
-// }
-
-module.exports.addJobs = addJobs;
+module.exports.deleteSavedJobs = deleteSavedJobs;
+module.exports.addCareerJobs = addCareerJobs;
+module.exports.addIneedJobs = addIneedJobs;
 module.exports.createUser = createUser;
 module.exports.loginUser = loginUser;
