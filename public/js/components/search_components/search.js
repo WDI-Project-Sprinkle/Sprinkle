@@ -20,16 +20,20 @@ const Search = React.createClass({
   render() {
     return (
       <form ref="searchForm" onSubmit={ this.handleSubmit }>
-        <section className="col s12">
-          <div className="input-field">
-            <section id="search-display" className="col s7">
-            <input id="searchInput" type="text" placeholder="job title" ref="searchInput" required />
-            <input id="city" type="text" placeholder="city" ref="city"  />
-            <input id="state" type="text" placeholder="state" ref="state"  />
-            <button type="submit" className="btn btn-primary btn-sm" id="searchButton">Search</button>
-            </section>
+        <div className="searchContainers">
+          <div className="searchCenter">
+          <input id="searchInput" type="text" placeholder="job title" ref="searchInput" required />
           </div>
-        </section>
+          <div className="searchCenter">
+          <input id="city" type="text" placeholder="city" ref="city"  />
+          </div>
+          <div className="searchCenter">
+          <input id="state" type="text" placeholder="state" ref="state"  />
+          </div>
+          <div className="searchCenter">
+          <button type="submit" className="btn btn-primary btn-sm" id="searchButton">Search</button>
+          </div>
+        </div>
       </form>
     )
   }

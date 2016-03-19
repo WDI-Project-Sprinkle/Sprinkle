@@ -1,34 +1,112 @@
-#container {
-  width: 80%;
-  height: 80%;
-  margin: 0 auto;
-  border: 1px solid black;
-  margin-top: 20px;
-}
 
 #navbar {
   background: black;
   color: red;
 }
 
+.navContainers {
+  right: 0;
+  text-align: center;
+}
+
+.navContainers .navLeft, .navContainers .navCenter, .navContainers .navRight {
+  display: inline-block;
+}
+
+.navContainers .navLeft {
+  float: left;
+}
+
+.navContainers .navCenter {
+  margin: 0 auto;
+}
+
+.navContainers .navRight {
+  float: right;
+}
+
+
+.searchContainers {
+  right: 0;
+  text-align: center;
+}
+
+.searchContainers .searchLeft, .searchContainers .searchCenter, .searchContainers .searchRight {
+  display: inline-block;
+}
+
+.searchContainers .searchLeft {
+  float: left;
+}
+
+.searchContainers .searchCenter {
+  margin: 0 auto;
+}
+
+.searchContainers .searchRight {
+  float: right;
+}
+
+
+#searchInput {
+  width: 350px;
+}
+
+#city {
+  width: 150px;
+}
+
+#state {
+}
+
+#signinform {
+  text-align: right;
+}
+
+#signupName {
+  widows: 200px;
+}
+
+#signupEmail {
+  widows: 200px;
+}
+
+#signupPassword {
+  widows: 200px;
+}
+
+#username {
+  width: 110px;
+  height: 25px;
+}
+
+#password {
+  width: 110px;
+  height: 25px;
+}
+
+#loginbutton {
+  width: 110px;
+  height: 25px;
+}
+
 #navbar li {
   display: inline;
   float: right;
   list-style-type: none;
-}
-
-#search {
-  padding-right: 45px;
+  width: auto;
 }
 
 #searchbar {
   border: 1px;
   background-color: blue;
+  width: auto;
 }
 
 #display {
   border: 1px;
   background-color: red;
+  width: auto;
 }
 
 #listings {

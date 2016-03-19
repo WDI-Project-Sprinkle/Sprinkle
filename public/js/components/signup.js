@@ -17,10 +17,15 @@ const Signup = React.createClass({
   render : function() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label><input ref="name" placeholder="name"/></label>
-        <label><input ref="email" placeholder="email"/></label>
-        <label><input ref="pass" placeholder="password" /></label><br />
-        <button type="submit">signup</button>
+        <div className="searchContainers">
+          <div className="searchCenter">
+            <h3>Sprinkle Signup Form</h3>
+            <label><input id="signupName" type="text" ref="name" placeholder="name"/></label>
+            <label><input id="signupEmail" type="text" ref="email" placeholder="email"/></label>
+            <label><input id="signupPassword" type="password" ref="pass" placeholder="password" /></label><br />
+            <button type="submit">signup</button>
+          </div>
+        </div>
       </form>
     )
   }
