@@ -114,6 +114,7 @@
   background-color: green;
 }
 
+
 .custab{
     border: 1px solid #ccc;
     padding: 5px;
@@ -129,4 +130,8 @@
 
 #deleteButton {
   height: 40px;
+}
+
+li {
+  list-style-type: none;
 }
