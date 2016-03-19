@@ -26,9 +26,4 @@ users.post('/login', db.loginUser, ( req, res ) => {
   res.json( { agent: res.rows, token: token } );
 })
 
-// uses.route('/:id')
-//   .get( db.showUser, ( req, res ) => {
-//     res.send(res.rows)
-//   })
-
 module.exports = users;

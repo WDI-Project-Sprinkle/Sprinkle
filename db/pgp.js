@@ -61,8 +61,8 @@ function loginUser(req, res, next) {
     })
 }
 // **** added functions getJobs and toggleJobs
-function getIndeedJobs( req, res, next ) {
-  db.any( "SELECT * from indeed_jobs ;", [req.agent.user_id])
+function getJobs( req, res, next ) {
+  db.any( "SELECT * from jobs ;", [req.agent.user_id])
     .then( function (data) {
       res.rows = data;
       next();
@@ -89,6 +89,6 @@ function toggleJobs( req, res, next ) {
 }
 
 module.exports.toggleJobs = toggleJobs;
-module.exports.getIndeedJobs = getIndeedJobs;
+module.exports.getJobs = getJobs;
 module.exports.createUser = createUser;
 module.exports.loginUser = loginUser;
