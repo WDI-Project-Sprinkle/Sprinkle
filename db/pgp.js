@@ -12,8 +12,6 @@ const cn = {
 
 const db = pgp(cn);
 
-
-
 function createSecure( email, password, name, callback ) {
   //hashing the password given by the user at signup
   bcrypt.genSalt( function( err, salt ) {
@@ -49,13 +47,11 @@ function createUser( req, res, next ) {
 function loginUser( req, res, next ) {
   const email = req.body.email
   const password = req.body.password
-
+  console.log('bro bro bro',req.user);
   db.one( "SELECT * FROM users WHERE email LIKE $1;", [ email ] )
     .then( ( data ) => {
-      console.log( data )
       if ( bcrypt.compareSync( password, data.password_digest ) ) {
         res.rows = data
-        console.log( 'wow you amazing Elton' );
         next()
       } else {
         res.status( 401 ).json( { data:"Fool this no workie" } )
@@ -152,7 +148,18 @@ function deleteSavedJobs( req, res, next ){
   })
 }
 
+function deleteUser (req,res,next) {
+  console.log('this is user id: ', req.user);
+  db.none('DELETE FROM users WHERE user_id=($1)', [req.user.user_id])
+  .then ( () => {
+    next();
+  })
+  .catch((error) => {
+    console.log("error on delete: ", error)
+  })
+}
 
+module.exports.deleteUser = deleteUser;
 module.exports.showSavedJobs = showSavedJobs;
 module.exports.deleteSavedJobs = deleteSavedJobs;
 module.exports.addCareerJobs = addCareerJobs;
