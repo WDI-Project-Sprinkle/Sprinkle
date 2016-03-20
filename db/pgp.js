@@ -110,11 +110,11 @@ function addCareerJobs( req, res, next ){
   const job_title = req.body.JobTitle;
   const job_desc = req.body.ONetFriendlyTitle;
   const city = req.body.City;
-  const state = req.body.state;
+  const state = req.body.State;
   const salaries = req.body.Pay;
   const first_added = req.body.PostedDate;
   const career_job_id = req.body.DID;
-  const career_url = req.body.CompanyDetilsURL;
+  const career_url = req.body.CompanyDetailsURL;
 
   db.none( 'INSERT INTO indeed_jobs ( company, job_title, job_desc, city, state, salaries, first_added, indeed_id, indeed_url, career) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING *', [ company, job_title, job_desc, city, state, salaries, first_added, career_id, career_url ] )
   .then( ( data ) => {
