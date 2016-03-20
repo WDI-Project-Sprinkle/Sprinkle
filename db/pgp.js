@@ -63,6 +63,39 @@ function loginUser( req, res, next ) {
     })
 }
 
+function updatePassword( req, res, next) {
+  console.log('You have made it to the pg file');
+  const currentPassword = req.body.currentPass
+  console.log('THIS IS THE BODY',req.body);
+  console.log('This is the current password, should not be undefined',currentPassword);
+  const newPassword = req.body.newPass
+  console.log('req:' ,req.user);
+
+  db.one("SELECT * FROM users WHERE email LIKE $1;", [req.user.email])
+    .then( (data) => {
+      console.log('email: ', data.email);
+      if ( bcrypt.compareSync( currentPassword, data.password_digest) ) {
+        console.log('this sorta works');
+        createSecure(data.email, newPassword, data.name, updateUser )
+        function updateUser(email, hash, name) {
+          db.none("UPDATE users SET password_digest=($1) WHERE user_id=($2) ", [hash, req.user.user_id])
+          .then(()=> {
+            next()
+          })
+          .catch((error)=>{
+            console.log(error);
+          })
+        }
+        next();
+      }
+    })
+    .catch((error) => {
+      console.log('error I suck: ', error);
+    })
+
+
+}
+
 // JL login hash
 function createHash( email, password, name, callback ) {
   //hashing the password given by the user at signup
@@ -159,6 +192,7 @@ function deleteUser (req,res,next) {
   })
 }
 
+module.exports.updatePassword = updatePassword;
 module.exports.deleteUser = deleteUser;
 module.exports.showSavedJobs = showSavedJobs;
 module.exports.deleteSavedJobs = deleteSavedJobs;

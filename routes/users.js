@@ -6,10 +6,6 @@ const bodyParser  = require('body-parser');
 const db          = require('../db/pgp.js');
 const secret      = 'you wanna hear a secret';
 
-users.get('/test', expressJWT({secret:secret}),(req, res) => {
-  console.log(req.user.user_id);
-})
-
 //From Doug
 users.use(function(error, request, response, next) {
  if(error.name === 'UnauthorizredError') {
@@ -24,6 +20,11 @@ users.post('/login', db.loginUser, ( req, res ) => {
 
 users.delete('/delete',expressJWT({secret:secret}),db.deleteUser, (req,res) => {
   res.send('deads');
+})
+
+users.put('/update', expressJWT({secret:secret}), db.updatePassword, (req,res) => {
+  console.log('updated the password bitches');
+  res.send('go')
 })
 
 users.route('/jobs')

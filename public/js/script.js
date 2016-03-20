@@ -176,6 +176,17 @@ const App = React.createClass({
     this.setState({ edit : this.state.edit});
   },
 
+  deleted : function() {
+    this.state.loggedIn = false;
+    this.state.edit = false;
+    this.setState({loggedIn : this.state.loggedIn, edit: this.state.edit})
+  },
+
+  updated : function() {
+    this.state.edit = false;
+    this.setState({edit : this.state.edit})
+  },
+
   saveIndeedJob : function(company, jobtitle, snippet, city, state, salaries, date, jobkey, url) {
 
     let data = {
@@ -231,7 +242,7 @@ const App = React.createClass({
       </div>
     let notSignedIn =
       <div>
-        <Signup signedIn={ this.signedIn}/>
+        <Signup signedIn={ this.signedIn }/>
       </div>
 
     let editIsFalse =
@@ -239,7 +250,7 @@ const App = React.createClass({
       </div>
     let editIsTrue =
       <div>
-        <EditProfile/>
+        <EditProfile deleted={this.deleted} updated={this.updated}/>
       </div>
 
     let regularSearch =
