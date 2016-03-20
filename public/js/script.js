@@ -236,12 +236,13 @@ const App = React.createClass({
     if (this.state.loggedIn == true) {
       $.post(
         {
-          url: '/users/CareerJobs',
-          data: data,
+          url : '/users/CareerJobs',
+          data : data,
           beforeSend: function( xhr ) {
             xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.token );
           }
-      })
+        }
+      )
       .done(data => this.setState({
         savedJobs : data.indexByKey('job_id')
       }))
