@@ -33,6 +33,7 @@ function createUser( req, res, next ) {
     db.none( "INSERT INTO users (email, password_digest, name ) VALUES($1, $2, $3) ;", [ email, hash, name ] )
     .then(function ( data ) {
       // success;
+      console.log( data );
       next();
     })
     .catch( function (error) {
@@ -46,6 +47,7 @@ function createUser( req, res, next ) {
 function loginUser( req, res, next ) {
   const email = req.body.email
   const password = req.body.password
+  console.log('bro bro bro',req.user);
   db.one( "SELECT * FROM users WHERE email LIKE $1;", [ email ] )
     .then( ( data ) => {
       if ( bcrypt.compareSync( password, data.password_digest ) ) {
@@ -76,6 +78,7 @@ function createHash( email, password, name, callback ) {
 
 // JL add Indeed Jobs to database
 function addIndeedJobs( req, res, next ){
+  console.log('THIS IS THE BODY OF INDEED',req.body);
   const company = req.body.company;
   const job_title = req.body.jobtitle;
   const job_desc = req.body.snippet;
@@ -87,14 +90,9 @@ function addIndeedJobs( req, res, next ){
   const indeed_url = req.body.url;
 
 
-  db.any( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, indeed_job_id, indeed_url, indeed) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING job_id', [ company, job_title, job_desc, city, state, salaries, first_added, indeed_job_id, indeed_url ] )
+  db.none( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, indeed_job_id, indeed_url, indeed) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING *', [ company, job_title, job_desc, city, state, salaries, first_added, indeed_job_id, indeed_url ] )
   .then( ( data ) => {
-    db.one( 'INSERT INTO apps (user_id, job_id) VALUES ($1, $2)', [req.user.user_id, data] )
-    .then((data)=>{
-      next();
-    })
     res.rows = data;
-    console.log('line 93 data: ', res.rows)
     next();
   })
   .catch( ( error ) => {
@@ -105,6 +103,7 @@ function addIndeedJobs( req, res, next ){
 
 // JL add Career Jobs to database
 function addCareerJobs( req, res, next ){
+  console.log('THIS IS THE BODY OF CAREER',req.body);
   const company = req.body.Company;
   const job_title = req.body.JobTitle;
   const job_desc = req.body.DescriptionTeaser;
@@ -115,7 +114,7 @@ function addCareerJobs( req, res, next ){
   const career_job_id = req.body.DID;
   const career_url = req.body.JobDetailsURL;
 
-  db.any( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, career_job_id, career_url, career) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING *', [ company, job_title, job_desc, city, state, salaries, first_added, career_job_id, career_url ] )
+  db.none( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, career_job_id, career_url, career) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING *', [ company, job_title, job_desc, city, state, salaries, first_added, career_job_id, career_url ] )
   .then( ( data ) => {
     res.rows = data;
     console.log('HEYYYY WE MADE IT HERERERERERERER');
@@ -124,11 +123,6 @@ function addCareerJobs( req, res, next ){
   .catch( ( error ) => {
     console.log( 'do you see dis error?', error )
   })
-}
-
-
-function userSavedJobs( req, res, next ){
-  db.one( 'INSERT INTO apps (user_id, job_id) VALUES ($1, $2)', [req.user.user_id, data] )
 }
 
 function showSavedJobs( req, res, next ){
@@ -165,7 +159,6 @@ function deleteUser (req,res,next) {
   })
 }
 
-module.exports.userSavedJobs = userSavedJobs;
 module.exports.deleteUser = deleteUser;
 module.exports.showSavedJobs = showSavedJobs;
 module.exports.deleteSavedJobs = deleteSavedJobs;

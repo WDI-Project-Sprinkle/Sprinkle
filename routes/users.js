@@ -22,7 +22,7 @@ users.post('/login', db.loginUser, ( req, res ) => {
   res.json( { agent: res.rows, token: token } );
 })
 
-users.delete('/delete',expressJWT({secret:secret}),db.deleteUser, (req,res) => {
+users.delete('/delete', expressJWT({secret:secret}),db.deleteUser, (req,res) => {
   res.send('deads');
 })
 
@@ -31,12 +31,12 @@ users.route('/jobs')
     res.send(res.rows)
   })
 
-users.route('/IndeedJobs')
-  .post(db.addIndeedJobs, (req,res) => {
+users.route('/IndeedJobs', expressJWT({secret:secret}))
+  .post( db.addIndeedJobs, (req,res) => {
     res.send(res.rows)
   })
 
-users.route('/CareerJobs')
+users.route('/CareerJobs', expressJWT({secret:secret}))
   .post(db.addCareerJobs, (req,res) => {
     res.send(res.rows)
   })
