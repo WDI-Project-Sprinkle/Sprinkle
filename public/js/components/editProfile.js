@@ -4,22 +4,48 @@ const EditProfile = React.createClass({
 
   handleSubmit : function(event) {
     event.preventDefault();
-    console.log('yay we edited the page');
+
+    const currentPass = this.refs.currentPassword.value;
+    const newPass = this.refs.newPassword.value;
+    const confirmPass =this.refs.confirmPassword.value;
+
+    let data = {
+      currentPass : currentPass,
+      newPass : newPass
+    }
+
+    if (newPass != confirmPass) {
+      alert('You failure, the passwords do not match')
+    } else {
+      $.ajax(
+        {
+          url : '/users/update',
+          data : data,
+          type: 'put',
+          beforeSend: function( xhr ) {
+            xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.token );
+          }
+        }
+      )
+      .done(() => {
+        this.props.updated();
+      })
+    }
   },
 
   handleDelete : function(event) {
     event.preventDefault();
     console.log('This is delete from ajax');
     $.ajax(
-    {
-      url : '/users/delete',
-      method : "delete",
-      beforeSend: function( xhr ) {
-        xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.token );
-      }
+      {
+        url : '/users/delete',
+        method : "delete",
+        beforeSend: function( xhr ) {
+          xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.token );
+        }
     })
     .done((data) => {
-      console.log('DAY DEADS AND GONE');
+      this.props.deleted();
     })
 
   },
