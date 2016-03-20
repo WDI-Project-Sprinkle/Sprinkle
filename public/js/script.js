@@ -287,6 +287,13 @@ const App = React.createClass({
         showIndeedJobs.push(<Listings company={el.company} desc={el.snippet} role={el.jobtitle} city={el.city} state={el.state} salaries={el.salaries} first_added={el.date} id={el.jobkey} url={el.url} name='indeed' savedJob={this.saveIndeedJob} />)
       })
 
+      // this.state.indeedJobs.reduce((el) => {
+      //   if($("#" + el.company) == 0) { /*{stack overflow}*/
+      //     $('#display').append($('<div>').attr('id', el.company ).css("background-color", "yellow").width(100).height(100))
+      //   }
+      // })
+
+
       var showCareerJobs = [];
       this.state.careerJobs.forEach((el) => {
         showCareerJobs.push(<Listings company={el.Company} desc={el.DescriptionTeaser} role={el.JobTitle} city={el.City} state={el.State} salaries={el.Pay} first_added={el.PostedDate} id={el.DID} url={el.JobDetailsURL} name='careerbuilder' savedJob={this.saveCareerJob} />)
