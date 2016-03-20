@@ -13,14 +13,6 @@ users.use(function(error, request, response, next) {
  }
 });
 
-users.route('/')
-  .get( (req, res) => {
-    res.json( { data: 'success' } )
-  })
-  .post(db.createUser, ( req, res ) => {
-    res.status(201).json( { data: 'success' } );
-  });
-
 users.post('/login', db.loginUser, ( req, res ) => {
   var token = jwt.sign( res.rows, secret );
   res.json( { agent: res.rows, token: token } );
@@ -30,6 +22,25 @@ users.route('/jobs')
   .get(db.showSavedJobs, (req, res)=>{
     res.send(res.rows)
   })
+
+users.route('/IndeedJobs')
+  .post(db.addIndeedJobs, (req,res) => {
+    res.send(res.rows)
+  })
+
+users.route('/CareerJobs')
+  .post(db.addCareerJobs, (req,res) => {
+    res.send(res.rows)
+  })
+
+users.route('/')
+  .get( (req, res) => {
+    res.json( { data: 'success' } )
+  })
+  .post(db.createUser, ( req, res ) => {
+    res.status(201).json( { data: 'success' } );
+  });
+
 
 // uses.route('/:id')
 //   .get( db.showUser, ( req, res ) => {

@@ -32,15 +32,15 @@ function createUser( req, res, next ) {
 
   function saveUser( email, hash, name ) {
     debugger
-    db.none( "INSERT INTO users (email, password_digest, name ) VALUES($1, $2, $3) RETURNING *;", [ email, hash, name ] )
+    db.none( "INSERT INTO users (email, password_digest, name ) VALUES($1, $2, $3) ;", [ email, hash, name ] )
     .then(function ( data ) {
       // success;
       console.log( data );
       next();
     })
-    .catch( function () {
+    .catch( function (error) {
       // error;
-      console.log( 'error signing up' );
+      console.log( 'error: ', error );
     });
   }
 }
@@ -81,7 +81,8 @@ function createHash( email, password, name, callback ) {
 
 
 // JL add Indeed Jobs to database
-function addIneedJobs( req, res, next ){
+function addIndeedJobs( req, res, next ){
+  console.log('THIS IS THE BODY OF INDEED',req.body);
   const company = req.body.company;
   const job_title = req.body.jobtitle;
   const job_desc = req.body.snippet;
@@ -93,36 +94,38 @@ function addIneedJobs( req, res, next ){
   const indeed_url = req.body.url;
 
 
-  db.none( 'INSERT INTO indeed_jobs ( company, job_title, job_desc, city, state, salaries, first_added, indeed_id, indeed_url, indeed) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING *', [ company, job_title, job_desc, city, state, salaries, first_added, indeed_id, indeed_url ] )
+  db.none( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, indeed_job_id, indeed_url, indeed) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING *', [ company, job_title, job_desc, city, state, salaries, first_added, indeed_job_id, indeed_url ] )
   .then( ( data ) => {
     res.rows = data;
     next();
   })
   .catch( ( error ) => {
-    console.log( error )
+    console.log( 'do you see dis error?', error )
   })
 }
 
 
 // JL add Career Jobs to database
 function addCareerJobs( req, res, next ){
+  console.log('THIS IS THE BODY OF CAREER',req.body);
   const company = req.body.Company;
   const job_title = req.body.JobTitle;
-  const job_desc = req.body.ONetFriendlyTitle;
+  const job_desc = req.body.DescriptionTeaser;
   const city = req.body.City;
   const state = req.body.state;
   const salaries = req.body.Pay;
   const first_added = req.body.PostedDate;
   const career_job_id = req.body.DID;
-  const career_url = req.body.CompanyDetilsURL;
+  const career_url = req.body.JobDetailsURL;
 
-  db.none( 'INSERT INTO indeed_jobs ( company, job_title, job_desc, city, state, salaries, first_added, indeed_id, indeed_url, career) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING *', [ company, job_title, job_desc, city, state, salaries, first_added, career_id, career_url ] )
+  db.none( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, career_job_id, career_url, career) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING *', [ company, job_title, job_desc, city, state, salaries, first_added, career_job_id, career_url ] )
   .then( ( data ) => {
     res.rows = data;
+    console.log('HEYYYY WE MADE IT HERERERERERERER');
     next();
   })
   .catch( ( error ) => {
-    console.log( error )
+    console.log( 'do you see dis error?', error )
   })
 }
 
@@ -153,6 +156,6 @@ function deleteSavedJobs( req, res, next ){
 module.exports.showSavedJobs = showSavedJobs;
 module.exports.deleteSavedJobs = deleteSavedJobs;
 module.exports.addCareerJobs = addCareerJobs;
-module.exports.addIneedJobs = addIneedJobs;
+module.exports.addIndeedJobs = addIndeedJobs;
 module.exports.createUser = createUser;
 module.exports.loginUser = loginUser;
