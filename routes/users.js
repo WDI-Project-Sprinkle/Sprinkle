@@ -38,7 +38,7 @@ users.route('/IndeedJobs')
   })
 
 users.route('/CareerJobs')
-  .post(db.addCareerJobs, (req,res) => {
+  .post(expressJWT({secret:secret}), db.addCareerJobs, db.userSavedJob, (req,res) => {
     res.send(res.rows)
   })
 
