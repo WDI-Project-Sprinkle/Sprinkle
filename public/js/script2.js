@@ -15,10 +15,15 @@ const Login           = require( './components/nav_components/login.js' )
 const Signup          = require( './components/signup.js' )
 const Logout          = require( './components/nav_components/logout.js' )
 const Display         = require( './components/display.js' )
-const Search          = require( './components/search.js' )
+const Search          = require( './components/search_components/search.js' )
 const Listings        = require( './components/listings.js' )
 const Nav             = require('./components/nav_components/nav.js');
-const AdvSearch       = require('./components/advSearch.js');
+const AdvSearch       = require('./components/search_components/advSearch.js');
+const Profiles        = require('./components/profiles.js');
+const SavedJobs       = require('./components/savedjobs.js');
+const AppliedJobs     = require('./components/appliedjobs.js');
+
+const utility         = require('./helpers/utility.js');
 
 const App = React.createClass({
 
@@ -28,9 +33,19 @@ const App = React.createClass({
       signupBox : false,
       advSearch : false,
       profile : false,
+      indeed : true,
+      career : true,
       indeedJobs : [],
-      careerJobs : []
+      careerJobs : [],
+      savedJobs : []
     }
+  },
+
+  componentDidMount : function(){
+    $.get('/users/jobs')
+    .done(data => this.setState({
+      savedJobs : data.indexByKey('job_id')
+    }))
   },
 
   addSearchIndeed : function ( newSearch ){
@@ -41,38 +56,61 @@ const App = React.createClass({
       city: newSearch.city,
       state: newSearch.state,
       l: cityState,
-      jt: newSearch.jt
+      jt: newSearch.jt,
+      radius: newSearch.radius
     }
 
-    $.get('/search/indeed',
-    {
-      data: data
-    })
-    .done( (data) => {
-      this.state.indeedJobs = data;
-      this.state.signupBox = false;
-      this.setState({ jobs : this.state.indeedJobs, signupBox : this.state.signupBox });
-    })
+    if (this.state.indeed == true) {
+      $.get('/search/indeed',
+      {
+        data: data
+      })
+      .done( (data) => {
+        this.state.indeedJobs = data;
+        this.state.signupBox = false;
+        this.state.advSearch = false;
+        this.state.indeed = true;
+        this.state.career = true;
+        this.state.profile = false;
+        this.setState({ indeedJobs : this.state.indeedJobs, signupBox : this.state.signupBox, career : this.state.career, indeed : this.state.indeed, AdvSearch : this.state.AdvSearch });
+      })
+    } else {
+      this.state.indeedJobs = [];
+      this.setState({indeedJobs : this.state.indeedJobs})
+    }
   },
 
   addSearchCareer : function ( newSearch ){
+    if (this.state.advSearch == false) {
+      newSearch.radius = 0;
+    }
 
     var data = {
       q: newSearch.q,
       city: newSearch.city,
       state: newSearch.state,
-      jt: newSearch.jt
+      jt: newSearch.jt,
+      radius: newSearch.radius
     }
 
-    $.get('/search/career',
-    {
-      data: data
-    })
-    .done( (data) => {
-      this.state.careerJobs = data;
-      this.state.signupBox = false;
-      this.setState({ jobs : this.state.careerJobs, signupBox : this.state.signupBox });
-    })
+    if (this.state.career == true) {
+      $.get('/search/career',
+      {
+        data: data
+      })
+      .done( (data) => {
+        this.state.careerJobs = data;
+        this.state.career = true;
+        this.state.indeed = true;
+        this.state.signupBox = false;
+        this.state.advSearch = false;
+        this.state.profile = false;
+        this.setState({ careerJobs : this.state.careerJobs, signupBox : this.state.signupBox, career : this.state.career, indeed : this.state.indeed, AdvSearch : this.state.AdvSearch });
+      })
+    } else {
+      this.state.careerJobs = [];
+      this.setState({careerJobs : this.state.careerJobs})
+    }
   },
 
   login : function( username, password ) {
@@ -112,13 +150,74 @@ const App = React.createClass({
   },
 
   handleAdvance : function() {
-    this.state.advSearch=true
-    this.setState( { advSearch : this.state.advSearch } )
+    this.state.advSearch = true;
+    this.state.indeed = false;
+    this.state.career = false;
+    this.setState( { advSearch : this.state.advSearch, indeed : this.state.indeed, career : this.state.career } )
   },
 
   handleBasic : function() {
-    this.state.advSearch=false
-    this.setState( { advSearch : this.state.advSearch } )
+    this.state.advSearch = false
+    this.state.indeed = true
+    this.state.career = true
+    this.setState( { advSearch : this.state.advSearch, indeed : this.state.indeed, career : this.state.career } )
+  },
+
+  toggleIndeed : function() {
+    this.state.indeed = !this.state.indeed
+    this.setState( { indeed : this.state.indeed } )
+  },
+
+
+
+  saveIndeedJob : function(company, jobtitle, snippet, city, state, salaries, date, jobkey, url) {
+
+    let data = {
+      company : company,
+      jobtitle : jobtitle,
+      snippet : snippet,
+      city : city,
+      state : state,
+      salaries: salaries,
+      date: date,
+      jobkey: jobkey,
+      url: url
+    }
+
+    if (this.state.loggedIn == true) {
+      $.post('/users/IndeedJobs', data)
+      .done(data => this.setState({
+        savedJobs : data.indexByKey('job_id')
+      }))
+      alert('saved!')
+    } else {
+      alert('please sign in first!')
+    }
+  },
+
+  saveCareerJob : function(Company, JobTitle, DescriptionTeaser, City, State, Pay, PostedDate, DID, JobDetailsURL) {
+
+    let data = {
+      Company : Company,
+      JobTitle : JobTitle,
+      DescriptionTeaser : DescriptionTeaser,
+      City : City,
+      State : State,
+      Pay: Pay,
+      PostedDate: PostedDate,
+      DID: DID,
+      JobDetailsURL: JobDetailsURL
+    }
+    console.log(data);
+    if (this.state.loggedIn == true) {
+      $.post('/users/CareerJobs',data)
+      .done(data => this.setState({
+        savedJobs : data.indexByKey('job_id')
+      }))
+      alert('saved!')
+    } else {
+      alert('please sign in first!')
+    }
   },
 
   render : function() {
@@ -137,19 +236,24 @@ const App = React.createClass({
     </div>
     let advSearch =
       <div>
-        <AdvSearch addSearchIndeed={ this.addSearchIndeed } addSearchCareer={ this.addSearchCareer }/>
+        <AdvSearch addSearchIndeed={ this.addSearchIndeed } addSearchCareer={ this.addSearchCareer } toggleIndeed={ this.toggleIndeed } toggleCareer={ this.toggleCareer}/>
         <a onClick={this.handleBasic}> basic search </a>
       </div>
 
       var showIndeedJobs = [];
       this.state.indeedJobs.forEach((el) => {
-        showIndeedJobs.push(<li>Job Title: {el.jobtitle} <br/> Company Name: {el.company} <br/> <a href={el.url} target="_blank">indeed</a></li>);
+        showIndeedJobs.push(<Listings company={el.company} desc={el.snippet} role={el.jobtitle} city={el.city} state={el.state} salaries={el.salaries} first_added={el.date} id={el.jobkey} url={el.url} name='indeed' savedJob={this.saveIndeedJob} />)
       })
 
       var showCareerJobs = [];
       this.state.careerJobs.forEach((el) => {
-        showCareerJobs.push(<li>Job Title: {el.JobTitle} <br/> Company Name: {el.Company} <br/> <a href={el.JobDetailsURL} target="_blank">careerbuilder</a></li>);
+        showCareerJobs.push(<Listings company={el.Company} desc={el.DescriptionTeaser} role={el.JobTitle} city={el.City} state={el.State} salaries={el.Pay} first_added={el.PostedDate} id={el.DID} url={el.JobDetailsURL} name='careerbuilder' savedJob={this.saveCareerJob} />)
       })
+
+    let profilePage =
+    <div>
+      <Profiles />
+    </div>
 
     return (
       <div className="container">
@@ -173,24 +277,22 @@ const App = React.createClass({
           <div className="row" id="display">
             <div className="nav-wrapper">
               <br/>
-
-              <ul>
-                { showIndeedJobs }
-                { showCareerJobs }
-              </ul>
+              {this.state.profile ? profilePage : ''}
               {this.state.signupBox ? notSignedIn : signedInView}
               {/* Initial Search Result Display */}
               <Display />
-              <profile />
             </div>
           </div>
 
 
           <div className="row" id="listings">
             <div className="nav-wrapper">
-              <br/>
-              {/* Initial Search Result Display */}
-              <Listings />
+              <ul>
+                <br/>
+                {/* Initial Search Result Display */}
+                { showIndeedJobs }
+                { showCareerJobs }
+              </ul>
             </div>
           </div>
       </div>

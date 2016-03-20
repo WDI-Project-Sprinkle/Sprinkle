@@ -287,12 +287,11 @@ const App = React.createClass({
 
           <div className="row" id="listings">
             <div className="nav-wrapper">
-              <ul>
                 <br/>
                 {/* Initial Search Result Display */}
                 { showIndeedJobs }
+
                 { showCareerJobs }
-              </ul>
             </div>
           </div>
       </div>
