@@ -65,7 +65,7 @@ const App = React.createClass({
     if (this.state.indeed == true) {
       $.get('/search/indeed',
       {
-        data: data
+        data: data,
       })
       .done( (data) => {
         this.state.indeedJobs = data;
@@ -202,7 +202,15 @@ const App = React.createClass({
     }
 
     if (this.state.loggedIn == true) {
-      $.post('/users/IndeedJobs', data)
+      $.post(
+        {
+          url : '/users/IndeedJobs',
+          data : data,
+          beforeSend: function( xhr ) {
+            xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.token );
+          }
+        }
+      )
       .done(data => this.setState({
         savedJobs : data.indexByKey('job_id')
       }))

@@ -123,13 +123,13 @@ function addIndeedJobs( req, res, next ){
   const indeed_url = req.body.url;
 
 
-  db.none( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, indeed_job_id, indeed_url, indeed) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING *', [ company, job_title, job_desc, city, state, salaries, first_added, indeed_job_id, indeed_url ] )
+  db.any( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, indeed_job_id, indeed_url, indeed) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING job_id', [ company, job_title, job_desc, city, state, salaries, first_added, indeed_job_id, indeed_url ] )
   .then( ( data ) => {
-    res.rows = data;
+    res.rows = data[0].job_id;
     next();
   })
   .catch( ( error ) => {
-    console.log( 'do you see dis error?', error )
+    console.log( 'addIneedJobs Error: ', error )
   })
 }
 
@@ -147,14 +147,23 @@ function addCareerJobs( req, res, next ){
   const career_job_id = req.body.DID;
   const career_url = req.body.JobDetailsURL;
 
-  db.none( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, career_job_id, career_url, career) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING *', [ company, job_title, job_desc, city, state, salaries, first_added, career_job_id, career_url ] )
+  db.any( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, career_job_id, career_url, career) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING job_id', [ company, job_title, job_desc, city, state, salaries, first_added, career_job_id, career_url ] )
   .then( ( data ) => {
-    res.rows = data;
-    console.log('HEYYYY WE MADE IT HERERERERERERER');
+    res.rows = data[0].job_id;
     next();
   })
   .catch( ( error ) => {
-    console.log( 'do you see dis error?', error )
+    console.log( 'addCareerJobs Error: ', error )
+  })
+}
+
+function userSavedJob( req, res, next ) {
+  db.none( 'INSERT INTO apps(user_id, job_id) VALUES ($1,$2)', [req.user.user_id, res.rows])
+  .then(()=> {
+    next()
+  })
+  .catch( ( error ) => {
+    console.log( 'userSavedJob Error: ', error )
   })
 }
 
@@ -192,6 +201,7 @@ function deleteUser (req,res,next) {
   })
 }
 
+module.exports.userSavedJob = userSavedJob;
 module.exports.updatePassword = updatePassword;
 module.exports.deleteUser = deleteUser;
 module.exports.showSavedJobs = showSavedJobs;
