@@ -2,7 +2,8 @@ const React = require('react');
 
 const Logout = require('./logout.js');
 const Login = require('./login.js');
-const ToProfile = require('./toProfile.js')
+const ToProfile = require('./toProfile.js');
+const Edit = require('./edit.js');
 
 const Nav = React.createClass({
 
@@ -23,6 +24,10 @@ const Nav = React.createClass({
     this.props.profile();
   },
 
+  edit : function() {
+    this.props.edit();
+  },
+
   render : function() {
     return (
       <div className="navContainers">
@@ -30,8 +35,11 @@ const Nav = React.createClass({
 
           {this.props.loggedIn ? (
           <div className="navRight"><ul>
-            <div className="navRight"><Logout logout={ this.logout }/></div>
             <div className="navRight"><ToProfile ToProfile={ this.ToProfile }/></div>
+            <br/>
+            <div className="navRight"><Edit edit={ this.edit }/></div>
+            <br/>
+            <div className="navRight"><Logout logout={ this.logout }/></div>
           </ul></div>
           ) : (
           <ul>
