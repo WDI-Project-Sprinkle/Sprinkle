@@ -150,7 +150,7 @@ const App = React.createClass({
   profile : function() {
     this.state.profile=true
     this.state.edit = false;
-    this.setState( { profile : this.state.profile, edit : this.state.edit })
+    this.setState( { profile : this.state.profile, edit : this.state.edit})
   },
 
   handleAdvance : function() {
