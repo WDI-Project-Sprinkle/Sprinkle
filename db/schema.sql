@@ -10,7 +10,7 @@ CREATE TABLE jobs (
   job_desc VARCHAR(255),
   city VARCHAR(255),
   state VARCHAR(255),
-  salaries INTEGER,
+  salaries TEXT,
   first_added TIMESTAMP,
   indeed BOOLEAN,
   indeed_job_id VARCHAR(100),

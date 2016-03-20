@@ -10,6 +10,7 @@ const Signup = React.createClass({
 
     $.post('/users', {email: email, password: pass, name: name})
     .done((data) => {
+      console.log('REACT BLOWS ');
       this.props.signedIn();
     })
   },
@@ -19,7 +20,7 @@ const Signup = React.createClass({
       <form onSubmit={this.handleSubmit}>
         <div className="searchContainers">
           <div className="searchCenter">
-            <h3>Sprinkle Signup Form</h3>
+            <h3>Sprinkle Signup</h3>
             <label><input id="signupName" type="text" ref="name" placeholder="name"/></label>
             <label><input id="signupEmail" type="text" ref="email" placeholder="email"/></label>
             <label><input id="signupPassword" type="password" ref="pass" placeholder="password" /></label><br />
