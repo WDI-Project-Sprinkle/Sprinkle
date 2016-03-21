@@ -9,9 +9,17 @@ const Listings = React.createClass({
 
   render() {
     return (
-      <div id="jobBox">
-        <form onSubmit={this.handleSubmit}>
-          <ul>
+// <<<<<<< HEAD
+//       <div id="jobBox">
+//         <form onSubmit={this.handleSubmit}>
+//           <ul>
+// =======
+      <form onSubmit={this.handleSubmit}>
+      <div className="starter-template">
+        <div className="thecard">
+          <div className="card-caption">
+            <ul id="res">
+            <p>
             <li>
               <strong>Company Name:</strong> {this.props.company}
             </li>
@@ -22,16 +30,29 @@ const Listings = React.createClass({
               <strong>Job Description:</strong> {this.props.desc}
             </li>
             <li>
-              <div id="companySourceOuter">
-                <a id="companySourceInner" href={this.props.url} target="_blank"><strong>{this.props.name}</strong></a>
-              </div>
+// <<<<<<< HEAD
+//               <div id="companySourceOuter">
+//                 <a id="companySourceInner" href={this.props.url} target="_blank"><strong>{this.props.name}</strong></a>
+//               </div>
+//             </li>
+//             <div id="saveJobOuter">
+//               <button id="saveJobInner" type="submit"> Save Job </button>
+//             </div>
+//           </ul>
+//         </form>
+//       </div>
+// =======
+              <a href={this.props.url} target="_blank"><strong>{this.props.name}</strong></a>
             </li>
-            <div id="saveJobOuter">
-              <button id="saveJobInner" type="submit"> Save Job </button>
-            </div>
+            </p>
+
+            <button type="submit"> Save Job </button>
           </ul>
-        </form>
+        </div>
       </div>
+    </div>
+
+      </form>
     )
   }
 })

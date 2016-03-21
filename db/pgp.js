@@ -12,8 +12,6 @@ const cn = {
 
 const db = pgp(cn);
 
-
-
 function createSecure( email, password, name, callback ) {
   //hashing the password given by the user at signup
   bcrypt.genSalt( function( err, salt ) {
@@ -49,13 +47,11 @@ function createUser( req, res, next ) {
 function loginUser( req, res, next ) {
   const email = req.body.email
   const password = req.body.password
-
+  console.log('bro bro bro',req.user);
   db.one( "SELECT * FROM users WHERE email LIKE $1;", [ email ] )
     .then( ( data ) => {
-      console.log( data )
       if ( bcrypt.compareSync( password, data.password_digest ) ) {
         res.rows = data
-        console.log( 'wow you amazing Elton' );
         next()
       } else {
         res.status( 401 ).json( { data:"Fool this no workie" } )
@@ -65,6 +61,39 @@ function loginUser( req, res, next ) {
     .catch( () => {
       console.error( 'error finding users' )
     })
+}
+
+function updatePassword( req, res, next) {
+  console.log('You have made it to the pg file');
+  const currentPassword = req.body.currentPass
+  console.log('THIS IS THE BODY',req.body);
+  console.log('This is the current password, should not be undefined',currentPassword);
+  const newPassword = req.body.newPass
+  console.log('req:' ,req.user);
+
+  db.one("SELECT * FROM users WHERE email LIKE $1;", [req.user.email])
+    .then( (data) => {
+      console.log('email: ', data.email);
+      if ( bcrypt.compareSync( currentPassword, data.password_digest) ) {
+        console.log('this sorta works');
+        createSecure(data.email, newPassword, data.name, updateUser )
+        function updateUser(email, hash, name) {
+          db.none("UPDATE users SET password_digest=($1) WHERE user_id=($2) ", [hash, req.user.user_id])
+          .then(()=> {
+            next()
+          })
+          .catch((error)=>{
+            console.log(error);
+          })
+        }
+        next();
+      }
+    })
+    .catch((error) => {
+      console.log('error I suck: ', error);
+    })
+
+
 }
 
 // JL login hash
@@ -94,13 +123,13 @@ function addIndeedJobs( req, res, next ){
   const indeed_url = req.body.url;
 
 
-  db.none( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, indeed_job_id, indeed_url, indeed) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING *', [ company, job_title, job_desc, city, state, salaries, first_added, indeed_job_id, indeed_url ] )
+  db.any( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, indeed_job_id, indeed_url, indeed) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING job_id', [ company, job_title, job_desc, city, state, salaries, first_added, indeed_job_id, indeed_url ] )
   .then( ( data ) => {
-    res.rows = data;
+    res.rows = data[0].job_id;
     next();
   })
   .catch( ( error ) => {
-    console.log( 'do you see dis error?', error )
+    console.log( 'addIneedJobs Error: ', error )
   })
 }
 
@@ -112,20 +141,29 @@ function addCareerJobs( req, res, next ){
   const job_title = req.body.JobTitle;
   const job_desc = req.body.DescriptionTeaser;
   const city = req.body.City;
-  const state = req.body.state;
+  const state = req.body.State;
   const salaries = req.body.Pay;
   const first_added = req.body.PostedDate;
   const career_job_id = req.body.DID;
   const career_url = req.body.JobDetailsURL;
 
-  db.none( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, career_job_id, career_url, career) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING *', [ company, job_title, job_desc, city, state, salaries, first_added, career_job_id, career_url ] )
+  db.any( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, career_job_id, career_url, career) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING job_id', [ company, job_title, job_desc, city, state, salaries, first_added, career_job_id, career_url ] )
   .then( ( data ) => {
-    res.rows = data;
-    console.log('HEYYYY WE MADE IT HERERERERERERER');
+    res.rows = data[0].job_id;
     next();
   })
   .catch( ( error ) => {
-    console.log( 'do you see dis error?', error )
+    console.log( 'addCareerJobs Error: ', error )
+  })
+}
+
+function userSavedJob( req, res, next ) {
+  db.none( 'INSERT INTO apps(user_id, job_id) VALUES ($1,$2)', [req.user.user_id, res.rows])
+  .then(()=> {
+    next()
+  })
+  .catch( ( error ) => {
+    console.log( 'userSavedJob Error: ', error )
   })
 }
 
@@ -152,7 +190,20 @@ function deleteSavedJobs( req, res, next ){
   })
 }
 
+function deleteUser (req,res,next) {
+  console.log('this is user id: ', req.user);
+  db.none('DELETE FROM users WHERE user_id=($1)', [req.user.user_id])
+  .then ( () => {
+    next();
+  })
+  .catch((error) => {
+    console.log("error on delete: ", error)
+  })
+}
 
+module.exports.userSavedJob = userSavedJob;
+module.exports.updatePassword = updatePassword;
+module.exports.deleteUser = deleteUser;
 module.exports.showSavedJobs = showSavedJobs;
 module.exports.deleteSavedJobs = deleteSavedJobs;
 module.exports.addCareerJobs = addCareerJobs;

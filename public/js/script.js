@@ -13,6 +13,7 @@ const browserHistory  = ReactRouter.browserHistory;
 const auth            = require( './auth.js' )
 const Login           = require( './components/nav_components/login.js' )
 const Signup          = require( './components/signup.js' )
+const EditProfile     = require( './components/editProfile.js' )
 const Logout          = require( './components/nav_components/logout.js' )
 const Display         = require( './components/display.js' )
 const Search          = require( './components/search_components/search.js' )
@@ -33,6 +34,7 @@ const App = React.createClass({
       signupBox : false,
       advSearch : false,
       profile : false,
+      edit : false,
       indeed : true,
       career : true,
       indeedJobs : [],
@@ -63,7 +65,7 @@ const App = React.createClass({
     if (this.state.indeed == true) {
       $.get('/search/indeed',
       {
-        data: data
+        data: data,
       })
       .done( (data) => {
         this.state.indeedJobs = data;
@@ -113,13 +115,14 @@ const App = React.createClass({
     }
   },
 
-  login : function( username, password ) {
+  login : function( username, password) {
     let data = {
       email: username,
       password: password
     }
     $.post('users/login', data)
     .done( (data) => {
+      localStorage.token = data.token;
       this.state.loggedIn=true;
       this.state.signupBox=false;
       this.setState( { loggedIn : this.state.loggedIn, signupBox : this.state.signupBox } )
@@ -146,7 +149,8 @@ const App = React.createClass({
 
   profile : function() {
     this.state.profile=true
-    this.setState( { profile : this.state.profile })
+    this.state.edit = false;
+    this.setState( { profile : this.state.profile, edit : this.state.edit})
   },
 
   handleAdvance : function() {
@@ -168,7 +172,22 @@ const App = React.createClass({
     this.setState( { indeed : this.state.indeed } )
   },
 
+  edit : function() {
+    this.state.edit = true;
+    this.state.profile = false;
+    this.setState({ edit : this.state.edit, profile : this.state.profile});
+  },
 
+  deleted : function() {
+    this.state.loggedIn = false;
+    this.state.edit = false;
+    this.setState({loggedIn : this.state.loggedIn, edit: this.state.edit})
+  },
+
+  updated : function() {
+    this.state.edit = false;
+    this.setState({edit : this.state.edit})
+  },
 
   saveIndeedJob : function(company, jobtitle, snippet, city, state, salaries, date, jobkey, url) {
 
@@ -185,7 +204,15 @@ const App = React.createClass({
     }
 
     if (this.state.loggedIn == true) {
-      $.post('/users/IndeedJobs', data)
+      $.post(
+        {
+          url : '/users/IndeedJobs',
+          data : data,
+          beforeSend: function( xhr ) {
+            xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.token );
+          }
+        }
+      )
       .done(data => this.setState({
         savedJobs : data.indexByKey('job_id')
       }))
@@ -208,9 +235,16 @@ const App = React.createClass({
       DID: DID,
       JobDetailsURL: JobDetailsURL
     }
-    console.log(data);
     if (this.state.loggedIn == true) {
-      $.post('/users/CareerJobs',data)
+      $.post(
+        {
+          url : '/users/CareerJobs',
+          data : data,
+          beforeSend: function( xhr ) {
+            xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.token );
+          }
+        }
+      )
       .done(data => this.setState({
         savedJobs : data.indexByKey('job_id')
       }))
@@ -226,7 +260,15 @@ const App = React.createClass({
       </div>
     let notSignedIn =
       <div>
-        <Signup signedIn={ this.signedIn}/>
+        <Signup signedIn={ this.signedIn }/>
+      </div>
+
+    let editIsFalse =
+      <div>
+      </div>
+    let editIsTrue =
+      <div>
+        <EditProfile deleted={this.deleted} updated={this.updated}/>
       </div>
 
     let regularSearch =
@@ -267,7 +309,7 @@ const App = React.createClass({
       <div className="container">
           <div className="row" id="navbar">
           <br/>
-              <Nav loggedIn={ this.state.loggedIn } login={ this.login } logout={ this.logout } signup={ this.signup } profile={ this.profile }/>
+              <Nav loggedIn={ this.state.loggedIn } login={ this.login } logout={ this.logout } signup={ this.signup } profile={ this.profile } edit={ this.edit }/>
               {/* API nav bar here */}
               {/*<Nav />*/}
           </div>
@@ -287,6 +329,7 @@ const App = React.createClass({
               <br/>
               {this.state.profile ? profilePage : ''}
               {this.state.signupBox ? notSignedIn : signedInView}
+              {this.state.edit ? editIsTrue : editIsFalse}
               {/* Initial Search Result Display */}
               <Display />
             </div>
@@ -295,16 +338,20 @@ const App = React.createClass({
 
           <div className="row" id="listings">
             <div className="nav-wrapper">
-              <ul>
                 <br/>
                 {/* Initial Search Result Display */}
-                <div id="showIndeedJobs">
-                  { showIndeedJobs }
-                </div>
-                <div id="showCareerJobs">
-                  { showCareerJobs }
-                </div>
-              </ul>
+// <<<<<<< HEAD
+//                 <div id="showIndeedJobs">
+//                   { showIndeedJobs }
+//                 </div>
+//                 <div id="showCareerJobs">
+//                   { showCareerJobs }
+//                 </div>
+//               </ul>
+// =======
+                { showIndeedJobs }
+
+                { showCareerJobs }
             </div>
           </div>
       </div>

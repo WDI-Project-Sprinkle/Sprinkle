@@ -18,18 +18,27 @@ users.post('/login', db.loginUser, ( req, res ) => {
   res.json( { agent: res.rows, token: token } );
 })
 
+users.delete('/delete',expressJWT({secret:secret}),db.deleteUser, (req,res) => {
+  res.send('deads');
+})
+
+users.put('/update', expressJWT({secret:secret}), db.updatePassword, (req,res) => {
+  console.log('updated the password bitches');
+  res.send('go')
+})
+
 users.route('/jobs')
   .get(db.showSavedJobs, (req, res)=>{
     res.send(res.rows)
   })
 
 users.route('/IndeedJobs')
-  .post(db.addIndeedJobs, (req,res) => {
+  .post(expressJWT({secret:secret}), db.addIndeedJobs, db.userSavedJob, (req,res) => {
     res.send(res.rows)
   })
 
 users.route('/CareerJobs')
-  .post(db.addCareerJobs, (req,res) => {
+  .post(expressJWT({secret:secret}), db.addCareerJobs, db.userSavedJob, (req,res) => {
     res.send(res.rows)
   })
 
