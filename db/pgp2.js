@@ -33,6 +33,7 @@ function createUser( req, res, next ) {
     db.none( "INSERT INTO users (email, password_digest, name ) VALUES($1, $2, $3) ;", [ email, hash, name ] )
     .then(function ( data ) {
       // success;
+      console.log( data );
       next();
     })
     .catch( function (error) {
@@ -42,11 +43,11 @@ function createUser( req, res, next ) {
   }
 }
 
-
 // JL Login user auth
 function loginUser( req, res, next ) {
   const email = req.body.email
   const password = req.body.password
+  console.log('bro bro bro',req.user);
   db.one( "SELECT * FROM users WHERE email LIKE $1;", [ email ] )
     .then( ( data ) => {
       if ( bcrypt.compareSync( password, data.password_digest ) ) {
@@ -61,38 +62,6 @@ function loginUser( req, res, next ) {
       console.error( 'error finding users' )
     })
 }
-
-
-function updatePassword( req, res, next) {
-  const currentPassword = req.body.currentPass
-  const newPassword = req.body.newPass
-  console.log('req:' ,req.user);
-
-  db.one("SELECT * FROM users WHERE email LIKE $1;", [req.user.email])
-    .then( (data) => {
-      console.log('email: ', data.email);
-      if ( bcrypt.compareSync( currentPassword, data.password_digest) ) {
-        console.log('this sorta works');
-        createSecure(data.email, newPassword, data.name, updateUser )
-        function updateUser(email, hash, name) {
-          db.none("UPDATE users SET password_digest=($1) WHERE user_id=($2) ", [hash, req.user.user_id])
-          .then(()=> {
-            next()
-          })
-          .catch((error)=>{
-            console.log(error);
-          })
-        }
-        next();
-      }
-    })
-    .catch((error) => {
-      console.log('error I suck: ', error);
-    })
-
-
-}
-
 
 // JL login hash
 function createHash( email, password, name, callback ) {
@@ -109,6 +78,7 @@ function createHash( email, password, name, callback ) {
 
 // JL add Indeed Jobs to database
 function addIndeedJobs( req, res, next ){
+  console.log('THIS IS THE BODY OF INDEED',req.body);
   const company = req.body.company;
   const job_title = req.body.jobtitle;
   const job_desc = req.body.snippet;
@@ -120,19 +90,20 @@ function addIndeedJobs( req, res, next ){
   const indeed_url = req.body.url;
 
 
-  db.any( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, indeed_job_id, indeed_url, indeed) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING job_id', [ company, job_title, job_desc, city, state, salaries, first_added, indeed_job_id, indeed_url ] )
+  db.none( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, indeed_job_id, indeed_url, indeed) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING *', [ company, job_title, job_desc, city, state, salaries, first_added, indeed_job_id, indeed_url ] )
   .then( ( data ) => {
-    res.rows = data[0].job_id;
+    res.rows = data;
     next();
   })
   .catch( ( error ) => {
-    console.log( 'addIneedJobs Error: ', error )
+    console.log( 'do you see dis error?', error )
   })
 }
 
 
 // JL add Career Jobs to database
 function addCareerJobs( req, res, next ){
+  console.log('THIS IS THE BODY OF CAREER',req.body);
   const company = req.body.Company;
   const job_title = req.body.JobTitle;
   const job_desc = req.body.DescriptionTeaser;
@@ -143,30 +114,19 @@ function addCareerJobs( req, res, next ){
   const career_job_id = req.body.DID;
   const career_url = req.body.JobDetailsURL;
 
-  db.any( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, career_job_id, career_url, career) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING job_id', [ company, job_title, job_desc, city, state, salaries, first_added, career_job_id, career_url ] )
+  db.none( 'INSERT INTO jobs ( company, job_title, job_desc, city, state, salaries, first_added, career_job_id, career_url, career) VALUES ( $1, $2, $3, $4, $5, $6, $7, $8, $9, false ) RETURNING *', [ company, job_title, job_desc, city, state, salaries, first_added, career_job_id, career_url ] )
   .then( ( data ) => {
-    res.rows = data[0].job_id;
+    res.rows = data;
+    console.log('HEYYYY WE MADE IT HERERERERERERER');
     next();
   })
   .catch( ( error ) => {
-    console.log( 'addCareerJobs Error: ', error )
+    console.log( 'do you see dis error?', error )
   })
 }
-
-
-function userSavedJob( req, res, next ) {
-  db.none( 'INSERT INTO apps (user_id, job_id, applied) VALUES ($1, $2, false)', [req.user.user_id, res.rows] )
-  .then(()=> {
-    next()
-  })
-  .catch( ( error ) => {
-    console.log( 'userSavedJob Error: ', error )
-  })
-}
-
 
 function showSavedJobs( req, res, next ){
-  db.any( 'SELECT users.name as user_name, jobs.job_id as job_id, jobs.company as company, jobs.job_title as job_title, jobs.job_desc as job_desc, jobs.indeed as indeed, jobs.indeed_url as indeed_url, jobs.career as career, jobs.career_url as career_url FROM apps FULL OUTER JOIN jobs ON apps.job_id = jobs.job_id LEFT JOIN users ON apps.user_id = users.user_id WHERE apps.user_id = $1', [ req.user.user_id ] )
+  db.any( 'SELECT * FROM jobs' )
   .then( ( data )=>{
     res.rows = data;
     next();
@@ -176,23 +136,20 @@ function showSavedJobs( req, res, next ){
   })
 }
 
-
 //JL deleteSavedJobs function
 function deleteSavedJobs( req, res, next ){
-  console.log("This is the user ID:", req.user.user_id, "this is the jobs id: ", req.body.job_id);
-  db.one( 'DELETE FROM apps WHERE user_id = ($1) AND job_id = ($2) RETURNING job_id', [ req.user.user_id, req.body.job_id ] )
-  .then( (data)=>{
-    console.log('DELETED!!')
-    res.job_id = data.job_id
+  db.one( 'DELETE FROM apps WHERE user_id = ($1) AND job_id = ($2)' )
+  .then( ( data )=>{
+    res.rows = data;
     next();
   })
   .catch( ( error )=>{
-    console.log( 'this is from deleteSavedJobs: ', error )
+    console.log( error )
   })
 }
 
-
-function deleteUser ( req,res,next ) {
+function deleteUser (req,res,next) {
+  console.log('this is user id: ', req.user);
   db.none('DELETE FROM users WHERE user_id=($1)', [req.user.user_id])
   .then ( () => {
     next();
@@ -202,20 +159,6 @@ function deleteUser ( req,res,next ) {
   })
 }
 
-
-function updateSavedJobs( req, res, next ){
-  db.one( 'UPDATE apps SET applied=true WHERE user_id=$1', [ req.user.user_id ])
-  .then(()=>{
-    next()
-  })
-  .catch( ( error )=>{
-    console.log( error )
-  })
-}
-
-module.exports.updateSavedJobs = updateSavedJobs;
-module.exports.userSavedJob = userSavedJob;
-module.exports.updatePassword = updatePassword;
 module.exports.deleteUser = deleteUser;
 module.exports.showSavedJobs = showSavedJobs;
 module.exports.deleteSavedJobs = deleteSavedJobs;

@@ -18,7 +18,7 @@ users.post('/login', db.loginUser, ( req, res ) => {
   res.json( { agent: res.rows, token: token } );
 })
 
-users.delete('/delete',expressJWT({secret:secret}),db.deleteUser, (req,res) => {
+users.delete('/delete', expressJWT({secret:secret}),db.deleteUser, (req,res) => {
   res.send('deads');
 })
 
@@ -27,8 +27,14 @@ users.put('/update', expressJWT({secret:secret}), db.updatePassword, (req,res) =
   res.send('go')
 })
 
+users.route('/jobs/delete')
+  .delete(expressJWT({secret:secret}), db.deleteSavedJobs, (req, res)=>{
+    console.log('about to send reply')
+    res.json(res.job_id)
+  })
+
 users.route('/jobs')
-  .get(db.showSavedJobs, (req, res)=>{
+  .get(expressJWT({secret:secret}), db.showSavedJobs, (req, res)=>{
     res.send(res.rows)
   })
 

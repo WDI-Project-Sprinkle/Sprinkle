@@ -291,7 +291,10 @@
 
 #display {
   border: 1px;
+<<<<<<< HEAD
   background-color: rgba(255, 0, 0, 0);;
+=======
+>>>>>>> 9e679c714d206c0c82a996c1066575a6c559a135
   width: auto;
 }
 
@@ -436,4 +439,7 @@ ul#res {
 #indeed_footnote {
   display: flex;
   justify-content: center;
+
+.resultTableMedium {
+  width: 1000px;
 }
