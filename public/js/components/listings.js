@@ -9,33 +9,36 @@ const Listings = React.createClass({
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-      <div className="starter-template">
-        <div className="thecard">
-          <div className="card-caption">
-            <ul id="res">
-            <p>
-            <li>
-              <strong>Company Name:</strong> {this.props.company}
-            </li>
-            <li>
-              <strong>Job Title:</strong> {this.props.role}
-            </li>
-            <li>
-              <strong>Job Description:</strong> {this.props.desc}
-            </li>
-            <li>
-              <a href={this.props.url} target="_blank"><strong>{this.props.name}</strong></a>
-            </li>
-            </p>
+      <div id="groupCards">
+        <div id="cardA">
+          <form id="outerCard" onSubmit={this.handleSubmit}>
+            <div className="starter-template">
+              <div className="thecard">
+                <div className="card-caption">
+                  <ul id="res">
+                  <p>
+                  <li>
+                    <strong>Company Name:</strong> {this.props.company}
+                  </li>
+                  <li>
+                    <strong>Job Title:</strong> {this.props.role}
+                  </li>
+                  <li>
+                    <strong>Job Description:</strong> {this.props.desc}
+                  </li>
+                  <li>
+                    <a href={this.props.url} target="_blank"><strong>{this.props.name}</strong></a>
+                  </li>
+                  </p>
 
-            <button type="submit"> Save Job </button>
-          </ul>
-        </div>
+                  <button type="submit"> Save Job </button>
+                  </ul>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-
-      </form>
     )
   }
 })

@@ -7,10 +7,22 @@
 }
 
 #sprinkleTitle {
-  color: #f35626;
-  background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
+  color: #0033cc;
+  background-image: -webkit-linear-gradient(92deg, #0033cc, #feab3a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  -webkit-animation: hue 60s infinite linear;
+}
+
+.outerSprinkleTitle {
+  height: 55px;
+  width: 24vw;
+  border: 1px solid black;
+  border-radius: 22px;
+  background-color: #f35626;
+  background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
+  -webkit-background-clip: background;
+  -webkit-background-fill-color: transparent;
   -webkit-animation: hue 60s infinite linear;
 }
 
@@ -65,7 +77,11 @@
 
   #signupButton {
     margin-top: 2px;
+    width: 92.7813px;
     line-height: 0px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
   }
 
 .navContainers .signupLink {
@@ -166,6 +182,10 @@
   height: 18px;
 }
 
+.loggedInBox {
+  padding-top: 20px;
+}
+
 #logoutLink,
   #logoutLink:visited {
     background : rgba( 38, 166, 154, 1);
@@ -205,11 +225,19 @@
     cursor: pointer; cursor: hand;
   }
 
+#loggedInBox {
+
+}
+
 #navbar li {
   display: inline;
   float: right;
   list-style-type: none;
   width: auto;
+}
+
+#searchButton {
+  margin-top: 10px;
 }
 
 #searchbar {
@@ -335,11 +363,6 @@
 }
 
 
-.starter-template {
-  padding: 40px 15px;
-  text-align: center;
-}
-
 a {
   color: currentColor;
   text-decoration: none;
@@ -370,10 +393,42 @@ a:hover .thecard {
   transition: 400ms ease;
 }
 
+#nav-wrapper {
+  width: 300px;
+}
+
+#groupCards {
+  display: flex;
+  justify-content: center;
+}
+
+#cardA {
+  width: 300px;
+  height: 400px;
+}
+
+#cardB {
+  width: 300px;
+  height: 400px;
+}
+
+#outerCard {
+  width: 300px;
+  height: 400px;
+  margin: 0px 0px 0px 6px;
+}
+
+.starter-template {
+  width: 300px;
+  height: 400px;
+  padding: 0px 0px;
+  text-align: center;
+}
+
 .card-caption {
   position: relative;
   background: #ffffff;
-  padding: 15px 15px 5px 5px;
+  padding: 5px 3px 5px 5px;
   border-radius: 0px 0px 4px 4px;
 }
 
@@ -402,4 +457,9 @@ h1 {
 ul#res {
   list-style-type: none;
   padding: 10px;
+}
+
+#indeed_footnote {
+  display: flex;
+  justify-content: center;
 }

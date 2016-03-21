@@ -31,32 +31,24 @@ const Nav = React.createClass({
   render : function() {
     return (
       <div className="navContainers">
-        <div className="navLeft">
+        <div className="navLeft outerSprinkleTitle">
           <h3 id="sprinkleTitle">Sprinkle</h3>
         </div>
 
         <div className="loginSignupInfo">
           {this.props.loggedIn ? (
-// <<<<<<< HEAD
-//             <div className="navRight">
-//               <ul>
-//                 <div className="navRight logoutLink"><Logout logout={ this.logout }/></div>
-//                 <div className="navRight profileLink"><ToProfile ToProfile={ this.ToProfile }/></div>
-//               </ul>
-//             </div>
-//           ) : (
-//             <ul>
-//               <div className="navRight"><Login login={ this.login }/></div>
-//               <div className="navRight signupLink"><a onClick={ this.handleSignup } >signup</a></div>
-//             </ul>
-// =======
-          <div className="navRight"><ul>
-            <div className="navRight"><ToProfile ToProfile={ this.ToProfile }/></div>
-            <br/>
-            <div className="navRight"><Edit edit={ this.edit }/></div>
-            <br/>
-            <div className="navRight"><Logout logout={ this.logout }/></div>
-          </ul></div>
+
+          <div className="navRight">
+            <ul>
+              <div id="loggedInBox">
+                <li><div className="loggedInBoxEl navRight"><ToProfile ToProfile={ this.ToProfile }/></div></li>
+
+                <li><div className="loggedInBoxEl navRight"><Edit edit={ this.edit }/></div></li>
+
+                <li><div className="loggedInBoxEl navRight"><Logout logout={ this.logout }/></div></li>
+              </div>
+            </ul>
+          </div>
           ) : (
           <ul>
             <div className="navRight"><Login login={ this.login }/></div>
