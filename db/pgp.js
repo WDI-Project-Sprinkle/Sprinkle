@@ -42,6 +42,7 @@ function createUser( req, res, next ) {
   }
 }
 
+
 // JL Login user auth
 function loginUser( req, res, next ) {
   const email = req.body.email
@@ -61,11 +62,9 @@ function loginUser( req, res, next ) {
     })
 }
 
+
 function updatePassword( req, res, next) {
-  console.log('You have made it to the pg file');
   const currentPassword = req.body.currentPass
-  console.log('THIS IS THE BODY',req.body);
-  console.log('This is the current password, should not be undefined',currentPassword);
   const newPassword = req.body.newPass
   console.log('req:' ,req.user);
 
@@ -93,6 +92,7 @@ function updatePassword( req, res, next) {
 
 
 }
+
 
 // JL login hash
 function createHash( email, password, name, callback ) {
@@ -153,8 +153,9 @@ function addCareerJobs( req, res, next ){
   })
 }
 
+
 function userSavedJob( req, res, next ) {
-  db.none( 'INSERT INTO apps(user_id, job_id) VALUES ($1,$2)', [req.user.user_id, res.rows])
+  db.none( 'INSERT INTO apps (user_id, job_id, applied) VALUES ($1, $2, false)', [req.user.user_id, res.rows] )
   .then(()=> {
     next()
   })
@@ -164,12 +165,8 @@ function userSavedJob( req, res, next ) {
 }
 
 
-function userSavedJobs( req, res, next ){
-  db.one( 'INSERT INTO apps (user_id, job_id) VALUES ($1, $2)', [req.user.user_id, data] )
-}
-
 function showSavedJobs( req, res, next ){
-  db.any( 'SELECT * FROM jobs' )
+  db.any( 'SELECT users.name as user_name, jobs.job_id as job_id, jobs.company as company, jobs.job_title as job_title, jobs.job_desc as job_desc, jobs.indeed as indeed, jobs.indeed_url as indeed_url, jobs.career as career, jobs.career_url as career_url FROM apps FULL OUTER JOIN jobs ON apps.job_id = jobs.job_id LEFT JOIN users ON apps.user_id = users.user_id WHERE apps.user_id = $1', [ req.user.user_id ] )
   .then( ( data )=>{
     res.rows = data;
     next();
@@ -178,21 +175,24 @@ function showSavedJobs( req, res, next ){
     console.log( error )
   })
 }
+
 
 //JL deleteSavedJobs function
 function deleteSavedJobs( req, res, next ){
-  db.one( 'DELETE FROM apps WHERE user_id = ($1) AND job_id = ($2)' )
-  .then( ( data )=>{
-    res.rows = data;
+  console.log("This is the user ID:", req.user.user_id, "this is the jobs id: ", req.body.job_id);
+  db.one( 'DELETE FROM apps WHERE user_id = ($1) AND job_id = ($2) RETURNING job_id', [ req.user.user_id, req.body.job_id ] )
+  .then( (data)=>{
+    console.log('DELETED!!')
+    res.job_id = data.job_id
     next();
   })
   .catch( ( error )=>{
-    console.log( error )
+    console.log( 'this is from deleteSavedJobs: ', error )
   })
 }
 
-function deleteUser (req,res,next) {
-  console.log('this is user id: ', req.user);
+
+function deleteUser ( req,res,next ) {
   db.none('DELETE FROM users WHERE user_id=($1)', [req.user.user_id])
   .then ( () => {
     next();
@@ -203,6 +203,17 @@ function deleteUser (req,res,next) {
 }
 
 
+function updateSavedJobs( req, res, next ){
+  db.one( 'UPDATE apps SET applied=true WHERE user_id=$1', [ req.user.user_id ])
+  .then(()=>{
+    next()
+  })
+  .catch( ( error )=>{
+    console.log( error )
+  })
+}
+
+module.exports.updateSavedJobs = updateSavedJobs;
 module.exports.userSavedJob = userSavedJob;
 module.exports.updatePassword = updatePassword;
 module.exports.deleteUser = deleteUser;
