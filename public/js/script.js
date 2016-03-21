@@ -18,6 +18,7 @@ const Listings        = require( './components/listings.js' )
 const Profiles        = require( './components/profiles.js');
 const AppliedJobs     = require( './components/appliedjobs.js' );
 const SavedJobs       = require( './components/savedjobs.js' );
+const Job             = require('./components/job.js')
 const Login           = require( './components/nav_components/login.js' )
 const Logout          = require( './components/nav_components/logout.js' )
 const Nav             = require( './components/nav_components/nav.js' );
@@ -148,7 +149,8 @@ const App = React.createClass({
 
   profile : function() {
     this.state.profile=true
-    this.setState( { profile : this.state.profile })
+    this.state.edit = false;
+    this.setState( { profile : this.state.profile, edit : this.state.edit })
   },
 
   handleAdvance : function() {
@@ -172,7 +174,8 @@ const App = React.createClass({
 
   edit : function() {
     this.state.edit = true;
-    this.setState({ edit : this.state.edit});
+    this.state.profile = false;
+    this.setState({ edit : this.state.edit, profile : this.state.profile});
   },
 
   deleted : function() {
@@ -284,8 +287,9 @@ const App = React.createClass({
   },
 
   renderJob : function(key){
-    <Profiles key={key} index={key} details={this.state.savedJobs[key]} toggleJob={this.toggleJob}/>
+    <Profiles key={key} index={key} details={this.state.savedJobs[key]}  toggleJob={this.toggleJob}/>
   },
+
 
   render : function() {
     let signedInView =

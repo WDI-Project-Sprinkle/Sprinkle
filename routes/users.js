@@ -27,6 +27,12 @@ users.put('/update', expressJWT({secret:secret}), db.updatePassword, (req,res) =
   res.send('go')
 })
 
+users.route('/jobs/delete')
+  .delete(expressJWT({secret:secret}), db.deleteSavedJobs, (req, res)=>{
+    console.log('about to send reply')
+    res.json(res.job_id)
+  })
+
 users.route('/jobs')
   .get(expressJWT({secret:secret}), db.showSavedJobs, (req, res)=>{
     res.send(res.rows)

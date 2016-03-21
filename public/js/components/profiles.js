@@ -7,12 +7,13 @@ const AppliedJobs     = require('../components/appliedjobs.js');
 
 const Profiles = React.createClass({
   // const token = auth.getToken()
+
   render : function(){
 
     return (
       <div>
-        <SavedJobs showSavedJobs={this.showSavedJobs} showAppliedJobs={this.showAppliedJobs}/>
-        <AppliedJobs showSavedJobs={this.showSavedJobs} showAppliedJobs={this.showAppliedJobs}/>
+        <SavedJobs />
+        <AppliedJobs />
       </div>
     )
   }

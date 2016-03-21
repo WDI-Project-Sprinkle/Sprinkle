@@ -106,7 +106,6 @@
 
 #display {
   border: 1px;
-  background-color: red;
   width: auto;
 }
 
@@ -196,4 +195,13 @@ h1 {
 ul#res {
   list-style-type: none;
   padding: 10px;
+}
+
+.resultTable {
+  width: 250px;
+}
+
+
+.resultTableMedium {
+  width: 1000px;
 }

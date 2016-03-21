@@ -64,10 +64,7 @@ function loginUser( req, res, next ) {
 
 
 function updatePassword( req, res, next) {
-  console.log('You have made it to the pg file');
   const currentPassword = req.body.currentPass
-  console.log('THIS IS THE BODY',req.body);
-  console.log('This is the current password, should not be undefined',currentPassword);
   const newPassword = req.body.newPass
   console.log('req:' ,req.user);
 
@@ -169,9 +166,8 @@ function userSavedJob( req, res, next ) {
 
 
 function showSavedJobs( req, res, next ){
-  db.any( 'SELECT users.name as user_name, jobs.job_id as job_id, jobs.company as company, jobs.job_title as job_title, jobs.job_desc as job_desc, jobs.indeed as indeed FROM apps FULL OUTER JOIN jobs ON apps.job_id = jobs.job_id LEFT JOIN users ON apps.user_id = users.user_id WHERE apps.user_id = $1', [ req.user.user_id ] )
+  db.any( 'SELECT users.name as user_name, jobs.job_id as job_id, jobs.company as company, jobs.job_title as job_title, jobs.job_desc as job_desc, jobs.indeed as indeed, jobs.indeed_url as indeed_url, jobs.career as career, jobs.career_url as career_url FROM apps FULL OUTER JOIN jobs ON apps.job_id = jobs.job_id LEFT JOIN users ON apps.user_id = users.user_id WHERE apps.user_id = $1', [ req.user.user_id ] )
   .then( ( data )=>{
-    console.log('Hola form the land of the pgp');
     res.rows = data;
     next();
   })
@@ -183,13 +179,15 @@ function showSavedJobs( req, res, next ){
 
 //JL deleteSavedJobs function
 function deleteSavedJobs( req, res, next ){
-  db.one( 'DELETE FROM apps WHERE user_id = ($1) AND job_id = ($2)' )
-  .then( ( data )=>{
-    res.rows = data;
+  console.log("This is the user ID:", req.user.user_id, "this is the jobs id: ", req.body.job_id);
+  db.one( 'DELETE FROM apps WHERE user_id = ($1) AND job_id = ($2) RETURNING job_id', [ req.user.user_id, req.body.job_id ] )
+  .then( (data)=>{
+    console.log('DELETED!!')
+    res.job_id = data.job_id
     next();
   })
   .catch( ( error )=>{
-    console.log( error )
+    console.log( 'this is from deleteSavedJobs: ', error )
   })
 }
 
