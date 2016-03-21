@@ -356,8 +356,6 @@ const App = React.createClass({
           <div className="row" id="display">
             <div className="nav-wrapper">
               <br/>
-              { Object.keys(this.state.careerJobs).map(this.renderCareerJobs) }
-              { Object.keys(this.state.indeedJobs).map(this.renderIndeedJobs) }
               {this.state.profile ? profilePage : ''}
               {this.state.signupBox ? notSignedIn : signedInView}
               {this.state.edit ? editIsTrue : editIsFalse}
