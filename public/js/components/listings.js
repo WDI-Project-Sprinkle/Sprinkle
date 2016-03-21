@@ -9,11 +9,6 @@ const Listings = React.createClass({
 
   render() {
     return (
-// <<<<<<< HEAD
-//       <div id="jobBox">
-//         <form onSubmit={this.handleSubmit}>
-//           <ul>
-// =======
       <form onSubmit={this.handleSubmit}>
       <div className="starter-template">
         <div className="thecard">
@@ -30,18 +25,6 @@ const Listings = React.createClass({
               <strong>Job Description:</strong> {this.props.desc}
             </li>
             <li>
-// <<<<<<< HEAD
-//               <div id="companySourceOuter">
-//                 <a id="companySourceInner" href={this.props.url} target="_blank"><strong>{this.props.name}</strong></a>
-//               </div>
-//             </li>
-//             <div id="saveJobOuter">
-//               <button id="saveJobInner" type="submit"> Save Job </button>
-//             </div>
-//           </ul>
-//         </form>
-//       </div>
-// =======
               <a href={this.props.url} target="_blank"><strong>{this.props.name}</strong></a>
             </li>
             </p>

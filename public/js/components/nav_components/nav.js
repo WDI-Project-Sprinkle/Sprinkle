@@ -32,7 +32,7 @@ const Nav = React.createClass({
     return (
       <div className="navContainers">
         <div className="navLeft">
-          <h3>Sprinkle</h3>
+          <h3 id="sprinkleTitle">Sprinkle</h3>
         </div>
 
         <div className="loginSignupInfo">
@@ -61,9 +61,8 @@ const Nav = React.createClass({
           <ul>
             <div className="navRight"><Login login={ this.login }/></div>
             <div className="navRight">
-            <button onClick={ this.handleSignup } >signup</button></div>
+            <button className="allButtons" id="signupButton" onClick={ this.handleSignup } >signup</button></div>
           </ul>
->>>>>>> fd682c9986029271927d95ba06ba223c13f013f7
           )}
         </div>
       </div>

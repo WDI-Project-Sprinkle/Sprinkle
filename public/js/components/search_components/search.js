@@ -33,7 +33,7 @@ const Search = React.createClass({
             </div>
           </div>
           <div className="searchCenter">
-            <button type="submit" className="btn btn-primary btn-sm" id="searchButton">Search</button>
+            <button type="submit" className="btn btn-primary btn-sm allButtons" id="searchButton">Search</button>
           </div>
         </div>
       </form>

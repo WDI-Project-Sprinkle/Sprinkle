@@ -81,19 +81,21 @@ const AdvSearch = React.createClass({
           </div>
 
           <div className="searchCenter">
-          <button type="submit" className="btn btn-primary btn-sm" id="searchButton">Search</button>
+          <button type="submit" className="btn btn-primary btn-sm allButtons" id="searchButton">Search</button>
           </div>
         </div>
 
         <br/>
-        
-        <div className="searchContainers">
-          <div className="searchCenter">
-            <EmploymentType />
-          </div>
 
-          <div className="searchCenter">
-            <Radius />
+        <div className="searchContainers">
+          <div className="searchTypes">
+            <div className="searchCenter">
+              <EmploymentType />
+            </div>
+
+            <div className="searchCenter">
+              <Radius />
+            </div>
           </div>
 
           <div className="searchCenter">

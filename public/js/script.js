@@ -340,15 +340,7 @@ const App = React.createClass({
             <div className="nav-wrapper">
                 <br/>
                 {/* Initial Search Result Display */}
-// <<<<<<< HEAD
-//                 <div id="showIndeedJobs">
-//                   { showIndeedJobs }
-//                 </div>
-//                 <div id="showCareerJobs">
-//                   { showCareerJobs }
-//                 </div>
-//               </ul>
-// =======
+
                 { showIndeedJobs }
 
                 { showCareerJobs }

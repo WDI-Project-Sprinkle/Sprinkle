@@ -9,7 +9,9 @@ const ToProfile = React.createClass({
   render : function() {
     return (
       <li>
-        <a onClick={ this.handleProfile }>Profile</a>
+        <div id="outerProfileButton">
+          <a id="profileButton" onClick={ this.handleProfile }>Profile</a>
+        </div>
       </li>
     )
   }

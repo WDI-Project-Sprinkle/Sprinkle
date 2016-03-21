@@ -24,7 +24,7 @@ const Signup = React.createClass({
             <label><input id="signupName" type="text" ref="name" placeholder="name"/></label>
             <label><input id="signupEmail" type="text" ref="email" placeholder="email"/></label>
             <label><input id="signupPassword" type="password" ref="pass" placeholder="password" /></label><br />
-            <button type="submit">signup</button>
+            <button className="allButtons" type="submit">signup</button>
           </div>
         </div>
       </form>

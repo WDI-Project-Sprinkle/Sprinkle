@@ -2,11 +2,30 @@
 #navbar {
   height: 70px;
   margin: 5px -7.5px;
-  background: rgba(80, 0, 0, 0.5);;
+  background: rgba(100, 80, 150, 0.5);;
   color: black;
 }
 
+#sprinkleTitle {
+  color: #f35626;
+  background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-animation: hue 60s infinite linear;
+}
+
+@-webkit-keyframes hue {
+    from {
+      -webkit-filter: hue-rotate(0deg);
+    }
+
+    to {
+      -webkit-filter: hue-rotate(360deg);
+    }
+}
+
 .navContainers {
+  margin-top: -12px;
   height: 70px;
   right: 0;
   text-align: center;
@@ -34,7 +53,23 @@
   height: 20px;
 }
 
+.allButtons,
+  .allButtons:visited {
+    background : rgba( 38, 166, 154, 1);
+    color : black;
+  }
+  .allButtons:hover {
+    background : rgba( 30, 135, 110, 1);
+    color : white;
+  }
+
+  #signupButton {
+    margin-top: 2px;
+    line-height: 0px;
+  }
+
 .navContainers .signupLink {
+  line-height: 1px;
   font-size: 12px;
   border-radius: 3px;
   background: rgba(255, 50, 50, 0.5);
@@ -47,6 +82,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   right: 0;
   text-align: center;
 }
@@ -61,7 +97,7 @@
 
 .searchContainers .searchCenter {
   margin: 0 auto;
-  padding-right: 20px;
+  padding: 2px 2px;
 }
 
 .searchContainers .searchRight {
@@ -88,6 +124,7 @@
 }
 
 #signinform {
+  margin-right: .5vw;
   text-align: center;
   display: flex;
   justify-content: flex-end;
@@ -129,13 +166,44 @@
   height: 18px;
 }
 
-#logoutLink {
+#logoutLink,
+  #logoutLink:visited {
+    background : rgba( 38, 166, 154, 1);
+    padding: 1px 2px;
+    color : black;
+  }
+  #logoutLink:hover {
+    background : rgba( 30, 135, 110, 1);
+    padding: 1px 2px;
+    color : white;
+    cursor: pointer; cursor: hand;
+  }
 
-}
+#editButton,
+  #editButton:visited {
+    background : rgba( 38, 166, 154, 1);
+    padding: 1px 2px;
+    color : black;
+  }
+  #editButton:hover {
+    background : rgba( 30, 135, 110, 1);
+    padding: 1px 2px;
+    color : white;
+    cursor: pointer; cursor: hand;
+  }
 
-#profileLink {
-
-}
+#profileButton,
+  #profileButton:visited {
+    background : rgba( 38, 166, 154, 1);
+    padding: 1px 2px;
+    color : black;
+  }
+  #profileButton:hover {
+    background : rgba( 30, 135, 110, 1);
+    padding: 1px 2px;
+    color : white;
+    cursor: pointer; cursor: hand;
+  }
 
 #navbar li {
   display: inline;
