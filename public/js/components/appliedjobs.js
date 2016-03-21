@@ -15,7 +15,7 @@ const AppliedJobs = React.createClass({
     console.log("hola from appliedJobs");
     $.get(
       {
-      url: '/users/jobs',
+      url: '/users/jobsapplied',
       beforeSend: function( xhr ) {
         xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.token );
       }

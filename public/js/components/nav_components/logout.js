@@ -9,7 +9,7 @@ const Logout = React.createClass({
   render : function() {
     return (
       <li>
-        <a onClick={ this.handleLogout }>Logout</a>
+        <a id="cursor" onClick={ this.handleLogout }>Logout</a>
       </li>
     )
   }

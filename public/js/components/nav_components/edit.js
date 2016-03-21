@@ -8,7 +8,7 @@ const Edit = React.createClass({
 
   render : function() {
     return (
-      <a onClick={ this.handleEdit }>Edit</a>
+      <a id="cursor" onClick={ this.handleEdit }>Edit</a>
     )
   }
 })

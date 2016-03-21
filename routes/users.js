@@ -42,6 +42,12 @@ users.route( '/jobs' )
   });
 
 
+users.route( '/jobsapplied' )
+  .get( expressJWT( { secret:secret } ), db.showAppliedJobs, ( req, res )=>{
+    res.send( res.rows )
+  });
+
+
 users.route( '/IndeedJobs' )
   .post( expressJWT( { secret:secret } ), db.addIndeedJobs, db.userSavedJob, ( req,res ) => {
     res.send( res.rows )

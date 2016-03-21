@@ -317,12 +317,12 @@ const App = React.createClass({
     let regularSearch =
     <div>
       <Search addSearchIndeed={ this.addSearchIndeed } addSearchCareer={ this.addSearchCareer }/>
-      <a onClick={ this.handleAdvance }> advance search </a>
+      <a id="cursor" onClick={ this.handleAdvance }> advance search </a>
     </div>
     let advSearch =
       <div>
         <AdvSearch addSearchIndeed={ this.addSearchIndeed } addSearchCareer={ this.addSearchCareer } toggleIndeed={ this.toggleIndeed } toggleCareer={ this.toggleCareer}/>
-        <a onClick={ this.handleBasic }> basic search </a>
+        <a id="cursor" onClick={ this.handleBasic }> basic search </a>
       </div>
 
     let showIndeedJobs = [];

@@ -9,7 +9,7 @@ const ToProfile = React.createClass({
   render : function() {
     return (
       <li>
-        <a onClick={ this.handleProfile }>Profile</a>
+        <a id="cursor" onClick={ this.handleProfile }>Profile</a>
       </li>
     )
   }

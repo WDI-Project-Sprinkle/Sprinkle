@@ -45,7 +45,7 @@ const AdvSearch = React.createClass({
           </div>
 
           <div className="searchCenter">
-          <button type="submit" className="btn btn-primary btn-sm" id="searchButton">Search</button>
+          <button type="submit" className="btn btn-primary btn-sm" id="cursor" >Search</button>
           </div>
         </div>
 

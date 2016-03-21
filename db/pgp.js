@@ -177,6 +177,18 @@ function showSavedJobs( req, res, next ){
 }
 
 
+function showAppliedJobs( req, res, next ){
+  db.any( 'SELECT users.name as user_name, jobs.job_id as job_id, jobs.company as company, jobs.job_title as job_title, jobs.job_desc as job_desc, jobs.indeed as indeed, jobs.indeed_url as indeed_url, jobs.career as career, jobs.career_url as career_url FROM apps FULL OUTER JOIN jobs ON apps.job_id = jobs.job_id LEFT JOIN users ON apps.user_id = users.user_id WHERE apps.applied=true AND apps.user_id = $1', [ req.user.user_id ] )
+  .then( ( data )=>{
+    res.rows = data;
+    next();
+  })
+  .catch( ( error )=>{
+    console.log( error )
+  })
+}
+
+
 //JL deleteSavedJobs function
 function deleteSavedJobs( req, res, next ){
   console.log("This is the user ID:", req.user.user_id, "this is the jobs id: ", req.body.job_id);
@@ -213,6 +225,8 @@ function updateSavedJobs( req, res, next ){
   })
 }
 
+
+module.exports.showAppliedJobs = showAppliedJobs;
 module.exports.updateSavedJobs = updateSavedJobs;
 module.exports.userSavedJob = userSavedJob;
 module.exports.updatePassword = updatePassword;

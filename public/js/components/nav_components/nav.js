@@ -35,17 +35,17 @@ const Nav = React.createClass({
 
           {this.props.loggedIn ? (
           <div className="navRight"><ul>
-            <div className="navRight"><ToProfile ToProfile={ this.ToProfile }/></div>
+            <div id="cursor" className="navRight"><ToProfile ToProfile={ this.ToProfile }/></div>
             <br/>
-            <div className="navRight"><Edit edit={ this.edit }/></div>
+            <div id="cursor" className="navRight"><Edit edit={ this.edit }/></div>
             <br/>
-            <div className="navRight"><Logout logout={ this.logout }/></div>
+            <div id="cursor" className="navRight"><Logout logout={ this.logout }/></div>
           </ul></div>
           ) : (
           <ul>
-            <div className="navRight"><Login login={ this.login }/></div>
+            <div id="cursor" className="navRight"><Login login={ this.login }/></div>
             <div className="navRight">
-            <button onClick={ this.handleSignup } >signup</button></div>
+            <button id="cursor" onClick={ this.handleSignup } >signup</button></div>
           </ul>
           )}
       </div>
