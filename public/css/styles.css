@@ -197,3 +197,15 @@ ul#res {
   list-style-type: none;
   padding: 10px;
 }
+
+/*http://stackoverflow.com/questions/4840736/easier-way-to-create-circle-div-than-using-an-image*/
+.circleBase {
+  border-radius: 50%;
+  behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+  /*display: inline-block;*/
+  /*margin: 0 auto;*/
+  width: 80px;
+  height: 80px;
+  background: #00ffff;
+  border: 3px solid #000;
+}
