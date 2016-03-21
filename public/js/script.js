@@ -11,20 +11,19 @@ const Link            = ReactRouter.Link;
 const browserHistory  = ReactRouter.browserHistory;
 
 const auth            = require( './auth.js' )
-const Login           = require( './components/nav_components/login.js' )
 const Signup          = require( './components/signup.js' )
 const EditProfile     = require( './components/editProfile.js' )
-const Logout          = require( './components/nav_components/logout.js' )
 const Display         = require( './components/display.js' )
-const Search          = require( './components/search_components/search.js' )
 const Listings        = require( './components/listings.js' )
-const Nav             = require('./components/nav_components/nav.js');
-const AdvSearch       = require('./components/search_components/advSearch.js');
-const Profiles        = require('./components/profiles.js');
-const SavedJobs       = require('./components/savedjobs.js');
-const AppliedJobs     = require('./components/appliedjobs.js');
-const Animation       = require('./components/animation.js');
-const AnimationCareer = require('./components/animationCareer.js');
+const Profiles        = require( './components/profiles.js');
+const AppliedJobs     = require( './components/appliedjobs.js' );
+const SavedJobs       = require( './components/savedjobs.js' );
+const Job             = require('./components/job.js')
+const Login           = require( './components/nav_components/login.js' )
+const Logout          = require( './components/nav_components/logout.js' )
+const Nav             = require( './components/nav_components/nav.js' );
+const Search          = require( './components/search_components/search.js' )
+const AdvSearch       = require( './components/search_components/advSearch.js' );
 
 const utility         = require('./helpers/utility.js');
 
@@ -40,17 +39,16 @@ const App = React.createClass({
       indeed : true,
       career : true,
       indeedJobs : [],
-      careerJobs : [],
-      savedJobs : []
+      careerJobs : []
     }
   },
 
-  componentDidMount : function(){
-    $.get('/users/jobs')
-    .done(data => this.setState({
-      savedJobs : data.indexByKey('job_id')
-    }))
-  },
+  // componentDidMount : function(){
+  //   $.get('/users/jobs')
+  //   .done(data => this.setState({
+  //     savedJobs : data.indexByKey('job_id')
+  //   }))
+  // },
 
   addSearchIndeed : function ( newSearch ){
     var cityState = newSearch.city + '+' + newSearch.state
@@ -152,7 +150,7 @@ const App = React.createClass({
   profile : function() {
     this.state.profile=true
     this.state.edit = false;
-    this.setState( { profile : this.state.profile, edit : this.state.edit})
+    this.setState( { profile : this.state.profile, edit : this.state.edit })
   },
 
   handleAdvance : function() {
@@ -256,17 +254,42 @@ const App = React.createClass({
     }
   },
 
-  renderIndeedJobs : function(key) {
-    return (
-      <Animation key={key} index={key} details={this.state.indeedJobs[key]} />
-    )
+  showSavedJobs : function(){
+    $.get(
+      {
+      url: '/users/job',
+      data: data,
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.token );
+      }
+    })
+    .done(data => this.setState({
+      savedJobs : data.indexByKey('job_id')
+    }))
+    console.log('showSavedJobs')
   },
 
-  renderCareerJobs : function(key) {
-    return (
-      <AnimationCareer key={key} index={key} details={this.state.careerJobs[key]} />
-    )
+  showAppliedJobs : function(){
+
   },
+
+  toggleJob : function(key){
+    this.state.savedJobs[key].applied = !this.state.savedJobs[key].applied;
+    this.setState({savedJobs: this.state.savedJobs})
+  },
+
+  jobApplied:function(key){
+    return this.state.savedJobs[key].applied
+  },
+
+  jobNotApplied:function(key){
+    return !this.jobApplied(key)
+  },
+
+  renderJob : function(key){
+    <Profiles key={key} index={key} details={this.state.savedJobs[key]}  toggleJob={this.toggleJob}/>
+  },
+
 
   render : function() {
     let signedInView =
@@ -296,15 +319,15 @@ const App = React.createClass({
         <a onClick={this.handleBasic}> basic search </a>
       </div>
 
-      var showIndeedJobs = [];
-      this.state.indeedJobs.forEach((el) => {
-        showIndeedJobs.push(<Listings company={el.company} desc={el.snippet} role={el.jobtitle} city={el.city} state={el.state} salaries={el.salaries} first_added={el.date} id={el.jobkey} url={el.url} name='indeed' savedJob={this.saveIndeedJob} />)
+    let showIndeedJobs = [];
+    this.state.indeedJobs.forEach((el) => {
+      showIndeedJobs.push(<Listings company={el.company} desc={el.snippet} role={el.jobtitle} city={el.city} state={el.state} salaries={el.salaries} first_added={el.date} id={el.jobkey} url={el.url} name='indeed' savedJob={this.saveIndeedJob} />)
       })
 
-      var showCareerJobs = [];
-      this.state.careerJobs.forEach((el) => {
-        showCareerJobs.push(<Listings company={el.Company} desc={el.DescriptionTeaser} role={el.JobTitle} city={el.City} state={el.State} salaries={el.Pay} first_added={el.PostedDate} id={el.DID} url={el.JobDetailsURL} name='careerbuilder' savedJob={this.saveCareerJob} />)
-      })
+    let showCareerJobs = [];
+    this.state.careerJobs.forEach((el) => {
+      showCareerJobs.push(<Listings company={el.Company} desc={el.DescriptionTeaser} role={el.JobTitle} city={el.City} state={el.State} salaries={el.Pay} first_added={el.PostedDate} id={el.DID} url={el.JobDetailsURL} name='careerbuilder' savedJob={this.saveCareerJob} />)
+    })
 
     let profilePage =
     <div>
