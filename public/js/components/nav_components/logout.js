@@ -4,7 +4,6 @@ const Logout = React.createClass({
   handleLogout : function( event ) {
     event.preventDefault();
     this.props.logout();
-    console.log('you wanna leaves me');
   },
 
   render : function() {

@@ -1,8 +1,8 @@
-const React = require('react');
+const React = require( 'react' );
 
 const EditProfile = React.createClass({
 
-  handleSubmit : function(event) {
+  handleSubmit : function( event ) {
     event.preventDefault();
 
     const currentPass = this.refs.currentPassword.value;
@@ -14,7 +14,7 @@ const EditProfile = React.createClass({
       newPass : newPass
     }
 
-    if (newPass != confirmPass) {
+    if ( newPass != confirmPass ) {
       alert('You failure, the passwords do not match')
     } else {
       $.ajax(
@@ -23,7 +23,7 @@ const EditProfile = React.createClass({
           data : data,
           type: 'put',
           beforeSend: function( xhr ) {
-            xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.token );
+            xhr.setRequestHeader( "Authorization", 'Bearer ' + localStorage.token );
           }
         }
       )
@@ -33,7 +33,7 @@ const EditProfile = React.createClass({
     }
   },
 
-  handleDelete : function(event) {
+  handleDelete : function( event ) {
     event.preventDefault();
     console.log('This is delete from ajax');
     $.ajax(
@@ -44,7 +44,7 @@ const EditProfile = React.createClass({
           xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.token );
         }
     })
-    .done((data) => {
+    .done( ( data ) => {
       this.props.deleted();
     })
 
@@ -52,7 +52,7 @@ const EditProfile = React.createClass({
 
   render : function() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={ this.handleSubmit }>
         <div className="searchContainers">
           <div className="searchCenter">
             <h3>Sprinkle Edit</h3>

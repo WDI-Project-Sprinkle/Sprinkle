@@ -1,9 +1,9 @@
-const React = require('react');
+const React = require( 'react' );
 
-const Logout = require('./logout.js');
-const Login = require('./login.js');
-const ToProfile = require('./toProfile.js');
-const Edit = require('./edit.js');
+const Logout = require( './logout.js' );
+const Login = require( './login.js' );
+const ToProfile = require( './toProfile.js' );
+const Edit = require( './edit.js' );
 
 const Nav = React.createClass({
 

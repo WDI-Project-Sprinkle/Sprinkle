@@ -36,6 +36,13 @@
     }
 }
 
+.nav-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 990px;
+}
+
 .navContainers {
   margin-top: -12px;
   height: 70px;

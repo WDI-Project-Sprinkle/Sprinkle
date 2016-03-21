@@ -1,7 +1,7 @@
-const React = require('react');
-const EmploymentType = require('./employmentType.js');
-const JobResource = require('./jobResource.js');
-const Radius = require('./radius.js');
+const React = require( 'react' );
+const EmploymentType = require( './employmentType.js' );
+const JobResource = require( './jobResource.js' );
+const Radius = require( './radius.js' );
 
 const AdvSearch = React.createClass({
 
@@ -14,6 +14,8 @@ const AdvSearch = React.createClass({
       jt: this.refs.jt.value,
       radius: this.refs.radius.value
     }
+
+    console.log("this is ref for jt", this.refs.jt.value);
     this.props.addSearchIndeed( search )
     this.props.addSearchCareer( search )
     this.refs.searchForm.reset()
@@ -26,63 +28,10 @@ const AdvSearch = React.createClass({
   handleCareerCheck : function() {
     this.props.toggleCareer()
   },
-  //
-  // <form ref="searchForm" onSubmit={ this.handleSubmit }>
-  //   <input id="searchInput" type="text" placeholder="job title" ref="searchInput" required />
-  //   <input id="city" type="text" placeholder="city" ref="city"  />
-  //   <input id="state" type="text" placeholder="state" ref="state"  />
-  //     <EmploymentType/>
-  //   <select ref='radius'>
-  //     <Radius />
-  //   </select>
-  //   <JobResource name="indeed" checked={ this.handleIndeedCheck }/>
-  //   <JobResource name="careerbuilder" checked={ this.handleCareerCheck }/>
-  // <button type="submit" className="btn btn-primary btn-sm" id="searchButton">Search</button>
-  // </form>
+
 
   render : function() {
     return (
-      // <form ref="searchForm" onSubmit={ this.handleSubmit }>
-      //   <div className="searchContainers">
-      //     <div className="searchCenter">
-      //     <input id="searchInput" type="text" placeholder="job title" ref="searchInput" required />
-      //     </div>
-      //
-      //     <div className="searchCenter">
-      //     <input id="city" type="text" placeholder="city" ref="city"  />
-      //     </div>
-      //
-      //     <div className="searchCenter">
-      //     <input id="state" type="text" placeholder="state" ref="state"  />
-      //     </div>
-      //
-      //     <div className="searchCenter">
-      //     <button type="submit" className="btn btn-primary btn-sm" id="searchButton">Search</button>
-      //     </div>
-      //   </div>
-      //
-      //   <br/>
-      //
-      //   <div className="searchContainers">
-      //     <div className="searchCenter">
-      //       <EmploymentType />
-      //     </div>
-      //
-      //     <div className="searchCenter">
-      //       <Radius />
-      //     </div>
-      //
-      //     <div className="searchCenter">
-      //       <JobResource name="indeed" checked={ this.handleIndeedCheck }/>
-      //     </div>
-      //
-      //     <div className="searchCenter">
-      //       <JobResource name="careerbuilder" checked={ this.handleCareerCheck }/>
-      //     </div>
-      //
-      //   </div>
-      //
-      // </form>
       <form ref="searchForm" onSubmit={ this.handleSubmit }>
        <div className="searchContainers">
          <div className="searchCenter">
@@ -103,13 +52,24 @@ const AdvSearch = React.createClass({
 
        <div className="searchContainers">
          <div className="searchTypes">
-           <div className="searchCenter">
-             <EmploymentType />
-           </div>
-
-           <div className="searchCenter">
-             <Radius />
-           </div>
+            <div className="searchCenter">
+              <select ref="jt">
+                <option value="fulltime">Full Time</option>
+                <option value="parttime">Part Time</option>
+                <option value="contract">Contract</option>
+                <option value="internship">Internship</option>
+                <option value="tempoary">tempoary</option>
+              </select>
+            </div>
+           <div  className="searchCenter">
+             <select ref="radius">
+               <option value="5">5 miles</option>
+               <option value="10">10 miles</option>
+               <option value="20">20 miles</option>
+               <option value="30">30 miles</option>
+               <option value="50">50 miles</option>
+             </select>
+          </div>
          </div>
 
          <div className="searchCenter">
