@@ -42,47 +42,90 @@ const AdvSearch = React.createClass({
 
   render : function() {
     return (
+      // <form ref="searchForm" onSubmit={ this.handleSubmit }>
+      //   <div className="searchContainers">
+      //     <div className="searchCenter">
+      //     <input id="searchInput" type="text" placeholder="job title" ref="searchInput" required />
+      //     </div>
+      //
+      //     <div className="searchCenter">
+      //     <input id="city" type="text" placeholder="city" ref="city"  />
+      //     </div>
+      //
+      //     <div className="searchCenter">
+      //     <input id="state" type="text" placeholder="state" ref="state"  />
+      //     </div>
+      //
+      //     <div className="searchCenter">
+      //     <button type="submit" className="btn btn-primary btn-sm" id="searchButton">Search</button>
+      //     </div>
+      //   </div>
+      //
+      //   <br/>
+      //
+      //   <div className="searchContainers">
+      //     <div className="searchCenter">
+      //       <EmploymentType />
+      //     </div>
+      //
+      //     <div className="searchCenter">
+      //       <Radius />
+      //     </div>
+      //
+      //     <div className="searchCenter">
+      //       <JobResource name="indeed" checked={ this.handleIndeedCheck }/>
+      //     </div>
+      //
+      //     <div className="searchCenter">
+      //       <JobResource name="careerbuilder" checked={ this.handleCareerCheck }/>
+      //     </div>
+      //
+      //   </div>
+      //
+      // </form>
       <form ref="searchForm" onSubmit={ this.handleSubmit }>
-        <div className="searchContainers">
-          <div className="searchCenter">
-          <input id="searchInput" type="text" placeholder="job title" ref="searchInput" required />
-          </div>
+       <div className="searchContainers">
+         <div className="searchCenter">
+         <input id="searchInput" type="text" placeholder="job title" ref="searchInput" required />
+         </div>
+         <div id="searchCityState">
+           <div className="searchCenter">
+             <input id="city" type="text" placeholder="city" ref="city"  />
+           </div>
 
-          <div className="searchCenter">
-          <input id="city" type="text" placeholder="city" ref="city"  />
-          </div>
+           <div className="searchCenter">
+             <input id="state" type="text" placeholder="state" ref="state"  />
+           </div>
+         </div>
+       </div>
 
-          <div className="searchCenter">
-          <input id="state" type="text" placeholder="state" ref="state"  />
-          </div>
+       <br/>
 
-          <div className="searchCenter">
-          <button type="submit" className="btn btn-primary btn-sm" id="searchButton">Search</button>
-          </div>
-        </div>
+       <div className="searchContainers">
+         <div className="searchTypes">
+           <div className="searchCenter">
+             <EmploymentType />
+           </div>
 
-        <br/>
-        
-        <div className="searchContainers">
-          <div className="searchCenter">
-            <EmploymentType />
-          </div>
+           <div className="searchCenter">
+             <Radius />
+           </div>
+         </div>
 
-          <div className="searchCenter">
-            <Radius />
-          </div>
+         <div className="searchCenter">
+           <JobResource name="indeed" checked={ this.handleIndeedCheck }/>
+         </div>
 
-          <div className="searchCenter">
-            <JobResource name="indeed" checked={ this.handleIndeedCheck }/>
-          </div>
+         <div className="searchCenter">
+           <JobResource name="careerbuilder" checked={ this.handleCareerCheck }/>
+         </div>
 
-          <div className="searchCenter">
-            <JobResource name="careerbuilder" checked={ this.handleCareerCheck }/>
-          </div>
+         <div className="searchCenter">
+         <button type="submit" className="btn btn-primary btn-sm allButtons" id="searchButton">Search</button>
+         </div>
+       </div>
 
-        </div>
-
-      </form>
+     </form>
     )
   }
 })

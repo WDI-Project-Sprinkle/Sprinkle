@@ -31,23 +31,25 @@ const Nav = React.createClass({
   render : function() {
     return (
       <div className="navContainers">
-        <div className="navLeft"><h3>Sprinkle</h3></div>
+        <div className="navLeft outerSprinkleTitle">
+          <h3 id="sprinkleTitle">Sprinkle</h3>
+        </div>
 
+        <div className="loginSignupInfo">
           {this.props.loggedIn ? (
           <div className="navRight"><ul>
-            <div className="navRight"><ToProfile ToProfile={ this.ToProfile }/></div>
-            <br/>
-            <div className="navRight"><Edit edit={ this.edit }/></div>
-            <br/>
-            <div className="navRight"><Logout logout={ this.logout }/></div>
+            <div className="loggedInBoxEl navRight"><ToProfile ToProfile={ this.ToProfile }/></div>
+            <div className="loggedInBoxEl navRight"><Edit edit={ this.edit }/></div>
+            <div className="loggedInBoxEl navRight"><Logout logout={ this.logout }/></div>
           </ul></div>
           ) : (
           <ul>
             <div className="navRight"><Login login={ this.login }/></div>
             <div className="navRight">
-            <button onClick={ this.handleSignup } >signup</button></div>
+            <button className="allButtons" id="signupButton" onClick={ this.handleSignup } >signup</button></div>
           </ul>
           )}
+        </div>
       </div>
     )
   }

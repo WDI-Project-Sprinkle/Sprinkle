@@ -311,12 +311,20 @@ const App = React.createClass({
     let regularSearch =
     <div>
       <Search addSearchIndeed={ this.addSearchIndeed } addSearchCareer={ this.addSearchCareer }/>
-      <a onClick={this.handleAdvance}> advance search </a>
+      <div id= "adSearch">
+        <div id= "adSearchInner">
+          <a id="aSearchContainer" onClick={this.handleAdvance}> advance search </a>
+        </div>
+      </div>
     </div>
     let advSearch =
       <div>
         <AdvSearch addSearchIndeed={ this.addSearchIndeed } addSearchCareer={ this.addSearchCareer } toggleIndeed={ this.toggleIndeed } toggleCareer={ this.toggleCareer}/>
-        <a onClick={this.handleBasic}> basic search </a>
+        <div id="adSearch">
+          <div id="adSearchInner">
+            <a id="aSearchContainer" onClick={this.handleBasic}> basic search </a>
+          </div>
+        </div>
       </div>
 
     let showIndeedJobs = [];
@@ -360,7 +368,6 @@ const App = React.createClass({
               {this.state.signupBox ? notSignedIn : signedInView}
               {this.state.edit ? editIsTrue : editIsFalse}
               {/* Initial Search Result Display */}
-              <Display />
             </div>
           </div>
 

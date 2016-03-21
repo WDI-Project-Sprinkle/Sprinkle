@@ -22,16 +22,18 @@ const Search = React.createClass({
       <form ref="searchForm" onSubmit={ this.handleSubmit }>
         <div className="searchContainers">
           <div className="searchCenter">
-          <input id="searchInput" type="text" placeholder="job title" ref="searchInput" required />
+            <input id="searchInput" type="text" placeholder="job title" ref="searchInput" required />
+          </div>
+          <div className="cityState">
+            <div className="searchCenter">
+              <input id="city" type="text" placeholder="city" ref="city"  />
+            </div>
+            <div className="searchCenter">
+              <input id="state" type="text" placeholder="state" ref="state"  />
+            </div>
           </div>
           <div className="searchCenter">
-          <input id="city" type="text" placeholder="city" ref="city"  />
-          </div>
-          <div className="searchCenter">
-          <input id="state" type="text" placeholder="state" ref="state"  />
-          </div>
-          <div className="searchCenter">
-          <button type="submit" className="btn btn-primary btn-sm" id="searchButton">Search</button>
+            <button type="submit" className="btn btn-primary btn-sm allButtons" id="searchButton">Search</button>
           </div>
         </div>
       </form>
