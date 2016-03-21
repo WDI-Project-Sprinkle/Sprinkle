@@ -26,19 +26,25 @@ const Nav = React.createClass({
   render : function() {
     return (
       <div className="navContainers">
-        <div className="navLeft"><h3>Sprinkle</h3></div>
+        <div className="navLeft">
+          <h3>Sprinkle</h3>
+        </div>
 
+        <div className="loginSignupInfo">
           {this.props.loggedIn ? (
-          <div className="navRight"><ul>
-            <div className="navRight"><Logout logout={ this.logout }/></div>
-            <div className="navRight"><ToProfile ToProfile={ this.ToProfile }/></div>
-          </ul></div>
+            <div className="navRight">
+              <ul>
+                <div className="navRight logoutLink"><Logout logout={ this.logout }/></div>
+                <div className="navRight profileLink"><ToProfile ToProfile={ this.ToProfile }/></div>
+              </ul>
+            </div>
           ) : (
-          <ul>
-            <div className="navRight"><Login login={ this.login }/></div>
-            <div className="navRight"><a onClick={ this.handleSignup } >signup</a></div>
-          </ul>
+            <ul>
+              <div className="navRight"><Login login={ this.login }/></div>
+              <div className="navRight signupLink"><a onClick={ this.handleSignup } >signup</a></div>
+            </ul>
           )}
+        </div>
       </div>
     )
   }

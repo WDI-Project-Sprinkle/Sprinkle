@@ -29,20 +29,28 @@ const AdvSearch = React.createClass({
 
   render : function() {
     return (
-      <form ref="searchForm" onSubmit={ this.handleSubmit }>
-        <input id="searchInput" type="text" placeholder="job title" ref="searchInput" required />
-        <input id="city" type="text" placeholder="city" ref="city"  />
-        <input id="state" type="text" placeholder="state" ref="state"  />
-        <select ref='jt'>
-          <EmploymentType/>
-        </select>
-        <select ref='radius'>
-          <Radius />
-        </select>
-        <JobResource name="indeed" checked={ this.handleIndeedCheck }/>
-        <JobResource name="careerbuilder" checked={ this.handleCareerCheck }/>
-      <button type="submit" className="btn btn-primary btn-sm" id="searchButton">Search</button>
-      </form>
+      <div id="advancedSearchOuter">
+        <form id="advancedSearchForm" ref="searchForm" onSubmit={ this.handleSubmit }>
+          <input id="searchInput" type="text" placeholder="job title" ref="searchInput" required />
+          <div className="cityState" id="advancedCityState">
+            <input id="city" type="text" placeholder="city" ref="city"  />
+            <input id="state" type="text" placeholder="state" ref="state"  />
+          </div>
+          <select ref='jt'>
+            <EmploymentType/>
+          </select>
+          <select ref='radius'>
+            <Radius />
+          </select>
+          <div className="advJobResource">
+            <JobResource name="indeed" checked={ this.handleIndeedCheck }/>
+          </div>
+          <div className="advJobResource">
+            <JobResource name="careerbuilder" checked={ this.handleCareerCheck }/>
+          </div>
+          <button type="submit" className="btn btn-primary btn-sm" id="searchButton">Search</button>
+        </form>
+      </div>
     )
   }
 })

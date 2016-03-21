@@ -37,7 +37,7 @@ const App = React.createClass({
       career : true,
       indeedJobs : [],
       careerJobs : [],
-      savedJobs : []
+      savedJobs : [],
     }
   },
 
@@ -232,12 +232,20 @@ const App = React.createClass({
     let regularSearch =
     <div>
       <Search addSearchIndeed={ this.addSearchIndeed } addSearchCareer={ this.addSearchCareer }/>
-      <a onClick={this.handleAdvance}> advance search </a>
+      <div id= "adSearch">
+        <div id= "adSearchInner">
+          <a id="aSearchContainer" onClick={this.handleAdvance}> advance search </a>
+        </div>
+      </div>
     </div>
     let advSearch =
       <div>
         <AdvSearch addSearchIndeed={ this.addSearchIndeed } addSearchCareer={ this.addSearchCareer } toggleIndeed={ this.toggleIndeed } toggleCareer={ this.toggleCareer}/>
-        <a onClick={this.handleBasic}> basic search </a>
+        <div id="adSearch">
+          <div id="adSearchInner">
+            <a id="aSearchContainer" onClick={this.handleBasic}> basic search </a>
+          </div>
+        </div>
       </div>
 
       var showIndeedJobs = [];
@@ -266,7 +274,7 @@ const App = React.createClass({
 
 
           <div className="row" id="searchbar">
-            <div className="nav-wrapper">
+            <div className="nav-wrapper search-wrapper">
               <br/>
               {/* API search bar here */}
               {this.state.advSearch ? advSearch : regularSearch}
@@ -290,8 +298,12 @@ const App = React.createClass({
               <ul>
                 <br/>
                 {/* Initial Search Result Display */}
-                { showIndeedJobs }
-                { showCareerJobs }
+                <div id="showIndeedJobs">
+                  { showIndeedJobs }
+                </div>
+                <div id="showCareerJobs">
+                  { showCareerJobs }
+                </div>
               </ul>
             </div>
           </div>

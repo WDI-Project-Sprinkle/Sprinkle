@@ -10,12 +10,12 @@ const Login = React.createClass({
 
   render : function() {
     return (
-      <form onSubmit={ this.handleLogin } >
-      <div className="container" id="signinform">
-        <input id="username" className="username" type="text" placeholder="username" ref="username"/>
-        <input id="password" className="password" type="password" placeholder="password" ref="password"/>
-        <button id="loginbutton" className="btn btn-primary btn-sm" type="submit">login</button>
-      </div>
+      <form id="loginForm" onSubmit={ this.handleLogin } >
+        <div className="container" id="signinform">
+          <input id="username" className="username" type="text" placeholder="username" ref="username"/>
+          <input id="password" className="password" type="password" placeholder="password" ref="password"/>
+          <button id="loginbutton" className="btn btn-primary btn-sm" type="submit">login</button>
+        </div>
       </form>
     )
   }
