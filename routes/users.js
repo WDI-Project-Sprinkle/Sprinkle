@@ -28,7 +28,7 @@ users.put('/update', expressJWT({secret:secret}), db.updatePassword, (req,res) =
 })
 
 users.route('/jobs')
-  .get(db.showSavedJobs, (req, res)=>{
+  .get(expressJWT({secret:secret}), db.showSavedJobs, (req, res)=>{
     res.send(res.rows)
   })
 

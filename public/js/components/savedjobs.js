@@ -4,12 +4,33 @@ const ReactDOM = require( 'react-dom' )
 
 const SavedJobs = React.createClass({
   // const token = auth.getToken()
+  setInitialState : function(){
+    return {
+      savedJobs: []
+    }
+  },
+
+  componentDidMount : function(){
+    console.log("hola from savedJobs");
+    $.get(
+      {
+      url: '/users/jobs',
+      beforeSend: function( xhr ) {
+        xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.token );
+      }
+    })
+    .done(data => this.setState({
+      savedJobs : data.indexByKey('job_id')
+    }))
+  },
+
   render : function(){
 
     return (
       <div>
         <h1>Saved Jobs</h1>
-        
+
+
       </div>
     )
   }

@@ -11,8 +11,8 @@ const Profiles = React.createClass({
 
     return (
       <div>
-        <SavedJobs />
-        <AppliedJobs />
+        <SavedJobs showSavedJobs={this.showSavedJobs} showAppliedJobs={this.showAppliedJobs}/>
+        <AppliedJobs showSavedJobs={this.showSavedJobs} showAppliedJobs={this.showAppliedJobs}/>
       </div>
     )
   }
