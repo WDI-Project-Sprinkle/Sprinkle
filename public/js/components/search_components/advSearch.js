@@ -71,17 +71,14 @@ const AdvSearch = React.createClass({
           <div className="searchCenter">
           <input id="searchInput" type="text" placeholder="job title" ref="searchInput" required />
           </div>
+          <div id="searchCityState">
+            <div className="searchCenter">
+              <input id="city" type="text" placeholder="city" ref="city"  />
+            </div>
 
-          <div className="searchCenter">
-          <input id="city" type="text" placeholder="city" ref="city"  />
-          </div>
-
-          <div className="searchCenter">
-          <input id="state" type="text" placeholder="state" ref="state"  />
-          </div>
-
-          <div className="searchCenter">
-          <button type="submit" className="btn btn-primary btn-sm allButtons" id="searchButton">Search</button>
+            <div className="searchCenter">
+              <input id="state" type="text" placeholder="state" ref="state"  />
+            </div>
           </div>
         </div>
 
@@ -106,6 +103,9 @@ const AdvSearch = React.createClass({
             <JobResource name="careerbuilder" checked={ this.handleCareerCheck }/>
           </div>
 
+          <div className="searchCenter">
+          <button type="submit" className="btn btn-primary btn-sm allButtons" id="searchButton">Search</button>
+          </div>
         </div>
 
       </form>
