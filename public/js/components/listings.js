@@ -2,7 +2,7 @@ const React = require( 'react' );
 
 const Listings = React.createClass({
 
-  handleSubmit : function(event) {
+  handleSubmit : function( event ) {
     event.preventDefault();
     this.props.savedJob(this.props.company, this.props.role, this.props.desc, this.props.city, this.props.state, this.props.salaries, this.props.first_added, this.props.id, this.props.url);
   },

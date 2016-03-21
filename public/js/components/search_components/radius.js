@@ -1,4 +1,4 @@
-const React = require('react');
+const React = require( 'react' );
 
 const Radius = React.createClass({
   render : function() {

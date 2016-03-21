@@ -4,6 +4,13 @@
   color: red;
 }
 
+.nav-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 990px;
+}
+
 .navContainers {
   right: 0;
   text-align: center;

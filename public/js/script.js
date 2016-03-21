@@ -18,14 +18,14 @@ const Listings        = require( './components/listings.js' )
 const Profiles        = require( './components/profiles.js');
 const AppliedJobs     = require( './components/appliedjobs.js' );
 const SavedJobs       = require( './components/savedjobs.js' );
-const Job             = require('./components/job.js')
+const Job             = require( './components/job.js' )
 const Login           = require( './components/nav_components/login.js' )
 const Logout          = require( './components/nav_components/logout.js' )
 const Nav             = require( './components/nav_components/nav.js' );
 const Search          = require( './components/search_components/search.js' )
 const AdvSearch       = require( './components/search_components/advSearch.js' );
 
-const utility         = require('./helpers/utility.js');
+const utility         = require( './helpers/utility.js' );
 
 const App = React.createClass({
 
@@ -43,12 +43,6 @@ const App = React.createClass({
     }
   },
 
-  // componentDidMount : function(){
-  //   $.get('/users/jobs')
-  //   .done(data => this.setState({
-  //     savedJobs : data.indexByKey('job_id')
-  //   }))
-  // },
 
   addSearchIndeed : function ( newSearch ){
     var cityState = newSearch.city + '+' + newSearch.state
@@ -81,6 +75,7 @@ const App = React.createClass({
       this.setState({indeedJobs : this.state.indeedJobs})
     }
   },
+
 
   addSearchCareer : function ( newSearch ){
     if (this.state.advSearch == false) {
@@ -115,6 +110,7 @@ const App = React.createClass({
     }
   },
 
+
   login : function( username, password) {
     let data = {
       email: username,
@@ -129,10 +125,12 @@ const App = React.createClass({
     })
   },
 
+
   logout : function() {
     this.state.loggedIn=false
     this.setState( { loggedIn : this.state.loggedIn } )
   },
+
 
   signup : function() {
     this.state.indeedJobs = [];
@@ -141,17 +139,20 @@ const App = React.createClass({
     this.setState( { signupBox : this.state.signupBox, indeedJobs : this.state.indeedJobs,  careerJobs : this.state.careerJobs })
   },
 
+
   signedIn : function() {
     this.state.signupBox=false
     this.state.loggedIn=true
     this.setState( { signupBox : this.state.signupBox, loggedIn : this.state.loggedIn } )
   },
 
+
   profile : function() {
     this.state.profile=true
     this.state.edit = false;
     this.setState( { profile : this.state.profile, edit : this.state.edit })
   },
+
 
   handleAdvance : function() {
     this.state.advSearch = true;
@@ -160,6 +161,7 @@ const App = React.createClass({
     this.setState( { advSearch : this.state.advSearch, indeed : this.state.indeed, career : this.state.career } )
   },
 
+
   handleBasic : function() {
     this.state.advSearch = false
     this.state.indeed = true
@@ -167,29 +169,34 @@ const App = React.createClass({
     this.setState( { advSearch : this.state.advSearch, indeed : this.state.indeed, career : this.state.career } )
   },
 
+
   toggleIndeed : function() {
     this.state.indeed = !this.state.indeed
     this.setState( { indeed : this.state.indeed } )
   },
 
+
   edit : function() {
     this.state.edit = true;
     this.state.profile = false;
-    this.setState({ edit : this.state.edit, profile : this.state.profile});
+    this.setState( { edit : this.state.edit, profile : this.state.profile } );
   },
+
 
   deleted : function() {
     this.state.loggedIn = false;
     this.state.edit = false;
-    this.setState({loggedIn : this.state.loggedIn, edit: this.state.edit})
+    this.setState( { loggedIn : this.state.loggedIn, edit: this.state.edit } )
   },
+
 
   updated : function() {
     this.state.edit = false;
-    this.setState({edit : this.state.edit})
+    this.setState( { edit : this.state.edit } )
   },
 
-  saveIndeedJob : function(company, jobtitle, snippet, city, state, salaries, date, jobkey, url) {
+
+  saveIndeedJob : function( company, jobtitle, snippet, city, state, salaries, date, jobkey, url ) {
 
     let data = {
       company : company,
@@ -203,26 +210,25 @@ const App = React.createClass({
       url: url
     }
 
-    if (this.state.loggedIn == true) {
+    if ( this.state.loggedIn == true ) {
       $.post(
         {
           url : '/users/IndeedJobs',
           data : data,
           beforeSend: function( xhr ) {
-            xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.token );
+            xhr.setRequestHeader( "Authorization", 'Bearer ' + localStorage.token );
           }
         }
       )
       .done(data => this.setState({
         savedJobs : data.indexByKey('job_id')
       }))
-      alert('saved!')
     } else {
-      alert('please sign in first!')
     }
   },
 
-  saveCareerJob : function(Company, JobTitle, DescriptionTeaser, City, State, Pay, PostedDate, DID, JobDetailsURL) {
+
+  saveCareerJob : function( Company, JobTitle, DescriptionTeaser, City, State, Pay, PostedDate, DID, JobDetailsURL ) {
 
     let data = {
       Company : Company,
@@ -254,6 +260,7 @@ const App = React.createClass({
     }
   },
 
+
   showSavedJobs : function(){
     $.get(
       {
@@ -266,28 +273,27 @@ const App = React.createClass({
     .done(data => this.setState({
       savedJobs : data.indexByKey('job_id')
     }))
-    console.log('showSavedJobs')
   },
 
-  showAppliedJobs : function(){
 
+  toggleJob : function( key ){
+    this.state.savedJobs[ key ].applied = !this.state.savedJobs[ key ].applied;
+    this.setState( { savedJobs: this.state.savedJobs } )
   },
 
-  toggleJob : function(key){
-    this.state.savedJobs[key].applied = !this.state.savedJobs[key].applied;
-    this.setState({savedJobs: this.state.savedJobs})
+
+  jobApplied:function( key ){
+    return this.state.savedJobs[ key ].applied
   },
 
-  jobApplied:function(key){
-    return this.state.savedJobs[key].applied
+
+  jobNotApplied:function( key ){
+    return !this.jobApplied( key )
   },
 
-  jobNotApplied:function(key){
-    return !this.jobApplied(key)
-  },
 
-  renderJob : function(key){
-    <Profiles key={key} index={key} details={this.state.savedJobs[key]}  toggleJob={this.toggleJob}/>
+  renderJob : function( key ){
+    <Profiles key={ key } index={ key } details={ this.state.savedJobs[ key ] }  toggleJob={ this.toggleJob }/>
   },
 
 
@@ -305,28 +311,28 @@ const App = React.createClass({
       </div>
     let editIsTrue =
       <div>
-        <EditProfile deleted={this.deleted} updated={this.updated}/>
+        <EditProfile deleted={ this.deleted } updated={ this.updated }/>
       </div>
 
     let regularSearch =
     <div>
       <Search addSearchIndeed={ this.addSearchIndeed } addSearchCareer={ this.addSearchCareer }/>
-      <a onClick={this.handleAdvance}> advance search </a>
+      <a onClick={ this.handleAdvance }> advance search </a>
     </div>
     let advSearch =
       <div>
         <AdvSearch addSearchIndeed={ this.addSearchIndeed } addSearchCareer={ this.addSearchCareer } toggleIndeed={ this.toggleIndeed } toggleCareer={ this.toggleCareer}/>
-        <a onClick={this.handleBasic}> basic search </a>
+        <a onClick={ this.handleBasic }> basic search </a>
       </div>
 
     let showIndeedJobs = [];
-    this.state.indeedJobs.forEach((el) => {
-      showIndeedJobs.push(<Listings company={el.company} desc={el.snippet} role={el.jobtitle} city={el.city} state={el.state} salaries={el.salaries} first_added={el.date} id={el.jobkey} url={el.url} name='indeed' savedJob={this.saveIndeedJob} />)
+    this.state.indeedJobs.forEach( ( el ) => {
+      showIndeedJobs.push(<Listings company={ el.company } desc={ el.snippet } role={ el.jobtitle } city={ el.city } state={ el.state } salaries={ el.salaries } first_added={ el.date } id={ el.jobkey } url={ el.url } name='indeed' savedJob={ this.saveIndeedJob } />)
       })
 
     let showCareerJobs = [];
-    this.state.careerJobs.forEach((el) => {
-      showCareerJobs.push(<Listings company={el.Company} desc={el.DescriptionTeaser} role={el.JobTitle} city={el.City} state={el.State} salaries={el.Pay} first_added={el.PostedDate} id={el.DID} url={el.JobDetailsURL} name='careerbuilder' savedJob={this.saveCareerJob} />)
+    this.state.careerJobs.forEach( ( el ) => {
+      showCareerJobs.push(<Listings company={ el.Company } desc={ el.DescriptionTeaser } role={ el.JobTitle } city={ el.City } state={ el.State } salaries={ el.Pay } first_added={ el.PostedDate } id={ el.DID } url={ el.JobDetailsURL } name='careerbuilder' savedJob={ this.saveCareerJob } />)
     })
 
     let profilePage =

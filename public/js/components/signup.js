@@ -10,7 +10,6 @@ const Signup = React.createClass({
 
     $.post('/users', {email: email, password: pass, name: name})
     .done((data) => {
-      console.log('REACT BLOWS ');
       this.props.signedIn();
     })
   },

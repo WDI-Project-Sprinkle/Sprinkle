@@ -32,29 +32,26 @@ const AppliedJobs = React.createClass({
     )
   },
 
-  // <Job   {Object.keys(this.state.appliedJobs).map(this.renderJob)} />
-
 
   render : function(){
-
     return (
       <div>
         <h1>Applied Jobs</h1>
         <div className="container">
           <div className="row col-md-6 col-md-offset-2 custyle">
           <table className="table table-striped custab">
-          <thead>
-            <tr>
-              <th className="resultTable"></th>
-              <th className="resultTableMedium">Company</th>
-              <th className="resultTableMedium">Job Title</th>
-              <th className="resultTable">Indeed</th>
-              <th className="resultTable">Indeed Url</th>
-              <th className="resultTable">Career</th>
-              <th className="resultTable">Career Url</th>
-              <th className="text-center">Action</th>
-            </tr>
-          </thead>
+            <thead>
+              <tr>
+                <th className="resultTable"></th>
+                <th className="resultTableMedium">Company</th>
+                <th className="resultTableMedium">Job Title</th>
+                <th className="resultTable">Indeed</th>
+                <th className="resultTable">Indeed Url</th>
+                <th className="resultTable">Career</th>
+                <th className="resultTable">Career Url</th>
+                <th className="text-center">Action</th>
+              </tr>
+            </thead>
         {Object.keys(this.state.appliedJobs).map(this.renderAppliedJob)}
             </table>
           </div>

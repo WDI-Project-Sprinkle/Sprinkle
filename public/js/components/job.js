@@ -2,15 +2,11 @@ const React = require( 'react' );
 
 const Job = React.createClass({
 
-  handleDelete : function(event) {
+  handleDelete : function( event ) {
     event.preventDefault();
-
     let data = {
       job_id : this.props.details.job_id
     }
-    console.log("This is the job id", this.props.details.job_id);
-    console.log('This is in handleDelete');
-
     $.ajax({
       url : '/users/jobs/delete',
       data : data,
@@ -20,12 +16,12 @@ const Job = React.createClass({
       }
     })
     .done((data)=> {
-
+      this.props.reset()
     })
   },
 
+
   render : function() {
-    console.log(this.props.details.company);
     return (
 
       <tr>

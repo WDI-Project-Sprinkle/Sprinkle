@@ -1,4 +1,4 @@
-const React = require('react');
+const React = require( 'react' );
 
 const EmploymentType = React.createClass({
   render : function() {

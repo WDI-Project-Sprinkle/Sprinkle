@@ -58,7 +58,7 @@ function loginUser( req, res, next ) {
       }
     })
     .catch( () => {
-      console.error( 'error finding users' )
+      console.error( error )
     })
 }
 
@@ -68,26 +68,26 @@ function updatePassword( req, res, next) {
   const newPassword = req.body.newPass
   console.log('req:' ,req.user);
 
-  db.one("SELECT * FROM users WHERE email LIKE $1;", [req.user.email])
+  db.one("SELECT * FROM users WHERE email LIKE $1;", [ req.user.email ])
     .then( (data) => {
       console.log('email: ', data.email);
       if ( bcrypt.compareSync( currentPassword, data.password_digest) ) {
         console.log('this sorta works');
-        createSecure(data.email, newPassword, data.name, updateUser )
+        createSecure( data.email, newPassword, data.name, updateUser )
         function updateUser(email, hash, name) {
-          db.none("UPDATE users SET password_digest=($1) WHERE user_id=($2) ", [hash, req.user.user_id])
-          .then(()=> {
+          db.none("UPDATE users SET password_digest=($1) WHERE user_id=($2) ", [ hash, req.user.user_id ])
+          .then( ()=> {
             next()
           })
-          .catch((error)=>{
-            console.log(error);
+          .catch( ( error )=>{
+            console.log( error );
           })
         }
         next();
       }
     })
-    .catch((error) => {
-      console.log('error I suck: ', error);
+    .catch( ( error ) => {
+      console.log( 'error I suck: ', error );
     })
 
 
@@ -126,7 +126,7 @@ function addIndeedJobs( req, res, next ){
     next();
   })
   .catch( ( error ) => {
-    console.log( 'addIneedJobs Error: ', error )
+    console.log( error )
   })
 }
 
@@ -149,7 +149,7 @@ function addCareerJobs( req, res, next ){
     next();
   })
   .catch( ( error ) => {
-    console.log( 'addCareerJobs Error: ', error )
+    console.log( error )
   })
 }
 
@@ -160,7 +160,7 @@ function userSavedJob( req, res, next ) {
     next()
   })
   .catch( ( error ) => {
-    console.log( 'userSavedJob Error: ', error )
+    console.log( error )
   })
 }
 
@@ -187,7 +187,7 @@ function deleteSavedJobs( req, res, next ){
     next();
   })
   .catch( ( error )=>{
-    console.log( 'this is from deleteSavedJobs: ', error )
+    console.log( error )
   })
 }
 
@@ -198,7 +198,7 @@ function deleteUser ( req,res,next ) {
     next();
   })
   .catch((error) => {
-    console.log("error on delete: ", error)
+    console.log( error)
   })
 }
 
