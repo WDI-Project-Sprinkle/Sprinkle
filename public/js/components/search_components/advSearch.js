@@ -1,7 +1,5 @@
 const React = require( 'react' );
-const EmploymentType = require( './employmentType.js' );
 const JobResource = require( './jobResource.js' );
-const Radius = require( './radius.js' );
 
 const AdvSearch = React.createClass({
 

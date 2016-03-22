@@ -373,7 +373,7 @@ const App = React.createClass({
 
 
           <div className="row" id="display">
-            <div className="nav-wrapper">
+            <div>
               <br/>
               {this.state.profile ? profilePage : ''}
               {this.state.signupBox ? notSignedIn : signedInView}
