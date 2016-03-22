@@ -11,7 +11,7 @@ const Logout = React.createClass({
     return (
       <li>
         <div id="OuterLogoutLink">
-          <a id="logoutLink" onClick={ this.handleLogout }>Logout</a>
+          <a id="logoutLink" onClick={ this.handleLogout }>Logout< /a >
         </div>
       </li>
     )

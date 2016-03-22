@@ -40,7 +40,7 @@ const App = React.createClass({
       career : true,
       indeedJobs : [],
       careerJobs : [],
-      savedJobs : [],
+      savedJobs : []
     }
   },
 

@@ -42,9 +42,7 @@ const Nav = React.createClass({
             <ul>
               <div id="loggedInBox">
                 <li><div className="loggedInBoxEl navRight"><ToProfile ToProfile={ this.ToProfile }/></div></li>
-
                 <li><div className="loggedInBoxEl navRight"><Edit edit={ this.edit }/></div></li>
-
                 <li><div className="loggedInBoxEl navRight"><Logout logout={ this.logout }/></div></li>
               </div>
             </ul>

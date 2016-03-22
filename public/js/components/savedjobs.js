@@ -27,7 +27,7 @@ const SavedJobs = React.createClass({
 
   renderSavedJob : function(key){
     return (
-      <Job key={key} index={key} details={this.state.savedJobs[key]}/>
+      < Job className="resultTable" key={key} index={key} details={this.state.savedJobs[key]}/>
     )
   },
   // {Object.keys(this.state.savedJobs[key]).map(this.renderJob)}
@@ -36,21 +36,23 @@ const SavedJobs = React.createClass({
   render : function(){
 
     return (
-      <div>
-        <h1>Saved Jobs</h1>
-        <div className="container">
+      <div id="allSavedJobs">
+        <div id="savedJobsOuter">
+          <h1 id="savedJobsInner">Saved Jobs</h1>
+        </div>
+        <div className=" container" id="savedJobsTable">
           <div className="row col-md-6 col-md-offset-2 custyle">
-          <table className="table table-striped custab">
+          <table className="resultTable allTable table table-striped custab">
           <thead>
             <tr>
-                <th className="resultTable"></th>
-                <th className="resultTableMedium">Company</th>
-                <th className="resultTableMedium">Job Title</th>
-                <th className="resultTable">Indeed</th>
-                <th className="resultTable">Indeed Url</th>
-                <th className="resultTable">Career</th>
-                <th className="resultTable">Career Url</th>
-                <th className="text-center">Action</th>
+                <th className="resultTable tableHeader"></th>
+                <th className="resultTable resultTableMedium tableCompany">Company</th>
+                <th className="resultTable resultTableMedium tableTitle">Job Title</th>
+                <th className="resultTable tableIndeed">Indeed</th>
+                <th className="resultTable allButtons tableIndeedUrl">Indeed Url</th>
+                <th className="resultTable tableCareer">Career</th>
+                <th className="resultTable allButtons tableCareerUrl">Career Url</th>
+                <th className="resultTable text-center tableAction">Action</th>
             </tr>
           </thead>
       {Object.keys(this.state.savedJobs).map(this.renderSavedJob)}

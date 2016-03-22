@@ -69,10 +69,12 @@
   .allButtons:visited {
     background : rgba( 38, 166, 154, 1);
     color : black;
+    cursor: pointer; cursor: hand;
   }
   .allButtons:hover {
     background : rgba( 30, 135, 110, 1);
     color : white;
+    cursor: pointer; cursor: hand;
   }
 
   #signupButton {
@@ -291,10 +293,7 @@
 
 #display {
   border: 1px;
-<<<<<<< HEAD
-  background-color: rgba(255, 0, 0, 0);;
-=======
->>>>>>> 9e679c714d206c0c82a996c1066575a6c559a135
+  background-color: rgba(255, 0, 0, 0);
   width: auto;
 }
 
@@ -439,7 +438,74 @@ ul#res {
 #indeed_footnote {
   display: flex;
   justify-content: center;
+}
+
+#appliedSavedJobs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#savedJobsOuter {
+  display: flex;
+  justify-content: center;
+}
+
+.resultTable {
+  background-color: rgba( 200, 164, 96, 1 );
+  width: 80px;
+  padding: 2px 12px;
+  text-align: center;
+}
+
+.tableHeader {
+  padding: 0px 2px;
+}
+
+/*.allSavedJobs {
+  display: flex;
+  justify-content: center;
+}*/
+
+/*.allTable {
+  margin-left: -40px;
+}*/
+
+.tableIndeedUrl {
+  width: 75px;
+}
 
 .resultTableMedium {
   width: 1000px;
+}
+
+#appliedJobsOuter {
+  display: flex;
+  justify-content: center;
+}
+
+/*.allAppliedJobs {
+  display: flex;
+  justify-content: center;
+}*/
+
+/*.appliedJobColumn {
+  display: flex;
+  justify-content: center;
+}*/
+
+/*.allATable {
+  margin-left: -40px;
+}*/
+
+/*.appliedTableMedium {
+  width: 1000px;
+}*/
+
+.appliedTable {
+  background-color: rgba( 50, 164, 96, 1 );
+  width: 80px;
+  padding: 2px 12px;
+  text-align: center;
 }

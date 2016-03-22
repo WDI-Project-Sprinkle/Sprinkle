@@ -89,7 +89,6 @@ const AdvSearch = React.createClass({
             <div className="searchCenter">
               <EmploymentType />
             </div>
-
             <div className="searchCenter">
               <Radius />
             </div>

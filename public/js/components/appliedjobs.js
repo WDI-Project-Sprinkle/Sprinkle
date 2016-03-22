@@ -38,21 +38,23 @@ const AppliedJobs = React.createClass({
   render : function(){
 
     return (
-      <div>
-        <h1>Applied Jobs</h1>
-        <div className="container">
-          <div className="row col-md-6 col-md-offset-2 custyle">
-          <table className="table table-striped custab">
+      <div id="allAppliedJobs">
+        <div id="appliedJobsOuter">
+          <h1 id="appliedJobsInner">Applied Jobs</h1>
+        </div>
+        <div className="container" id="appliedJobsTable">
+          <div className="row appliedJobColumn col-md-6 col-md-offset-2 custyle">
+          <table className="appliedTable allATable table-striped custab">
           <thead>
             <tr>
-              <th className="resultTable"></th>
-              <th className="resultTableMedium">Company</th>
-              <th className="resultTableMedium">Job Title</th>
-              <th className="resultTable">Indeed</th>
-              <th className="resultTable">Indeed Url</th>
-              <th className="resultTable">Career</th>
-              <th className="resultTable">Career Url</th>
-              <th className="text-center">Action</th>
+              <th className="appliedTable tableHeader"></th>
+              <th className="appliedTable appliedTableMedium tableCompany">Company</th>
+              <th className="appliedTable appliedTableMedium tableTitle">Job Title</th>
+              <th className="appliedTable tableIndeed">Indeed</th>
+              <th className="appliedTable allButtons tableIndeedUrl">Indeed Url</th>
+              <th className="appliedTable tableCareer">Career</th>
+              <th className="appliedTable allButtons tableCareerUrl">Career Url</th>
+              <th className="appliedTable text-center tableAction">Action</th>
             </tr>
           </thead>
         {Object.keys(this.state.appliedJobs).map(this.renderAppliedJob)}
