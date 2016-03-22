@@ -306,7 +306,7 @@ const App = React.createClass({
       </div>
     let editIsTrue =
       <div>
-        <EditProfile deleted={this.deleted} updated={this.updated}/>
+        <EditProfile className="allDeleteButtons" deleted={this.deleted} updated={this.updated}/>
       </div>
 
     let regularSearch =
@@ -345,7 +345,7 @@ const App = React.createClass({
 
     return (
       <div className="container">
-          <div className="row" id="navbar">
+          <div className="row waffle" id="navbar">
           <br/>
               <Nav loggedIn={ this.state.loggedIn } login={ this.login } logout={ this.logout } signup={ this.signup } profile={ this.profile } edit={ this.edit }/>
               {/* API nav bar here */}
@@ -353,7 +353,7 @@ const App = React.createClass({
           </div>
 
 
-          <div className="row" id="searchbar">
+          <div className="row iceCream" id="searchbar">
             <div className="nav-wrapper search-wrapper">
               <br/>
               {/* API search bar here */}
@@ -362,7 +362,7 @@ const App = React.createClass({
           </div>
 
 
-          <div className="row" id="display">
+          <div className="row waffle" id="display">
             <div className="nav-wrapper">
               <br/>
               {this.state.profile ? profilePage : ''}
@@ -374,7 +374,7 @@ const App = React.createClass({
           </div>
 
 
-          <div className="row" id="listings">
+          <div className="row waffleListings" id="listings">
             <div className="nav-wrapper">
                 <br/>
                 {/* Initial Search Result Display */}

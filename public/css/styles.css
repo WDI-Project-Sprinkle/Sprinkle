@@ -2,7 +2,7 @@
 #navbar {
   height: 70px;
   margin: 5px -7.5px;
-  background: rgba(100, 80, 150, 0.5);;
+  background: url(../img/sprinkles.png);
   color: black;
 }
 
@@ -65,6 +65,69 @@
   height: 20px;
 }
 
+#outerIndeedUrlLink,
+  #outerIndeedUrlLink:visited {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    line-height: normal;
+  }
+  #outerIndeedUrlLink:hover {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    line-height: normal;
+  }
+
+
+.indeedUrlLink,
+  .indeedUrlLink:visited {
+    background : rgba( 130, 45, 175, 1);
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer; cursor: hand;
+    color : black;
+
+  }
+  .indeedUrlLink:hover {
+    background : rgba( 150, 45, 175, 1);
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer; cursor: hand;
+    color : white;
+  }
+
+#outerCareerUrlLink,
+  #outerCareerUrlLink {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    line-height: normal;
+  }
+  #outerCareerUrlLink:hover {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    line-height: normal;
+  }
+
+.careerUrlLink,
+  .careerUrlLink:visited {
+    background : rgba( 60, 166, 60, 1);
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer; cursor: hand;
+    color : black;
+
+  }
+  .careerUrlLink:hover {
+    background : rgba( 60, 166, 60, 1);
+    border-radius: 5px;
+    text-align: center;
+    cursor: pointer; cursor: hand;
+    color : white;
+  }
+
 .allButtons,
   .allButtons:visited {
     background : rgba( 38, 166, 154, 1);
@@ -73,6 +136,35 @@
   }
   .allButtons:hover {
     background : rgba( 30, 135, 110, 1);
+    color : white;
+    cursor: pointer; cursor: hand;
+  }
+
+.allDeleteButtons,
+  .allDeleteButtons:visited {
+    display: flex;
+    justify-content: center;
+    width: 15px;
+    text-align: center;
+    font-size: 10px;
+    background : red;
+    color : black;
+    cursor: pointer; cursor: hand;
+  }
+  .allDeleteButtons:hover {
+    background : maroon;
+    color : white;
+    cursor: pointer; cursor: hand;
+  }
+
+.confirmButton,
+  .confirmButton:visited {
+    background : blue;
+    color : black;
+    cursor: pointer; cursor: hand;
+  }
+  .confirmButton:hover {
+    background : navy;
     color : white;
     cursor: pointer; cursor: hand;
   }
@@ -97,7 +189,7 @@
 }
 
 .searchContainers {
-  margin-top: -10px;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -137,6 +229,7 @@
 }
 
 .loginSignupInfo {
+  margin-top: 10px;
   width: 20vw;
   display: flex;
   flex-direction: column;
@@ -189,15 +282,22 @@
   padding-top: 20px;
 }
 
+#outerEditButton {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
 #logoutLink,
   #logoutLink:visited {
     background : rgba( 38, 166, 154, 1);
-    padding: 1px 2px;
+    margin-left: 2px;
+    padding: 1px 5px;
     color : black;
   }
   #logoutLink:hover {
     background : rgba( 30, 135, 110, 1);
-    padding: 1px 2px;
+    margin-left: 2px;
+    padding: 1px 5px;
     color : white;
     cursor: pointer; cursor: hand;
   }
@@ -250,6 +350,7 @@
   /*border: 1px;
   background-color: blue;*/
   width: auto;
+  z-index: 100;
 }
 
 #adSearch {
@@ -295,6 +396,37 @@
   border: 1px;
   background-color: rgba(255, 0, 0, 0);
   width: auto;
+  padding: 120px 0px;
+  margin-top: -150px;
+  z-index: 10;
+}
+
+.waffle {
+  background: url(../img/waffle.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+
+.waffleListings {
+  background: url(../img/waffle.jpg);
+  background-size:contain;
+  background-position: center;
+  position: relative;
+}
+
+.iceCream {
+  background: url(../img/iceCream.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-bottom-left-radius:50%;
+  border-bottom-right-radius:50%;
+  border-bottom: 10px solid rgb(244,164,96);;
+  padding-bottom: 80px;
+  z-index: 100;
+  position: relative;
 }
 
 #showIndeedJobs {
@@ -342,11 +474,6 @@
   background: rgba(100, 100, 100, 0.5);
   color: red;
 }
-
-/*#listings {
-  border: 1px;
-  background-color: green;
-}*/
 
 .custab{
     border: 1px solid #ccc;
@@ -452,60 +579,34 @@ ul#res {
   justify-content: center;
 }
 
-.resultTable {
-  background-color: rgba( 200, 164, 96, 1 );
-  width: 80px;
-  padding: 2px 12px;
-  text-align: center;
-}
-
-.tableHeader {
-  padding: 0px 2px;
-}
-
-/*.allSavedJobs {
-  display: flex;
-  justify-content: center;
-}*/
-
-/*.allTable {
-  margin-left: -40px;
-}*/
-
-.tableIndeedUrl {
-  width: 75px;
-}
-
-.resultTableMedium {
-  width: 1000px;
-}
-
 #appliedJobsOuter {
   display: flex;
   justify-content: center;
 }
 
-/*.allAppliedJobs {
-  display: flex;
-  justify-content: center;
-}*/
-
-/*.appliedJobColumn {
-  display: flex;
-  justify-content: center;
-}*/
-
-/*.allATable {
-  margin-left: -40px;
-}*/
-
-/*.appliedTableMedium {
-  width: 1000px;
-}*/
-
-.appliedTable {
-  background-color: rgba( 50, 164, 96, 1 );
-  width: 80px;
+.resultTable {
+  background-color: rgba( 255, 255, 255, 1 );
   padding: 2px 12px;
   text-align: center;
 }
+
+.appliedTable {
+  background-color: rgba( 255, 255, 255, 1 );
+  padding: 2px 12px;
+  text-align: center;
+}
+
+#outerCheckboxJobs {
+  padding: 0px 9px;
+}
+.tableHeader {
+  padding: 0px 2px;
+}
+
+/*.tableIndeedUrl {
+  width: 75px;
+}*/
+
+/*.resultTableMedium {
+  width: 1000px;
+}*/
