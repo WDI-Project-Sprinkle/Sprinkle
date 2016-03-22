@@ -44,7 +44,7 @@ const Nav = React.createClass({
           </ul></div>
           ) : (
           <ul>
-            <div className="navRight"><Login login={ this.login }/></div>
+            <div id="cursor" className="navRight"><Login login={ this.login }/></div>
             <div className="navRight">
             <button className="allButtons" id="signupButton" onClick={ this.handleSignup } >signup</button></div>
           </ul>

@@ -375,8 +375,9 @@
 
 
 .starter-template {
-  padding: 40px 15px;
+  padding: 2px 3px;
   text-align: center;
+
 }
 
 a {
@@ -401,6 +402,7 @@ a:hover .thecard {
 
 .thecard {
   width: 300px;
+  height: 450px;
   margin: 2% auto;
   box-shadow: 0 1px 30px rgba(0,0,0,.4);
   display: inline-block;
@@ -443,10 +445,24 @@ ul#res {
   padding: 10px;
 }
 
+<<<<<<< HEAD
 #indeed_footnote {
   display: flex;
   justify-content: center;
+=======
+.resultTable {
+  width: 250px;
+}
+>>>>>>> c0b919631b0be925b6df5b64b129e6cb11bc1ac9
 
 .resultTableMedium {
   width: 1000px;
+}
+
+#cursor {
+  cursor: pointer;
+}
+
+#savejob:active {
+  background-color: green;
 }

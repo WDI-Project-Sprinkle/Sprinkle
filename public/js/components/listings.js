@@ -29,7 +29,7 @@ const Listings = React.createClass({
             </li>
             </p>
 
-            <button type="submit"> Save Job </button>
+            <button id="savejob" type="submit"> Save Job </button>
           </ul>
         </div>
       </div>
