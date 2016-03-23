@@ -150,9 +150,11 @@ const App = React.createClass({
 
 
   profile : function() {
-    this.state.profile=true
+    this.state.profile=true;
     this.state.edit = false;
-    this.setState( { profile : this.state.profile, edit : this.state.edit })
+    this.state.indeedJobs = [];
+    this.state.careerJobs = [];
+    this.setState( { profile : this.state.profile, edit : this.state.edit, indeedJobs : this.state.indeedJobs, careerJobs : this.state.careerJobs })
   },
 
 

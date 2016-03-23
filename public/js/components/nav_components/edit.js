@@ -9,7 +9,7 @@ const Edit = React.createClass({
   render : function() {
     return (
       <div id="outerEditButton">
-        <a id="editButton" onClick={ this.handleEdit }>Edit</a>
+        <button id="editButton" onClick={ this.handleEdit }>Edit</button>
       </div>
     )
   }
