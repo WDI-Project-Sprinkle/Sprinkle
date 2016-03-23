@@ -128,7 +128,9 @@ const App = React.createClass({
 
   logout : function() {
     this.state.loggedIn=false
-    this.setState( { loggedIn : this.state.loggedIn } )
+    this.state.profile = false;
+    this.state.edit = false;
+    this.setState( { loggedIn : this.state.loggedIn, profile : this.state.profile, editi : this.state.edit } )
   },
 
 
@@ -355,7 +357,7 @@ const App = React.createClass({
 
     return (
       <div className="container">
-          <div className="row" id="navbar">
+           <div className="row waffle" id="navbar">
           <br/>
               <Nav loggedIn={ this.state.loggedIn } login={ this.login } logout={ this.logout } signup={ this.signup } profile={ this.profile } edit={ this.edit }/>
               {/* API nav bar here */}
@@ -363,7 +365,7 @@ const App = React.createClass({
           </div>
 
 
-          <div className="row" id="searchbar">
+          <div className="row iceCream" id="searchbar">
             <div>
               <br/>
               {/* API search bar here */}
@@ -372,7 +374,7 @@ const App = React.createClass({
           </div>
 
 
-          <div className="row" id="display">
+          <div className="row waffle" id="display">
             <div>
               <br/>
               {this.state.profile ? profilePage : ''}
@@ -383,7 +385,7 @@ const App = React.createClass({
           </div>
 
 
-          <div className="row" id="listings">
+          <div className="row waffleListings" id="listings">
             <div className="nav-wrapper">
                 <br/>
                 {/* Initial Search Result Display */}

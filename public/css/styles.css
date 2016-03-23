@@ -1,4 +1,3 @@
-
 #navbar {
   height: 70px;
   margin: 5px -7.5px;
@@ -173,13 +172,13 @@
 #username {
   margin: 2px 1px;
   width: 16vw;
-  height: 18px;
+  height: 25px;
 }
 
 #password {
   margin: 2px 1px;
   width: 12vw;
-  height: 18px;
+  height: 25px;
 }
 
 #loginbutton {
@@ -198,12 +197,12 @@
   #logoutLink:visited {
     background : rgba( 38, 166, 154, 1);
     padding: 1px 2px;
-    color : black;
+    color: black;
   }
   #logoutLink:hover {
     background : rgba( 30, 135, 110, 1);
     padding: 1px 2px;
-    color : white;
+    color: white;
     cursor: pointer; cursor: hand;
   }
 
@@ -211,12 +210,12 @@
   #editButton:visited {
     background : rgba( 38, 166, 154, 1);
     padding: 1px 2px;
-    color : black;
+    color: black;
   }
   #editButton:hover {
     background : rgba( 30, 135, 110, 1);
     padding: 1px 2px;
-    color : white;
+    color: white;
     cursor: pointer; cursor: hand;
   }
 
@@ -224,12 +223,12 @@
   #profileButton:visited {
     background : rgba( 38, 166, 154, 1);
     padding: 1px 2px;
-    color : black;
+    color: black;
   }
   #profileButton:hover {
     background : rgba( 30, 135, 110, 1);
     padding: 1px 2px;
-    color : white;
+    color: white;
     cursor: pointer; cursor: hand;
   }
 
@@ -298,10 +297,7 @@
 
 #display {
   border: 1px;
-<<<<<<< HEAD
   background-color: rgba(255, 0, 0, 0);;
-=======
->>>>>>> 9e679c714d206c0c82a996c1066575a6c559a135
   width: auto;
 }
 
@@ -445,15 +441,10 @@ ul#res {
   padding: 10px;
 }
 
-<<<<<<< HEAD
 #indeed_footnote {
   display: flex;
   justify-content: center;
-=======
-.resultTable {
-  width: 250px;
 }
->>>>>>> c0b919631b0be925b6df5b64b129e6cb11bc1ac9
 
 .resultTableMedium {
   width: 1000px;

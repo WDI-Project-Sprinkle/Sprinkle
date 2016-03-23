@@ -32,7 +32,7 @@ const Nav = React.createClass({
     return (
       <div className="navContainers">
         <div className="navLeft outerSprinkleTitle">
-          <h3 id="sprinkleTitle">Sprinkle</h3>
+          <h3 id="sprinkleTitle" >Sprinkle</h3>
         </div>
 
         <div className="loginSignupInfo">
