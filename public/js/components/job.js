@@ -29,9 +29,9 @@ const Job = React.createClass({
         <td>{this.props.details.company}</td>
         <td>{this.props.details.job_title}</td>
         <td>{this.props.details.indeed}</td>
-        <td><a id="cursor" href={this.props.details.indeed_url}>visit Indeed</a></td>
+        <td><a id="cursor" href={this.props.details.indeed_url} target="_blank" >visit Indeed</a></td>
         <td>{this.props.details.career}</td>
-        <td><a id="cursor" href={this.props.details.career_url}>visit Career</a></td>
+        <td><a id="cursor" href={this.props.details.career_url} target="_blank" >visit Career</a></td>
         <td className="text-center">
         <button id="cursor" onClick={this.handleDelete} href="#" className="btn btn-danger btn-xs"><span className="glyphicon glyphicon-remove"></span> Delete
         </button>
