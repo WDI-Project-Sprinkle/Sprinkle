@@ -59,7 +59,7 @@ const EditProfile = React.createClass({
             <label><input id="currentPassword" type="password" ref="currentPassword" placeholder="current password"/></label>
             <label><input id="newPassword" type="password" ref="newPassword" placeholder="new password"/></label>
             <label><input id="confirmPassword" type="password" ref="confirmPassword" placeholder="confirm password" /></label><br />
-            <button className="allButtons" type="submit">confirm</button>
+            <button id="confirmButton" type="submit">confirm</button>
           </div>
           <br/>
           <button id="deletebutton" className="allButtons" onClick={ this.handleDelete }>Delete Account</button>
