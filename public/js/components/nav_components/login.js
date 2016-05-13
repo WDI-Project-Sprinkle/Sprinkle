@@ -22,7 +22,7 @@ const Login = React.createClass({
         {/* mobile menu */}
         <div id="m_menu" className="ui floating sidebar inverted vertical menu">
           <div rel="0" className="item">
-            <h3>Sprinkle</h3>
+            <img src="../img/logo.png" alt="Logo" className="image"/>
           </div>
 
           <div rel="1" className="item">
@@ -56,7 +56,13 @@ const Login = React.createClass({
           {/* Mobile Menu Button */}
 
           <div className="item">
-            <h3>Sprinkle</h3>
+
+            <h2 className="ui teal image header">
+              <img src="../img/logo.png" alt="Logo" className="image"/>
+              <div className="content">
+              prinkle
+              </div>
+            </h2>
           </div>
 
 
