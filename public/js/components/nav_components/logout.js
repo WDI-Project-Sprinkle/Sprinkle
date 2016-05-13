@@ -8,11 +8,12 @@ const Logout = React.createClass({
 
   render : function() {
     return (
-      <li>
-        <div id="OuterLogoutLink">
-          <button id="logoutLink" onClick={ this.handleLogout }>Logout</button>
-        </div>
-      </li>
+      <div className="item">
+        <button className="ui button"
+        onClick={ this.handleLogout }>
+        Logout
+        </button>
+      </div>
     )
   }
 })

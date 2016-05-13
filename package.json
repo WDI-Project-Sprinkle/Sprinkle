@@ -36,6 +36,7 @@
     "react-dom": "^0.14.7",
     "react-router": "^2.0.1",
     "request": "^2.69.0",
+    "semantic": "0.0.1",
     "semantic-ui": "^2.1.8",
     "uglifyify": "^3.0.1",
     "watchify": "^3.7.0",

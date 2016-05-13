@@ -326,18 +326,22 @@ const App = React.createClass({
     let regularSearch =
     <div>
       <Search addSearchIndeed={ this.addSearchIndeed } addSearchCareer={ this.addSearchCareer }/>
-      <div id= "adSearch">
-        <div id= "adSearchInner">
-          <a id="aSearchContainer" onClick={this.handleAdvance}> advance search </a>
+      <div>
+        <div className="ui checkbox toggle">
+        <input type="checkbox" name="advancesearch"
+          onChange={this.handleAdvance}/>
+          <label> Advanced Search</label>
         </div>
       </div>
     </div>
     let advSearch =
       <div>
         <AdvSearch addSearchIndeed={ this.addSearchIndeed } addSearchCareer={ this.addSearchCareer } toggleIndeed={ this.toggleIndeed } toggleCareer={ this.toggleCareer}/>
-        <div id="adSearch">
-          <div id="adSearchInner">
-            <a id="aSearchContainer" onClick={this.handleBasic}> basic search </a>
+        <div>
+          <div className="ui checkbox toggle">
+          <input type="checkbox" name="basicsearch"
+            onChange={this.handleBasic}/>
+            <label> Basic Search</label>
           </div>
         </div>
       </div>
@@ -359,15 +363,15 @@ const App = React.createClass({
 
     return (
       <div className="container">
-           <div className="row waffle" id="navbar">
-          <br/>
-              <Nav loggedIn={ this.state.loggedIn } login={ this.login } logout={ this.logout } signup={ this.signup } profile={ this.profile } edit={ this.edit }/>
-              {/* API nav bar here */}
-              {/*<Nav />*/}
+          <div>
+            <br/>
+            <Nav loggedIn={ this.state.loggedIn } login={ this.login } logout={ this.logout } signup={ this.signup } profile={ this.profile } edit={ this.edit }/>
+            {/* API nav bar here */}
+            {/*<Nav />*/}
           </div>
 
 
-          <div className="row iceCream" id="searchbar">
+          <div className="searchbar" id="searchbar">
             <div>
               <br/>
               {/* API search bar here */}
@@ -376,7 +380,7 @@ const App = React.createClass({
           </div>
 
 
-          <div className="row waffle" id="display">
+          <div className="profile" id="display">
             <div>
               <br/>
               {this.state.profile ? profilePage : ''}
@@ -387,8 +391,8 @@ const App = React.createClass({
           </div>
 
 
-          <div className="row waffleListings" id="listings">
-            <div className="nav-wrapper">
+          <div id="listings" >
+            <div id="listingcards" className="ui three columns cards stackable teal">
                 <br/>
                 {/* Initial Search Result Display */}
                 { showIndeedJobs }
