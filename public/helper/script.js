@@ -10,5 +10,7 @@ $(function(){
     $('#m_menu').sidebar('toggle');
   })
 
+  $('checkbox').checkbox()
+
 
 })

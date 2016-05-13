@@ -36,21 +36,21 @@ const Nav = React.createClass({
             {this.props.loggedIn ? (
 
             <div className="ui top fixed fluid three item menu stackable">
-              <div>
+              <div className="item">
                 <ToProfile ToProfile={ this.ToProfile }/>
               </div>
 
-              <div>
+              <div className="item">
                 <Edit edit={ this.edit }/>
               </div>
 
-              <div>
+              <div className="item">
                 <Logout logout={ this.logout }/>
               </div>
             </div>
 
             ) : (
-            <div>
+            <div className="item">
                 <div>
                   <Login login={ this.login }/>
                 </div>

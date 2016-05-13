@@ -21,9 +21,38 @@ body{
   margin-top: 50px;
 }
 
+#signupform{
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
 #searchbar{
   margin-left: 10px;
   margin-right: 10px;
+}
+
+#signupbox{
+  justify-content: center;
+}
+
+#column{
+  width: 500px
+}
+
+#formcontent{
+  justify-content: center;
+  text-align: center;
+  text-align: -webkit-center;
+}
+
+#signupformfield{
+  width: 70% !important;
+}
+
+.profile{
+  margin-bottom: 50px;
 }
 
 /* Listing Components */
@@ -36,6 +65,16 @@ body{
   height: 90px;
   margin-top: 10px;
 }
+
+/* applied & savedjobs listing */
+
+#appliedjobs{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+
 
 /* indeed_footnote */
 #indeed_footnote{

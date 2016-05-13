@@ -6,6 +6,7 @@ const Login = React.createClass({
     event.preventDefault();
     const username = this.refs.username.value;
     const password = this.refs.password.value;
+    console.log(username)
     this.props.login( username, password );
   },
 
@@ -33,7 +34,7 @@ const Login = React.createClass({
                   <div className="field">
                     <input type="password" placeholder="password" ref="password"/>
                   </div>
-                  <button className="ui button submit labeled icon"> <i className="icon sign in"></i> Login</button>
+                  <button className="ui button submit labeled icon" type="submit"> <i className="icon sign in"></i> Login</button>
                 </div>
               </form>
           </div>

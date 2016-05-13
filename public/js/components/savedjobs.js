@@ -48,26 +48,28 @@ const SavedJobs = React.createClass({
   render : function(){
 
     return (
-      <div>
-        <h1>Saved Jobs</h1>
-        <div className="container">
-          <div className="row col-md-6 col-md-offset-2 custyle">
-          <table className="table table-striped custab">
-          <thead>
-            <tr>
-                <th className="resultTable"></th>
-                <th className="resultTableMedium">Company</th>
-                <th className="resultTableMedium">Job Title</th>
-                <th className="resultTable">Indeed</th>
-                <th className="resultTable">Indeed Url</th>
-                <th className="resultTable">Career</th>
-                <th className="resultTable">Career Url</th>
-                <th className="text-center">Action</th>
-            </tr>
-          </thead>
-      {Object.keys(this.state.savedJobs).map(this.renderSavedJob)}
-            </table>
+      <div id="appliedjobs" className="column">
+        <class id="saved_appliedjobs" className="ui teal header">
+          <div className="content">
+            <h1>Saved Jobs</h1>
           </div>
+        </class>
+
+        <div className="ui stacked segment">
+          <table className="ui celled table">
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>Job Title</th>
+                <th>Indeed</th>
+                <th>Indeed Url</th>
+                <th>Career</th>
+                <th>Career Url</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            {Object.keys(this.state.savedJobs).map(this.renderSavedJob)}
+          </table>
         </div>
       </div>
     )
