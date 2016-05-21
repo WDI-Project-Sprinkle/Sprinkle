@@ -30,26 +30,40 @@ const Nav = React.createClass({
 
   render : function() {
     return (
-      <div className="navContainers">
-        <div className="navLeft outerSprinkleTitle">
-          <h3 id="sprinkleTitle" >Sprinkle</h3>
-        </div>
+      <div>
+          {/* Right Navbar */}
+          <div>
+            {this.props.loggedIn ? (
 
-        <div className="loginSignupInfo">
-          {this.props.loggedIn ? (
-          <div className="navRight"><ul>
-            <div className="loggedInBoxEl navRight"><ToProfile ToProfile={ this.ToProfile }/></div>
-            <div className="loggedInBoxEl navRight"><Edit edit={ this.edit }/></div>
-            <div className="loggedInBoxEl navRight"><Logout logout={ this.logout }/></div>
-          </ul></div>
-          ) : (
-          <ul>
-            <div id="cursor" className="navRight"><Login login={ this.login }/></div>
-            <div className="navRight">
-            <button className="allButtons" id="signupButton" onClick={ this.handleSignup } >signup</button></div>
-          </ul>
-          )}
-        </div>
+            <div className="ui top fixed fluid three item menu stackable">
+              <div className="item">
+                <ToProfile ToProfile={ this.ToProfile }/>
+              </div>
+
+              <div className="item">
+                <Edit edit={ this.edit }/>
+              </div>
+
+              <div className="item">
+                <Logout logout={ this.logout }/>
+              </div>
+            </div>
+
+            ) : (
+            <div className="item">
+                <div>
+                  <Login login={ this.login }/>
+                </div>
+            </div>
+
+            )}
+
+          </div>
+          <div id="signup" className="item">
+            <button className="ui button"
+            onClick={ this.handleSignup } >Signup</button>
+          </div>
+
       </div>
     )
   }

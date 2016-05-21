@@ -1,459 +1,106 @@
-#navbar {
-  height: 70px;
-  margin: 5px -7.5px;
-  background: rgba(100, 80, 150, 0.5);;
-  color: black;
+body{
+  margin: 0;
+  padding: 0;
+  font-family: "helvetica", arial;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 200;
 }
 
-#sprinkleTitle {
-  color: #0033cc;
-  background-image: -webkit-linear-gradient(92deg, #0033cc, #feab3a);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-animation: hue 60s infinite linear;
-}
-
-.outerSprinkleTitle {
-  height: 55px;
-  width: 24vw;
-  border: 1px solid black;
-  border-radius: 22px;
-  background-color: #f35626;
-  background-image: -webkit-linear-gradient(92deg, #f35626, #feab3a);
-  -webkit-background-clip: background;
-  -webkit-background-fill-color: transparent;
-  -webkit-animation: hue 60s infinite linear;
-}
-
-@-webkit-keyframes hue {
-    from {
-      -webkit-filter: hue-rotate(0deg);
-    }
-
-    to {
-      -webkit-filter: hue-rotate(360deg);
-    }
-}
-
-.nav-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  width: 990px;
-}
-
-.navContainers {
-  margin-top: -12px;
-  height: 70px;
-  right: 0;
-  text-align: center;
-  display: flex;
-  justify-content:space-between;
-}
-
-.navContainers .navLeft, .navContainers .navCenter, .navContainers .navRight {
+/* Nav Bar */
+#navbar{
+  max-width: 1024px;
+  margin: 0 auto;
   display: inline-block;
 }
 
-.navContainers .navLeft {
-  float: left;
-  height: 45px;
+#loginform{
+  display: inline-block !important;
 }
 
-.navContainers .navCenter {
-  margin: 0 auto;
+#signup{
+  margin-top: 50px;
 }
 
-.navContainers .navRight {
-  float: right;
-  display: flex;
-  flex-direction: column;
-  height: 20px;
+#signupform{
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 50px;
+  text-align: center;
 }
 
-.allButtons,
-  .allButtons:visited {
-    background : rgba( 38, 166, 154, 1);
-    color : black;
-  }
-  .allButtons:hover {
-    background : rgba( 30, 135, 110, 1);
-    color : white;
-  }
-
-  #signupButton {
-    margin-top: 2px;
-    width: 92.7813px;
-    line-height: 0px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-  }
-
-.navContainers .signupLink {
-  line-height: 1px;
-  font-size: 12px;
-  border-radius: 3px;
-  background: rgba(255, 50, 50, 0.5);
-  margin: 2px 3px 2px 2px;
-  width: 12vw;
-  height: 18px;
+#searchbar{
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-.searchContainers {
-  margin-top: -10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+#signupbox{
   justify-content: center;
-  right: 0;
+}
+
+#column{
+  width: 500px
+}
+
+#formcontent{
+  justify-content: center;
   text-align: center;
+  text-align: -webkit-center;
 }
 
-.searchContainers .searchLeft, .searchContainers .searchCenter, .searchContainers .searchRight {
-  display: inline-block;
+#signupformfield{
+  width: 70% !important;
 }
 
-.searchContainers .searchLeft {
-  float: left;
+.profile{
+  margin-bottom: 50px;
 }
 
-.searchContainers .searchCenter {
-  margin: 0 auto;
-  padding: 2px 2px;
+/* Listing Components */
+#listingcards{
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
-.searchContainers .searchRight {
-  float: right;
-}
-
-
-#searchInput {
-  width: 350px;
-}
-
-#city {
-  width: 175px;
-}
-
-#state {
-  width: 175px;
-}
-
-.loginSignupInfo {
-  width: 20vw;
-  display: flex;
-  flex-direction: column;
-}
-
-#signinform {
-  margin-right: .5vw;
-  text-align: center;
-  display: flex;
-  justify-content: flex-end;
-}
-
-#signupName {
-  widows: 200px;
-}
-
-#signupEmail {
-  widows: 200px;
-}
-
-#signupPassword {
-  widows: 200px;
-}
-
-#loginForm {
-  margin: 0px -1vw;
-}
-
-#username {
-  margin: 2px 1px;
-  width: 16vw;
-  height: 25px;
-}
-
-#password {
-  margin: 2px 1px;
-  width: 12vw;
-  height: 25px;
-}
-
-#loginbutton {
-  line-height: 11px;
-  font-size: 12px;
-  margin: 2px 5px 2px 02px;
-  width: 12vw;
-  height: 18px;
-}
-
-.loggedInBox {
-  padding-top: 20px;
-}
-
-#logoutLink,
-  #logoutLink:visited {
-    background : rgba( 38, 166, 154, 1);
-    padding: 1px 2px;
-    color: black;
-  }
-  #logoutLink:hover {
-    background : rgba( 30, 135, 110, 1);
-    padding: 1px 2px;
-    color: white;
-    cursor: pointer; cursor: hand;
-  }
-
-#editButton,
-  #editButton:visited {
-    background : rgba( 38, 166, 154, 1);
-    padding: 1px 2px;
-    color: black;
-  }
-  #editButton:hover {
-    background : rgba( 30, 135, 110, 1);
-    padding: 1px 2px;
-    color: white;
-    cursor: pointer; cursor: hand;
-  }
-
-#profileButton,
-  #profileButton:visited {
-    background : rgba( 38, 166, 154, 1);
-    padding: 1px 2px;
-    color: black;
-  }
-  #profileButton:hover {
-    background : rgba( 30, 135, 110, 1);
-    padding: 1px 2px;
-    color: white;
-    cursor: pointer; cursor: hand;
-  }
-
-#loggedInBox {
-
-}
-
-#navbar li {
-  display: inline;
-  float: right;
-  list-style-type: none;
-  width: auto;
-}
-
-#searchButton {
+#descripption{
+  height: 90px;
   margin-top: 10px;
 }
 
-#searchbar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /*border: 1px;
-  background-color: blue;*/
-  width: auto;
+/* applied & savedjobs listing */
+
+#appliedjobs{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-#adSearch {
-  display: flex;
-  justify-content: center;
-  margin: -15px 0px 10px 0px;
+
+
+/* indeed_footnote */
+#indeed_footnote{
+  text-align: center;
 }
 
-#aSearchContainer,
-  #aSearchContainer {
-    border-radius: 2px;
-    padding: 2px;
-    width: 115px;
-    height: 23px;
-    color: black;
-    background-color: rgba(50, 180, 165, 1);
-    text-align: center;
+
+/* Responsive CSS */
+
+@media all and (min-width: 631px) {
+  html body{
+    margin-left: 0 !important;
   }
-  #aSearchContainer:hover {
-    border-radius: 2px;
-    padding: 2px;
-    width: 115px;
-    height: 23px;
-    background-color: rgba( 38, 166, 154, 1);
-    color: white;
-    text-align: center;
-    cursor: pointer; cursor: hand;
+  #m_menu.visible{
   }
-
-#advancedSearchForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  #mainHead{
+    display: none;
+  }
 }
 
-#advancedCityState {
-  display: flex;
-  justify-content: center;
-}
-
-#display {
-  border: 1px;
-  background-color: rgba(255, 0, 0, 0);;
-  width: auto;
-}
-
-#showIndeedJobs {
-
-}
-
-#container {
-  margin: 0px 2vw;
-  border: 1px solid black;
-  background-color: rgba(255, 255, 140, 0.2);
-}
-
-#jobBox {
-  margin: 0px 1px 5px 1px;
-  background: rgba(100, 100, 200, 0.5);
-  border: 1px solid black;
-  border-radius: 15px;
-}
-
-#companySourceOuter {
-  display: flex;
-  justify-content: center;
-}
-
-#companySourceInner {
-  padding: 5px 3px;
-  width: 100px;
-  border: 1px solid black;
-  border-radius: 5px;
-  background: rgba(100, 100, 100, 0.5);
-  text-align: center;
-  color: red;
-}
-
-#saveJobOuter {
-  display: flex;
-  justify-content: center;
-}
-
-#saveJobInner {
-  padding: 5px 3px;
-  width: 100px;
-  border: 1px solid black;
-  border-radius: 5px;
-  background: rgba(100, 100, 100, 0.5);
-  color: red;
-}
-
-/*#listings {
-  border: 1px;
-  background-color: green;
-}*/
-
-.custab{
-    border: 1px solid #ccc;
-    padding: 5px;
-    margin: 5% 0;
-    box-shadow: 3px 3px 2px #ccc;
-    transition: 0.5s;
-}
-
-.custab:hover{
-    box-shadow: 3px 3px 0px transparent;
-    transition: 0.5s;
-}
-
-#deleteButton {
-  height: 40px;
-}
-
-
-.starter-template {
-  padding: 2px 3px;
-  text-align: center;
-
-}
-
-a {
-  color: currentColor;
-  text-decoration: none;
-  text-align: center;
-}
-
-p {
-  font-size: 13px;
-  overflow: hidden;
-}
-
-a:hover .card-outmore {
-  background: #2C3E50;
-  color: #fff;
-}
-
-a:hover .thecard {
-  box-shadow: 0 10px 50px rgba(0,0,0,.6);
-}
-
-.thecard {
-  width: 300px;
-  height: 500px;
-  margin: 2% auto;
-  box-shadow: 0 1px 30px rgba(0,0,0,.4);
-  display: inline-block;
-  background-color: #fff;
-  border-radius: 4px;
-  transition: 400ms ease;
-}
-
-.card-caption {
-  position: relative;
-  background: #ffffff;
-  padding: 15px 15px 5px 5px;
-  border-radius: 0px 0px 4px 4px;
-}
-
-.card-outmore {
-  padding: 10px 25px 10px 25px;
-  border-radius: 0px 0px 4px 4px;
-  border-top: 1px solid #e0e0e0;
-  background: #efefef;
-  color: #222;
-  display: inline-table;
-  width: 250px;
-  transition: 400ms ease;
-}
-.card-outmore h5 {
-  float: left;
-}
-.card-outmore i {
-  float: right;
-}
-
-
-h1 {
-  font-size: 22px;
-}
-
-ul#res {
-  list-style-type: none;
-  padding: 10px;
-}
-
-#indeed_footnote {
-  display: flex;
-  justify-content: center;
-}
-
-.resultTableMedium {
-  width: 1000px;
-}
-
-#cursor {
-  cursor: pointer;
-}
-
-#savejob:active {
-  background-color: green;
+@media all and (max-width: 630px) {
+  #menu{display: none;}
+  #m_btn{
+    display: inline-block;
+  }
+  #mainHead{
+    display: none;
+  }
 }

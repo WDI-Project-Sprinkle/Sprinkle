@@ -19,24 +19,33 @@ const Search = React.createClass({
 
   render() {
     return (
-      <form ref="searchForm" onSubmit={ this.handleSubmit }>
-        <div className="searchContainers">
-          <div className="searchCenter">
-            <input id="searchInput" type="text" placeholder="job title" ref="searchInput" required />
-          </div>
-          <div className="cityState">
-            <div className="searchCenter">
-              <input id="city" type="text" placeholder="city" ref="city"  />
+      <div className="ui inverted segment raised">
+
+        <form className="ui form fluid" ref="searchForm" onSubmit={ this.handleSubmit }>
+          <div className="searchContainers">
+
+            <div className="field">
+              <input type="text" placeholder="job title" ref="searchInput" required />
             </div>
-            <div className="searchCenter">
-              <input id="state" type="text" placeholder="state" ref="state"  />
+
+            <div className="two fields">
+              <div className="field">
+                <input type="text" placeholder="city" ref="city"  />
+              </div>
+
+              <div className="field">
+                <input type="text" placeholder="state" ref="state"  />
+              </div>
             </div>
+
+            <div>
+              <button type="submit" className="ui button submit labeled icon red small"><i className="icon search"></i>Search</button>
+            </div>
+
           </div>
-          <div className="searchCenter">
-            <button type="submit" className="btn btn-primary btn-sm allButtons" id="searchButton">Search</button>
-          </div>
-        </div>
-      </form>
+        </form>
+
+      </div>
     )
   }
 })

@@ -8,8 +8,11 @@ const Edit = React.createClass({
 
   render : function() {
     return (
-      <div id="outerEditButton">
-        <button id="editButton" onClick={ this.handleEdit }>Edit</button>
+      <div className="item">
+        <button className="ui button"
+        onClick={ this.handleEdit }>
+        Edit
+        </button>
       </div>
     )
   }
