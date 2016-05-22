@@ -16,10 +16,8 @@ const Profiles        = require( './components/profiles.js');
 const AppliedJobs     = require( './components/appliedjobs.js' );
 const SavedJobs       = require( './components/savedjobs.js' );
 const Job             = require( './components/job.js' )
-const Login           = require( './components/login.js' )
-const Logout          = require( './components/logout.js' )
-const Search          = require( './components/search_components/search.js' )
-const AdvSearch       = require( './components/search_components/advSearch.js' );
+const Search          = require( './components/search.js' )
+const AdvSearch       = require( './components/advSearch.js' );
 
 const utility         = require( './helpers/utility.js' );
 
@@ -32,6 +30,7 @@ class App extends Component {
     return (
       <div>
         <Nav />
+        <Search />
       </div>
     )
   }

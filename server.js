@@ -1,6 +1,8 @@
 'use strict'
 require('dotenv').config();
 const express      = require('express');
+const expressJWT   = require( 'express-jwt' );
+const secret       = process.env.SECRET;
 const logger       = require('morgan');
 const path         = require('path');
 const bodyParser   = require('body-parser');
@@ -16,6 +18,6 @@ app.use(bodyParser.urlencoded({extended : false }));
 app.use(bodyParser.json());
 app.use('/users', userRoutes);
 app.use('/search', searchRoutes);
-app.use('/jobs', jobsRoutes);
+app.use('/jobs', expressJWT({secret : secret}), jobsRoutes);
 app.get('*', (req, res) => {res.sendFile(path.join(__dirname, 'public/index.html'))})
 app.listen(port, () => {console.log('Ayyyeeeeeee Sexyyy Lady! ', port);});

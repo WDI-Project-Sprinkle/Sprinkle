@@ -8,6 +8,13 @@ export default class Nav extends Component {
     if (localStorage.token) {
       return (
         <div>
+          <h2 className="ui teal image header">
+            <img src="../img/logo.png" alt="Logo" className="image"/>
+            <div className="content">
+            prinkle
+            </div>
+          </h2>
+          <br />
           <Link to="/home">Home</Link><br />
           <Link to="/profile">Profile</Link><br />
           <Link to="/edit">Edit</Link>
@@ -17,6 +24,13 @@ export default class Nav extends Component {
     } else {
       return (
         <div>
+          <h2 className="ui teal image header">
+            <img src="../img/logo.png" alt="Logo" className="image"/>
+            <div className="content">
+            prinkle
+            </div>
+          </h2>
+          <br />
           <Link to="/home">Home</Link><br />
           <Login /><br />
           <Link to="/signup">Signup</Link>

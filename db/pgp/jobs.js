@@ -122,7 +122,6 @@ function updateSavedJobs( req, res, next ){
   })
 }
 
-
 module.exports.showAppliedJobs = showAppliedJobs;
 module.exports.updateSavedJobs = updateSavedJobs;
 module.exports.userSavedJob = userSavedJob;

@@ -121,7 +121,7 @@ export default class Login extends Component {
 //             <h2 className="ui teal image header">
 //               <img src="../img/logo.png" alt="Logo" className="image"/>
 //               <div className="content">
-//               prinkle
+//               Sprinkle
 //               </div>
 //             </h2>
 //           </div>
