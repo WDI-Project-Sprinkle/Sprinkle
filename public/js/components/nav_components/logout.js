@@ -21,6 +21,7 @@
 // module.exports = Logout;
 
 import React, {Component} from 'react';
+import {browserHistory} from 'react-router';
 
 export default class Logout extends Component {
   render() {
@@ -34,5 +35,6 @@ export default class Logout extends Component {
   handleLogout(event) {
     event.preventDefault();
     delete localStorage.token;
+    browserHistory.push('/home'); // redirects to home
   }
 }

@@ -15,5 +15,5 @@ app.use(bodyParser.urlencoded({extended : false }));
 app.use(bodyParser.json());
 app.use('/users', userRoutes);
 app.use('/search', searchRoutes);
-app.get('*', (req, res) => {res.sendFile(path.join(__dirname, 'index.html'))})
+app.get('*', (req, res) => {res.sendFile(path.join(__dirname, 'public/index.html'))})
 app.listen(port, () => {console.log('Ayyyeeeeeee Sexyyy Lady! ', port);});

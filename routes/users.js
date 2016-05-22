@@ -13,13 +13,6 @@ users.use( function( error, request, response, next ) {
  }
 });
 
-
-users.post( '/login', db.loginUser, ( req, res ) => {
-  var token = jwt.sign( res.rows, secret );
-  res.json( { agent: res.rows, token: token } );
-});
-
-
 users.delete( '/delete', expressJWT( { secret:secret } ), db.deleteUser, ( req,res ) => {
   res.send( 'deads' );
 });
@@ -59,14 +52,16 @@ users.route( '/CareerJobs' )
     res.send( res.rows )
   });
 
+users.post('/login', db.loginUser, (req, res) => { // logins
+  var token = jwt.sign(res.rows, secret);
+  res.json({agent: res.rows, token: token});
+});
 
-users.route( '/' )
-  .get( ( req, res ) => {
-    res.json( { data: 'success' } )
-  })
-  .post( db.createUser, ( req, res ) => {
-    res.status( 201 ).json( { data: 'success' } );
-  });
+users.route('/signup')
+  .post(db.createUser, (req, res) => { // creates user
+    var token = jwt.sign(res.rows, secret);
+    res.json({agent: res.rows, token: token});
+});
 
 
 module.exports = users;

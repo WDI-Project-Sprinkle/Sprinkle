@@ -1,4 +1,5 @@
-const React = require('react');
+import React, {Component} from 'react';
+import {browserHistory, Link} from 'react-router';
 
 const ToProfile = React.createClass({
   handleProfile : function( event ) {
@@ -9,7 +10,7 @@ const ToProfile = React.createClass({
   render : function() {
     return (
         <div className="item">
-          <button className="ui button" 
+          <button className="ui button"
           onClick={ this.handleProfile }>
           Profile
           </button>
@@ -19,3 +20,11 @@ const ToProfile = React.createClass({
 })
 
 module.exports = ToProfile;
+
+// export default class ToProfile extends Component {
+//   render() {
+//     return (
+//       <Link to="/profile">Profile</Link>
+//     )
+//   }
+// }

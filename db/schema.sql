@@ -22,7 +22,7 @@ CREATE TABLE jobs (
 
 CREATE TABLE users (
   user_id SERIAL UNIQUE PRIMARY KEY,
-  email VARCHAR(255),
+  email VARCHAR(255) UNIQUE,
   password_digest TEXT,
   name VARCHAR(255)
 );

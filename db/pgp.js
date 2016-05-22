@@ -27,43 +27,38 @@ function createSecure( email, password, name, callback ) {
   })
 }
 
-
 // JL create user from form
 function createUser( req, res, next ) {
   createSecure( req.body.email, req.body.password, req.body.name, saveUser );
-
   function saveUser( email, hash, name ) {
-    debugger
-    db.none( "INSERT INTO users (email, password_digest, name ) VALUES($1, $2, $3) ;", [ email, hash, name ] )
-    .then(function ( data ) {
-      // success;
+    db.one( "INSERT INTO users (email, password_digest, name )\
+     VALUES($1, $2, $3) returning email, password_digest;", [email, hash, name])
+    .then((data) => {
+      res.rows = data;
       next();
     })
-    .catch( function (error) {
-      // error;
-      console.log( 'error: ', error );
+    .catch((error) => {
+      res.rows = 'error';
+      next();
     });
   }
 }
 
-
-// JL Login user auth
-function loginUser( req, res, next ) {
-  const email = req.body.email
-  const password = req.body.password
-  db.one( "SELECT * FROM users WHERE email LIKE $1;", [ email ] )
-    .then( ( data ) => {
-      if ( bcrypt.compareSync( password, data.password_digest ) ) {
-        res.rows = data
-        next()
-      } else {
-        res.status( 401 ).json( { data:"Fool this no workie" } )
-        next()
-      }
-    })
-    .catch( () => {
-      console.error( error )
-    })
+function loginUser(req, res, next) {
+  db.one('SELECT * FROM users WHERE email LIKE $1;', [req.body.email])
+  .then((data) => {
+    if (bcrypt.compareSync(req.body.password, data.password_digest)) {
+      res.rows = data
+      next()
+    } else {
+      res.rows = 'error';
+      next();
+    }
+  })
+  .catch( () => {
+    res.rows = 'error';
+    next();
+  })
 }
 
 
