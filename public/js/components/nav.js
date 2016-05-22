@@ -2,22 +2,23 @@ import React, {Component} from 'react';
 import {Link, browserHistory} from 'react-router';
 import Logout from './logout';
 import Login from './login';
-// import ToProfile from './toProfile';
-// import Edit from './edit';
 
 export default class Nav extends Component {
   render() {
     if (localStorage.token) {
       return (
         <div>
-          <Link to="/profile">Profile</Link>
+          <Link to="/home">Home</Link><br />
+          <Link to="/profile">Profile</Link><br />
+          <Link to="/edit">Edit</Link>
           <Logout />
         </div>
       )
     } else {
       return (
         <div>
-          <Login />
+          <Link to="/home">Home</Link><br />
+          <Login /><br />
           <Link to="/signup">Signup</Link>
         </div>
       )

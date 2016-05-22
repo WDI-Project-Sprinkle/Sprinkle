@@ -18,8 +18,8 @@ users.delete( '/delete', expressJWT( { secret:secret } ), db.deleteUser, ( req,r
 });
 
 
-users.put( '/update', expressJWT( { secret:secret } ), db.updatePassword, ( req,res ) => {
-  res.send( 'go' )
+users.put('/update', expressJWT({secret : secret}), db.updatePassword, (req, res) => {
+res.send(res.rows)
 });
 
 

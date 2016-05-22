@@ -61,35 +61,32 @@ function loginUser(req, res, next) {
   })
 }
 
-
-function updatePassword( req, res, next) {
-  const currentPassword = req.body.currentPass
-  const newPassword = req.body.newPass
-  console.log('req:' ,req.user);
-
-  db.one("SELECT * FROM users WHERE email LIKE $1;", [ req.user.email ])
-    .then( (data) => {
-      console.log('email: ', data.email);
-      if ( bcrypt.compareSync( currentPassword, data.password_digest) ) {
-        console.log('this sorta works');
-        createSecure( data.email, newPassword, data.name, updateUser )
-        function updateUser(email, hash, name) {
-          db.none("UPDATE users SET password_digest=($1) WHERE user_id=($2) ", [ hash, req.user.user_id ])
-          .then( ()=> {
-            next()
-          })
-          .catch( ( error )=>{
-            console.log( error );
-          })
-        }
+function updatePassword(req, res, next) {
+  db.one('SELECT * FROM users WHERE email LIKE $1;', [req.user.email])
+  .then((data) => {
+    if (bcrypt.compareSync(req.body.currentPassword, data.password_digest)) {
+      createSecure(data.email, req.body.newPassword, data.name, updateUser)
+    } else {
+      res.rows = 'error';
+      next();
+    }
+    function updateUser(email, hash, name) {
+      db.none('UPDATE users SET password_digest=($1) WHERE user_id=($2)',
+      [hash, req.user.user_id])
+      .then(() => {
+        res.rows = 'success';
         next();
-      }
-    })
-    .catch( ( error ) => {
-      console.log( 'error I suck: ', error );
-    })
-
-
+      })
+      .catch((error) => {
+        res.rows = 'error';
+        next();
+      })
+    }
+  })
+  .catch((error) => {
+    res.rows = 'error';
+    next();
+  })
 }
 
 

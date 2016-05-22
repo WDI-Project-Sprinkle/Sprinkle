@@ -62,6 +62,7 @@
 import $ from 'jquery';
 import React, {Component} from 'react';
 import {browserHistory} from 'react-router';
+import Nav from './nav_components/nav';
 
 export default class Signup extends Component {
   constructor(props) {
@@ -78,49 +79,52 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <div id="signupbox" className="ui middle aligned center aligned grid ">
-        <div id="column" className="column">
-          <class className="ui teal header">
-            <div className="content">
-              <h2>Sprinkle Signup</h2>
-            </div>
-          </class>
-          <form className="ui form fluid" id="signupform" onSubmit={this.handleSubmit.bind(this)}>
-            <div id="formcontent" className='ui stacked segment teal'>
-              <div id="signupformfield" className="three wide field">
-                <div className="ui left icon input">
-                  <i className="ui user icon"></i>
-                  <input value={this.state.name} placeholder="Name"
-                  onChange={event => this.onNameChange(event.target.value)}/>
-                </div>
+      <div>
+        <Nav />
+        <div id="signupbox" className="ui middle aligned center aligned grid ">
+          <div id="column" className="column">
+            <class className="ui teal header">
+              <div className="content">
+                <h2>Sprinkle Signup</h2>
               </div>
-              <div id="signupformfield" className="three wide field">
-                <div className="ui left icon input">
-                  <i className="ui mail outline icon"></i>
-                  <input value={this.state.email} type="email" placeholder="Email"
-                  onChange={event => this.onEmailChange(event.target.value)}/>
+            </class>
+            <form className="ui form fluid" id="signupform" onSubmit={this.handleSubmit.bind(this)}>
+              <div id="formcontent" className='ui stacked segment teal'>
+                <div id="signupformfield" className="three wide field">
+                  <div className="ui left icon input">
+                    <i className="ui user icon"></i>
+                    <input value={this.state.name} placeholder="Name"
+                    onChange={event => this.onNameChange(event.target.value)}/>
+                  </div>
                 </div>
-              </div>
-              <div id="signupformfield" className="three wide field">
-                <div className="ui left icon input">
-                  <i className="ui lock icon"></i>
-                  <input value={this.state.password} type="password" placeholder="Password"
-                  onChange={event => this.onPasswordChange(event.target.value)}/>
+                <div id="signupformfield" className="three wide field">
+                  <div className="ui left icon input">
+                    <i className="ui mail outline icon"></i>
+                    <input value={this.state.email} type="email" placeholder="Email"
+                    onChange={event => this.onEmailChange(event.target.value)}/>
+                  </div>
                 </div>
-              </div>
-              <div id="signupformfield" className="three wide field">
-                <div className="ui left icon input">
-                  <i className="ui lock icon"></i>
-                  <input value={this.state.confirmPassword} type="password"
-                  placeholder="Confirm Password"
-                  onChange={event => this.onConfirmPasswordChange(event.target.value)}/>
+                <div id="signupformfield" className="three wide field">
+                  <div className="ui left icon input">
+                    <i className="ui lock icon"></i>
+                    <input value={this.state.password} type="password" placeholder="Password"
+                    onChange={event => this.onPasswordChange(event.target.value)}/>
+                  </div>
                 </div>
+                <div id="signupformfield" className="three wide field">
+                  <div className="ui left icon input">
+                    <i className="ui lock icon"></i>
+                    <input value={this.state.confirmPassword} type="password"
+                    placeholder="Confirm Password"
+                    onChange={event => this.onConfirmPasswordChange(event.target.value)}/>
+                  </div>
+                </div>
+                {this.state.error}
+                <br />
+                <button className="ui button" type="submit">Signup</button>
               </div>
-              {this.state.error}
-              <br />
-              <button className="ui button" type="submit">Signup</button>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     )
