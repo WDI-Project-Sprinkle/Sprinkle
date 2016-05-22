@@ -2,8 +2,7 @@ const express     = require( 'express' );
 const expressJWT  = require( 'express-jwt' );
 const jwt         = require( 'jsonwebtoken' );
 const users       = express.Router();
-const bodyParser  = require( 'body-parser' );
-const db          = require( '../db/pgp.js' );
+const db          = require( '../db/pgp/users.js' );
 const secret      = process.env.SECRET;
 
 //From Doug
@@ -13,55 +12,20 @@ users.use( function( error, request, response, next ) {
  }
 });
 
-users.delete( '/delete', expressJWT( { secret:secret } ), db.deleteUser, ( req,res ) => {
-  res.send( 'deads' );
-});
+users.delete('/delete', expressJWT({secret : secret}), db.deleteUser,
+(req, res) => {res.send('deads')});
 
-
-users.put('/update', expressJWT({secret : secret}), db.updatePassword, (req, res) => {
-res.send(res.rows)
-});
-
-
-users.route( '/jobs/delete' )
-  .delete( expressJWT( { secret:secret } ), db.deleteSavedJobs, ( req, res )=>{
-    res.json( res.job_id )
-  });
-
-
-users.route( '/jobs' )
-  .get( expressJWT( { secret:secret } ), db.showSavedJobs, ( req, res )=>{
-    res.send( res.rows )
-  });
-
-
-users.route( '/jobsapplied' )
-  .get( expressJWT( { secret:secret } ), db.showAppliedJobs, ( req, res )=>{
-    res.send( res.rows )
-  });
-
-
-users.route( '/IndeedJobs' )
-  .post( expressJWT( { secret:secret } ), db.addIndeedJobs, db.userSavedJob, ( req,res ) => {
-    res.send( res.rows )
-  });
-
-
-users.route( '/CareerJobs' )
-  .post( expressJWT( { secret:secret } ), db.addCareerJobs, db.userSavedJob, ( req,res ) => {
-    res.send( res.rows )
-  });
+users.put('/update', expressJWT({secret : secret}), db.updatePassword,
+(req, res) => {res.send(res.rows)});
 
 users.post('/login', db.loginUser, (req, res) => { // logins
   var token = jwt.sign(res.rows, secret);
-  res.json({agent: res.rows, token: token});
+  res.json({agent : res.rows, token : token});
 });
 
-users.route('/signup')
-  .post(db.createUser, (req, res) => { // creates user
-    var token = jwt.sign(res.rows, secret);
-    res.json({agent: res.rows, token: token});
+users.post('/signup', db.createUser, (req, res) => { // creates user
+  var token = jwt.sign(res.rows, secret);
+  res.json({agent : res.rows, token : token});
 });
-
 
 module.exports = users;
