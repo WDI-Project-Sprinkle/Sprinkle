@@ -29,11 +29,18 @@ body{
 }
 
 #searchbar{
+  margin-top: 10%;
   margin-left: 10px;
   margin-right: 10px;
 }
 
+.navText {
+  text-decoration: none;
+  color: #00B5AD;
+}
+
 #signupbox{
+  margin-top: 5%;
   justify-content: center;
 }
 

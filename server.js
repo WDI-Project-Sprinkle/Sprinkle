@@ -10,7 +10,7 @@ const app          = express();
 const port         = process.env.PORT || 3000;
 const userRoutes   = require(path.join( __dirname, '/routes/users'));
 const searchRoutes = require(path.join( __dirname, '/routes/search'));
-const jobsRoutes = require(path.join( __dirname, '/routes/jobs'));
+const jobsRoutes   = require(path.join( __dirname, '/routes/jobs'));
 
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));

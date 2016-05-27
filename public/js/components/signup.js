@@ -62,7 +62,7 @@
 import $ from 'jquery';
 import React, {Component} from 'react';
 import {browserHistory} from 'react-router';
-import Nav from './nav_components/nav';
+import Nav from './nav';
 
 export default class Signup extends Component {
   constructor(props) {

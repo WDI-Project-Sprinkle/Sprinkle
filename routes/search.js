@@ -21,12 +21,10 @@ Object.prototype.pluckFirstArrayItem = (first_argument) => {
 };
 
 function getJobsIndeed(req, res, next) {
-  request(`http://api.indeed.com/ads/apisearch?publisher=${apikeyIndeed}
-  &q=${req.query.data.q}&l=${req.query.data.l}&co=us&jt=${req.query.data.jt}
-  &radius=${req.query.data.radius}&format=json&limit=20&v=2`,
+  request(`http://api.indeed.com/ads/apisearch?publisher=${apikeyIndeed}&q=${req.query.q}&l=${req.query.l}&co=us&jt=${req.query.jt}&radius=${req.query.radius}&format=json&limit=20&v=2`,
   (err, response, body) => {
-    var data = JSON.parse( body );
-    res.dataIndeed = data.results;
+    var data = JSON.parse(body);
+    res.dataIndeed = data;
     next()
   });
 }

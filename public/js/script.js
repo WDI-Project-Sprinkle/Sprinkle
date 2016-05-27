@@ -7,16 +7,13 @@ import {Router, Route, Navigation, Link, browserHistory, IndexRoute} from 'react
 import Nav from './components/nav';
 import Signup from './components/signup';
 import Edit from './components/edit';
+import Search from './components/search';
 
-const auth            = require( './auth.js' )
-const EditProfile     = require( './components/editProfile.js' )
-const Display         = require( './components/display.js' )
 const Listings        = require( './components/listings.js' )
 const Profiles        = require( './components/profiles.js');
 const AppliedJobs     = require( './components/appliedjobs.js' );
 const SavedJobs       = require( './components/savedjobs.js' );
 const Job             = require( './components/job.js' )
-const Search          = require( './components/search.js' )
 const AdvSearch       = require( './components/advSearch.js' );
 
 const utility         = require( './helpers/utility.js' );
@@ -24,15 +21,23 @@ const utility         = require( './helpers/utility.js' );
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      indeedJobs : []
+    }
   }
 
   render() {
     return (
       <div>
         <Nav />
-        <Search />
+        <Search passIndeedData={this.handleIndeedData.bind(this)}/>
       </div>
     )
+  }
+
+  handleIndeedData(data) {
+    this.setState({indeedJobs : data})
   }
 }
 

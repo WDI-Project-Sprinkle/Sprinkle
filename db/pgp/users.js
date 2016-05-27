@@ -104,11 +104,11 @@ function createHash( email, password, name, callback ) {
 
 function deleteUser ( req,res,next ) {
   db.none('DELETE FROM users WHERE user_id=($1)', [req.user.user_id])
-  .then ( () => {
+  .then (() => {
     next();
   })
   .catch((error) => {
-    console.log( error)
+    console.log(error)
   })
 }
 

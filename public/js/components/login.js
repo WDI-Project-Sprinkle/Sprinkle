@@ -18,28 +18,36 @@ export default class Login extends Component {
       return <h3>Welcome {this.state.email}!</h3>
     }
     return (
-      <div>
-        <form onSubmit={this.handleSubmit.bind(this)}>
-          <input
-            value={this.state.email} type="email" placeholder="email"
-            onChange={event => this.onEmailChange(event.target.value)} />
-            <br />
-          <input
-            value={this.state.password} type="password" placeholder="password"
-            onChange={event => this.onPasswordChange(event.target.value)} />
-            <br />
-          <button type="submit">Submit</button>
-          <h5>{this.state.error}</h5>
+      <div className="item">
+        <form id="loginform" className="ui form" onSubmit={this.handleSubmit.bind(this)}>
+          <div className="fields">
+            <div className="field">
+              <input
+                value={this.state.email} type="email" placeholder="email"
+                onChange={event => this.onEmailChange(event.target.value)} />
+            </div><br />
+            <div className="field">
+              <input
+                value={this.state.password} type="password" placeholder="password"
+                onChange={event => this.onPasswordChange(event.target.value)} />
+            </div><br />
+            <button className="ui button submit labeled icon" type="submit">
+            <i className="icon sign in"></i>Login</button>
+            <h5>{this.state.error}</h5>
+          </div>
         </form>
       </div>
     )
   }
+
   onEmailChange(email) {
     this.setState({email}); // updates username state
   }
+
   onPasswordChange(password) {
     this.setState({password}); // updates password state
   }
+
   handleSubmit(event) {
     event.preventDefault(); // prevents page from refreshing
     let error = 'Oops, please check your email or password';

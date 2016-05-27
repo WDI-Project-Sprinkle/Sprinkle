@@ -54,6 +54,7 @@ export default class Edit extends Component {
                 {this.state.error}
                 <br />
                 <button className="ui button" type="submit">Submit</button>
+                <button className="ui button" onClick={this.handleDelete.bind(this)}>Delete Account</button>
               </div>
             </form>
           </div>
@@ -100,5 +101,20 @@ export default class Edit extends Component {
         }
       })
     }
+  }
+
+  handleDelete(event) {
+    event.preventDefault();
+    $.ajax({
+      url : 'users/delete',
+      type : 'delete',
+      beforeSend : (xhr) => {
+        xhr.setRequestHeader("Authorization", 'Bearer ' + localStorage.token);
+      }
+    })
+    .done(() => {
+      delete localStorage.token;
+      browserHistory.push('/home'); // redirects to home
+    })
   }
 }
