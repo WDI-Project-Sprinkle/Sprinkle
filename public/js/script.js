@@ -8,6 +8,7 @@ import Nav from './components/nav';
 import Signup from './components/signup';
 import Edit from './components/edit';
 import Search from './components/search';
+import JobList from './components/job_list';
 
 const Listings        = require( './components/listings.js' )
 const Profiles        = require( './components/profiles.js');
@@ -32,6 +33,7 @@ class App extends Component {
       <div>
         <Nav />
         <Search passIndeedData={this.handleIndeedData.bind(this)}/>
+        <JobList jobs={this.state.indeedJobs}/>
       </div>
     )
   }
