@@ -12,7 +12,7 @@ search.get('/career', getJobsCareer, (req, res) => {res.json(res.dataCareer)})
 // @author Jason Seminara 2016-03-18
 // @description This will take an object whose vals are arrays; pluck off the first item and save it as the new val
 // @returns a copy of the original
-Object.prototype.pluckFirstArrayItem = (first_argument) => {
+Object.prototype.pluckFirstArrayItem = function(first_argument) {
   return Object.keys(this).reduce((copy, key) => {
     copy[key] = this[key][0]
     return copy;
@@ -30,12 +30,10 @@ function getJobsIndeed(req, res, next) {
 }
 
 function getJobsCareer(req, res, next) {
-  request(`http://api.careerbuilder.com/v1/jobsearch?DeveloperKey=${apikeyCareer}
-  &JobTitle=${req.query.data.q}&Location=${req.query.data.city},
-  ${req.query.data.state}&Radius=${req.query.data.radius}
-  &EmploymentType=${req.query.data.jt}`, (err, response, body) => {
+  request(`http://api.careerbuilder.com/v1/jobsearch?DeveloperKey=${apikeyCareer}&JobTitle=${req.query.q}&Location=${req.query.city},${req.query.state}&Radius=${req.query.radius}&EmploymentType=${req.query.jt}`,
+  (err, response, body) => {
     parseString(body, (err, result) => {
-      data = result.ResponseJobSearch.Results[0].JobSearchResult.map(job => job.pluckFirstArrayItem())
+      data = result.ResponseJobSearch.Results[0].JobSearchResult.map(job => job.pluckFirstArrayItem());
     });
     res.dataCareer = data;
     next()

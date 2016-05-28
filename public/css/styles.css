@@ -87,6 +87,7 @@ body{
 
 /* indeed_footnote */
 #indeed_footnote{
+  margin-top: 90%;
   text-align: center;
 }
 

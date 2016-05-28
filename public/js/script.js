@@ -12,10 +12,9 @@ import JobList from './components/job_list';
 import AdvSearch from './components/advSearch';
 import Profiles from './components/profiles';
 
-const Listings        = require( './components/listings.js' )
-const AppliedJobs     = require( './components/appliedjobs.js' );
-const SavedJobs       = require( './components/savedjobs.js' );
-const Job             = require( './components/job.js' )
+// const AppliedJobs     = require( './components/appliedjobs.js' );
+// const SavedJobs       = require( './components/savedjobs.js' );
+// const Job             = require( './components/job.js' )
 
 const utility         = require( './helpers/utility.js' );
 
@@ -25,6 +24,7 @@ class App extends Component {
 
     this.state = {
       indeedJobs : [],
+      careerJobs : [],
       advSearch : false
     }
   }
@@ -34,22 +34,30 @@ class App extends Component {
       return (
         <div>
           <Nav />
-          <AdvSearch handleAdvSearch={this.handleAdvSearch.bind(this)} passIndeedData={this.handleIndeedData.bind(this)}/>
-          <JobList jobs={this.state.indeedJobs}/>
+          <AdvSearch handleAdvSearch={this.handleAdvSearch.bind(this)}
+          passIndeedData={this.handleIndeedData.bind(this)}
+          passCareerData={this.handleCareerData.bind(this)}/>
+          <JobList indeedJobs={this.state.indeedJobs} careerJobs={this.state.careerJobs}/>
         </div>
       )
     }
     return (
       <div>
         <Nav />
-        <Search handleAdvSearch={this.handleAdvSearch.bind(this)} passIndeedData={this.handleIndeedData.bind(this)}/>
-        <JobList jobs={this.state.indeedJobs}/>
+        <Search handleAdvSearch={this.handleAdvSearch.bind(this)}
+        passIndeedData={this.handleIndeedData.bind(this)}
+        passCareerData={this.handleCareerData.bind(this)}/>
+        <JobList indeedJobs={this.state.indeedJobs} careerJobs={this.state.careerJobs}/>
       </div>
     )
   }
 
   handleIndeedData(data) {
     this.setState({indeedJobs : data})
+  }
+
+  handleCareerData(data) {
+    this.setState({careerJobs : data})
   }
 
   handleAdvSearch(event) {

@@ -64,7 +64,10 @@ export default class Search extends Component {
 
     let data = {
       q : this.state.jobTitle,
-      l : `${this.state.city} ${this.state.state}`
+      l : `${this.state.city} ${this.state.state}`,
+      city : this.state.city,
+      state : this.state.state,
+      radius : 20
     }
 
     $.get({
@@ -74,5 +77,15 @@ export default class Search extends Component {
     .done((data) => {
       this.props.passIndeedData(data.results);
     })
+
+    $.get({
+      url : '/search/career',
+      data : data
+    })
+    .done((data) => {
+      this.props.passCareerData(data);
+    })
+
+    this.setState({jobTitle : '', city : '', state : ''}) // resets form
   }
 }

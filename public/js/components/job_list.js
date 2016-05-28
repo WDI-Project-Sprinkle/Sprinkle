@@ -2,19 +2,35 @@ import React from 'react';
 import JobListItem from './job_list_item';
 
 const JobList = (props) => {
-  const indeedJobItems = props.jobs.map((job) => {
+  const indeedJobItems = props.indeedJobs.map((job) => {
     return (
       <JobListItem
-      title={job.jobtitle}
-      key={job.jobkey}
-      job={job}/>
+      company={job.company}
+      jobtitle={job.jobtitle}
+      snippet={job.snippet}
+      url={job.url}
+      key={job.jobkey}/>
+    )
+  });
+
+  const careerJobItems = props.careerJobs.map((job) => {
+    return (
+      <JobListItem
+      Company={job.Company}
+      JobTitle={job.JobTitle}
+      DescriptionTeaser={job.DescriptionTeaser}
+      url={job.JobDetailsURL}
+      key={job.CompanyDID + job.DID}/>
     )
   });
 
   return (
-    <ul>
-      {indeedJobItems}
-    </ul>
+    <div id="listings">
+      <div id="listingcards" className="ui three columns cards stackable teal">
+        {indeedJobItems}
+        {careerJobItems}
+      </div>
+    </div>
   );
 }
 
