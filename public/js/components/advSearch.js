@@ -93,12 +93,12 @@ export default class AdvSearch extends Component {
            </div>
 
            <div>
-             <button type="submit" className="ui button submit labeled icon red small">
+             <button type="submit" className="ui button submit labeled icon small" className="button">
              <i className="icon search"></i>Search</button>
            </div>
            <br />
            <div>
-             <button className="ui button submit labeledicon red small"
+             <button className="ui button submit labeledicon small" className="button"
              onClick={this.props.handleAdvSearch}>
              <i className="icon search"></i>Basic Search</button>
            </div>
@@ -150,7 +150,7 @@ export default class AdvSearch extends Component {
       radius : this.state.radius,
       jt : this.state.jobType
     }
-    if (this.state.indeed) {
+    if (this.state.indeed) { // searches indeed jobs if true
       $.get({
         url : '/search/indeed',
         data : data
@@ -158,12 +158,12 @@ export default class AdvSearch extends Component {
       .done((data) => {
         this.props.passIndeedData(data.results);
       })
-    } else {
+    } else { // removes indeed jobs if untrue
       let data = [];
       this.props.passIndeedData(data);
     }
 
-    if (this.state.career) {
+    if (this.state.career) { // searches career jobs if true
       $.get({
         url : '/search/career',
         data : data
@@ -171,7 +171,7 @@ export default class AdvSearch extends Component {
       .done((data) => {
         this.props.passCareerData(data);
       })
-    } else {
+    } else { // removes career jobs if untrue
       let data = [];
       this.props.passCareerData(data);
     }

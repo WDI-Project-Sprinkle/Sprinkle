@@ -1,6 +1,10 @@
 import React from 'react';
 
 const JobListItem = (props) => {
+  let save = '';
+  if (localStorage.token) {
+    save = <button className="saveButton">Save</button>
+  }
   // careerBuilder jobs
   if (props.Company) {
     return (
@@ -10,9 +14,10 @@ const JobListItem = (props) => {
         <strong>{props.JobTitle}</strong> <br/>
         </div>
         <div id="descripption" className="Description">
-          {props.DescriptionTeaser}
+          <p>{props.DescriptionTeaser}</p>
         </div>
         <a href={props.url} target="_blank">CareerBuilder</a>
+        {save}
       </form>
     )
   }
@@ -24,9 +29,10 @@ const JobListItem = (props) => {
       <strong>{props.jobtitle}</strong> <br/>
       </div>
       <div id="descripption" className="Description">
-        {props.snippet}
+        <p>{props.snippet}</p>
       </div>
       <a href={props.url} target="_blank">Indeed</a>
+      {save}
     </form>
   );
 };

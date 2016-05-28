@@ -29,6 +29,7 @@ body{
 }
 
 #searchbar{
+  background-color: #00B5AD;
   margin-top: 10%;
   margin-left: 10px;
   margin-right: 10px;
@@ -78,16 +79,28 @@ body{
 /* applied & savedjobs listing */
 
 #appliedjobs{
-  margin-top: 20px;
+  margin-top: 10%;
   margin-bottom: 20px;
   text-align: center;
 }
 
+.saveButton {
+  color: white;
+  background-color: #00B5AD;
+  font-size: 20px;
+  min-width: 30%;
+  margin: 0 auto;
+}
 
+.button {
+  color: #008A85;
+  background-color: white;
+  border-radius: 5px;
+}
 
 /* indeed_footnote */
 #indeed_footnote{
-  margin-top: 90%;
+  margin-top: 80%;
   text-align: center;
 }
 

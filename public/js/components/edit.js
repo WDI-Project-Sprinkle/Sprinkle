@@ -53,8 +53,8 @@ export default class Edit extends Component {
                 </div>
                 {this.state.error}
                 <br />
-                <button className="ui button" type="submit">Submit</button>
-                <button className="ui button" onClick={this.handleDelete.bind(this)}>Delete Account</button>
+                <button className="button" type="submit">Submit</button>
+                <button className="button" onClick={this.handleDelete.bind(this)}>Delete Account</button>
               </div>
             </form>
           </div>

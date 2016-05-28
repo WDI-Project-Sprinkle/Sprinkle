@@ -33,11 +33,11 @@ export default class Search extends Component {
             </div>
             <div>
               <button type="submit"
-              className="ui button submit labeled icon red small">
+              className="ui button submit labeled icon small" className="button">
               <i className="icon search"></i>Search</button>
             </div><br/>
             <div>
-              <button className="ui button submit labeledicon red small"
+              <button className="ui button submit labeledicon small" className="button"
               onClick={this.props.handleAdvSearch}>
               <i className="icon search"></i>Advance Search</button>
             </div>
