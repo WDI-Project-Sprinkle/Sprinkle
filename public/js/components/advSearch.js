@@ -30,7 +30,7 @@ const AdvSearch = React.createClass({
 
   render : function() {
     return (
-      <div className="ui inverted segment raised">
+      <div className="ui inverted segment raised" id="searchbar" >
 
         <form className="ui form fluid" ref="searchForm" onSubmit={ this.handleSubmit }>
 
@@ -102,6 +102,12 @@ const AdvSearch = React.createClass({
 
            <div>
              <button type="submit" className="ui button submit labeled icon red small"><i className="icon search"></i>Search</button>
+           </div>
+           <br />
+           <div>
+             <button className="ui button submit labeledicon red small"
+             onClick={this.props.handleAdvSearch}>
+             <i className="icon search"></i>Basic Search</button>
            </div>
 
          </div>

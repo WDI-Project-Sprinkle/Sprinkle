@@ -9,13 +9,13 @@ import Signup from './components/signup';
 import Edit from './components/edit';
 import Search from './components/search';
 import JobList from './components/job_list';
+import AdvSearch from './components/advSearch';
+import Profiles from './components/profiles';
 
 const Listings        = require( './components/listings.js' )
-const Profiles        = require( './components/profiles.js');
 const AppliedJobs     = require( './components/appliedjobs.js' );
 const SavedJobs       = require( './components/savedjobs.js' );
 const Job             = require( './components/job.js' )
-const AdvSearch       = require( './components/advSearch.js' );
 
 const utility         = require( './helpers/utility.js' );
 
@@ -24,15 +24,25 @@ class App extends Component {
     super(props);
 
     this.state = {
-      indeedJobs : []
+      indeedJobs : [],
+      advSearch : false
     }
   }
 
   render() {
+    if (this.state.advSearch) {
+      return (
+        <div>
+          <Nav />
+          <AdvSearch handleAdvSearch={this.handleAdvSearch.bind(this)} passIndeedData={this.handleIndeedData.bind(this)}/>
+          <JobList jobs={this.state.indeedJobs}/>
+        </div>
+      )
+    }
     return (
       <div>
         <Nav />
-        <Search passIndeedData={this.handleIndeedData.bind(this)}/>
+        <Search handleAdvSearch={this.handleAdvSearch.bind(this)} passIndeedData={this.handleIndeedData.bind(this)}/>
         <JobList jobs={this.state.indeedJobs}/>
       </div>
     )
@@ -41,6 +51,12 @@ class App extends Component {
   handleIndeedData(data) {
     this.setState({indeedJobs : data})
   }
+
+  handleAdvSearch(event) {
+    event.preventDefault();
+    this.setState({advSearch : !this.state.advSearch})
+  }
+
 }
 
 const routes = (
@@ -48,6 +64,7 @@ const routes = (
     <Route path="/" component={App} />
     <Route path="/home" component={App} />
     <Route path="/signup" component={Signup} />
+    <Route path="/profile" component={Profiles} />
     <Route path="/edit" component={Edit} />
   </Router>
 )

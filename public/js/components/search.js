@@ -35,6 +35,11 @@ export default class Search extends Component {
               <button type="submit"
               className="ui button submit labeled icon red small">
               <i className="icon search"></i>Search</button>
+            </div><br/>
+            <div>
+              <button className="ui button submit labeledicon red small"
+              onClick={this.props.handleAdvSearch}>
+              <i className="icon search"></i>Advance Search</button>
             </div>
           </div>
         </form>

@@ -14,9 +14,6 @@ export default class Login extends Component {
   }
 
   render() {
-    if (localStorage.token) { // checks if logged in
-      return <h3>Welcome {this.state.email}!</h3>
-    }
     return (
       <div className="item">
         <form id="loginform" className="ui form" onSubmit={this.handleSubmit.bind(this)}>

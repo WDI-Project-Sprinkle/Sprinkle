@@ -37,6 +37,8 @@ body{
 .navText {
   text-decoration: none;
   color: #00B5AD;
+  border: none;
+  background-color: inherit;
 }
 
 #signupbox{

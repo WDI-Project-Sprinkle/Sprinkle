@@ -27,7 +27,7 @@ export default class Logout extends Component {
   render() {
     return (
       <div className="item">
-        <button className="ui button" onClick={this.handleLogout}>Logout</button>
+        <button className="navText"><h2 onClick={this.handleLogout}>Logout</h2></button>
       </div>
     )
   }

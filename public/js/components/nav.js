@@ -7,17 +7,25 @@ export default class Nav extends Component {
   render() {
     if (localStorage.token) {
       return (
-        <div>
-          <h2 className="ui teal image header">
-            <img src="../img/logo.png" alt="Logo" className="image"/>
-            <div className="content">
-            prinkle
-            </div>
-          </h2>
+        <div id="menu" className="ui top fixed five item menu stackable">
+          <div className="item">
+            <h2 className="ui teal image header">
+              <img src="../img/logo.png" alt="Logo" className="image"/>
+              <div className="content">
+              prinkle
+              </div>
+            </h2>
+          </div>
           <br />
-          <Link to="/home">Home</Link><br />
-          <Link to="/profile">Profile</Link><br />
-          <Link to="/edit">Edit</Link>
+          <div className="item">
+          <Link to="/home"><h2 className="navText">Home</h2></Link>
+          </div>
+          <div className="item">
+          <Link to="/profile"><h2 className="navText">Profile</h2></Link>
+          </div>
+          <div className="item">
+          <Link to="/edit"><h2 className="navText">Edit</h2></Link>
+          </div>
           <Logout />
         </div>
       )
